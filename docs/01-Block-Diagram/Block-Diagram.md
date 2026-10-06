@@ -10,4 +10,4 @@ This block diagram is to show the subsystems of the Arm Motion Control board, ho
 
 ## Block Diagram 
 (https://github.com/CrackOxide/CrackOxide_EGR304_Fall26.github.io/blob/main/Ren_Inblock_diagram.drawio.png)
-![Indivial Block diagram ]
+[Indivial Block diagram ]
