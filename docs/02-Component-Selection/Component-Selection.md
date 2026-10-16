@@ -1,11 +1,12 @@
 ---
-title: Component Selection Example
+title: Component Selection
 ---
 **H-Bridge Motor Driver**
 
 1. Pololu DRV8874 single brushed DC motor driver carrier
 
-    ![](image1.png)
+    ![](<img width="600" height="480" alt="image" src="https://github.com/user-attachments/assets/59e8ae35-8409-4e8e-87ca-a6a3dbca8462" />
+)
 
     * $11.94/each
     * [link to product](https://www.pololu.com/product/4035)
@@ -17,7 +18,7 @@ title: Component Selection Example
     | Undervoltage, overcurrent and thermal protection, plus an nFAULT output the firmware can read. |
     | Includes 0.1" breakaway headers, so it can be hand soldered and tested on a breadboard. |
 
-1. CTX936TR-ND surface mount oscillator
+1. Adafruit DRV8871 DC motor driver breakout
 
     ![](image3.png)
 
