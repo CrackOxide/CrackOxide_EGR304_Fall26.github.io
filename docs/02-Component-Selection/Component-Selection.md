@@ -5,8 +5,7 @@ title: Component Selection
 
 1. Pololu DRV8874 single brushed DC motor driver carrier
 
-    ![](<img width="600" height="480" alt="image" src="https://github.com/user-attachments/assets/59e8ae35-8409-4e8e-87ca-a6a3dbca8462" />
-)
+    <img width="600" height="480" alt="image" src="https://github.com/user-attachments/assets/38b76673-50e1-4af0-a5eb-e566417c6706" />
 
     * $11.94/each
     * [link to product](https://www.pololu.com/product/4035)
