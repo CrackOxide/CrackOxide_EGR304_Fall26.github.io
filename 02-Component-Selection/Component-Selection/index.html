@@ -881,11 +881,235 @@
 
 | Pros                                      | Cons                                                             |
 | ----------------------------------------- | ---------------------------------------------------------------- |
-| 11 kg·cm (150 oz·in) stall torque at 300 rpm no-load speed gives the most torque margin | Most expensive option |
+| 11 kg·cm stall torque at 300 rpm no-load speed gives the most torque margin | Most expensive option |
 | Built-in two-channel Hall-effect quadrature encoder | Stall current is 5.0 A, above the driver's continuous rating |
 | Datasheet and dimension drawing are available for the mechanical design | Adds mass to the arm; the weight is not listed on the page and must be checked |
 | 4 mm D-shaft output. | The encoder needs a 3.5 V to 20 V supply and its outputs swing from 0 V to Vcc|
 </code></pre>
+<ol>
+<li>
+<p>Pololu 250:1 Micro Metal Gearmotor MP 6V</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/ff4376af-aee2-475e-b04b-c97b52344fd0" data-desc-position="bottom"><img width="300" height="240" alt="image" src="https://github.com/user-attachments/assets/ff4376af-aee2-475e-b04b-c97b52344fd0"></a></p>
+<ul>
+<li>$23.95/each</li>
+<li><a href="https://www.pololu.com/product/2370">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Very compact with metal gears, saves arm weight.</td>
+<td>Stall torque is only 1.6 kg·cm, about one seventh of Option 1</td>
+</tr>
+<tr>
+<td>Low stall current fits any of the three drivers.</td>
+<td>Manufactor warns that stalling can damage the motor or gearbox</td>
+</tr>
+<tr>
+<td>The extended motor shaft allows a magnetic encoder to be added later.</td>
+<td>No encoder included</td>
+</tr>
+<tr>
+<td>Datasheet available</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Adafruit DC gearbox "TT" motor, 200 rpm, 3 to 6 VDC</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/7608b7b7-4eaf-4c45-afb4-52e9af9ec26d" data-desc-position="bottom"><img width="320" height="243" alt="image" src="https://github.com/user-attachments/assets/7608b7b7-4eaf-4c45-afb4-52e9af9ec26d"></a></p>
+<ul>
+<li>$2.95/each</li>
+<li><a href="https://www.adafruit.com/product/3777">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lowest price</td>
+<td>Stall torque is only 0.8 kg·cm at 6 V, too low for a loaded arm joint.</td>
+</tr>
+<tr>
+<td>Light with a 1:48 gearbox and 200 mm leads ending in 0.1" connectors.</td>
+<td>Rated 3 V to 6 V, needs a separate lower-voltage rail.</td>
+</tr>
+<tr>
+<td>TLow current (1.5 A stall at 6 V).</td>
+<td>No encoder included</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Choice:</strong> Option 2: Pololu 250:1 Micro Metal Gearmotor MP 6V</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p><strong>Rationale:</strong> The 6 V rail keeps the whole system on one motor rail as the power budget guidance recommends. Its stall torque is about fourteen times that of the TT motor, which gives margin while the real torque requirement of the arm is still unknown. The higher price is acceptable because the lower-cost motors would have to be replaced if the arm load turns out to be heavier. </p>
+<p><strong>Position Sensor</strong>
+<br>
+1. Bourns 6639S-1-103, 10 kΩ single-turn conductive plastic precision potentiometer</p>
+<pre><code>&lt;img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/e34d8ba1-1b92-40b1-bc82-2d9252d5a220" /&gt;
+
+* $24.77/each
+* [link to product](https://www.mouser.com/en/ProductDetail/Bourns/6639S-1-103/?qs=sGAEpiMZZMtygI3JAGOxU%2FcoYPJDRhcE)
+
+| Pros                                      | Cons                                                             |
+| ----------------------------------------- | ---------------------------------------------------------------- |
+| Single analog output goes straight to RA0, using one pin and no driver code. | Highest price of the three position sensors |
+| The reading is still valid after power loss, so no homing routine is needed. | Mechanical contact wear over time. |
+| Not affected by the magnetic field of the motor. | The wiper can be noisy, so the firmware should average several ADC samples. |
+| Used as a divider between 3.3 V and GND, the ±15% resistance tolerance does not matter because the reading is ratiometric. |
+</code></pre>
+<ol>
+<li>
+<p>Bourns 3590S-2-103L, 10 kΩ 10-turn wirewound precision potentiometer</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/ca09a138-dd53-4f1d-80ad-9da43b2df136" data-desc-position="bottom"><img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/ca09a138-dd53-4f1d-80ad-9da43b2df136"></a></p>
+<ul>
+<li>$17.78/each</li>
+<li><a href="https://www.newark.com/bourns/3590s-2-103l/potentiometer-10kohm-5-linear/dp/62K3206">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lower price than Option 1</td>
+<td>a joint that moves less than one revolution would use only a small part of the range, which wastes ADC resolution unless it is geared up.</td>
+</tr>
+<tr>
+<td>±0.25% independent linearity, the best of the three.</td>
+<td>Wirewound elements change resistance in small steps rather than continuously.</td>
+</tr>
+<tr>
+<td>2 W power rating and a −40 °C to +125 °C operating range.</td>
+<td>Larger body and a gear or pulley train would be needed, adding mechanical complexity</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Adafruit AS5600 magnetic angle sensor (STEMMA QT)</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/1b8bd053-27db-4658-8aad-f540fbf11456" data-desc-position="bottom"><img width="210" height="200" alt="image" src="https://github.com/user-attachments/assets/1b8bd053-27db-4658-8aad-f540fbf11456"></a></p>
+<ul>
+<li>$5.95/each</li>
+<li><a href="https://www.adafruit.com/product/6357">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lowest cost</td>
+<td>Needs a diametrically magnetized magnet centered on the shaft axis</td>
+</tr>
+<tr>
+<td>Contactless, so there is no wear</td>
+<td>The motor's magnets and currents can disturb the magnetic reading</td>
+</tr>
+<tr>
+<td>12-bit absolute angle (4096 steps per revolution)</td>
+<td>Whether the analog OUT pin is available on this board must be confirmed</td>
+</tr>
+<tr>
+<td>Can be read over I2C or analog voltage.</td>
+<td>More design work needed</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Choice:</strong> Option 1, Bourns 6639S-1-103.</td>
+<td></td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Rationale:</strong> The potentiometer matches the block diagram exactly: one analog wire to RA0 and nothing else to configure. A single-turn part fits an arm joint that moves less than one revolution, while the 10-turn Option 2 would waste most of its range. Unlike the AS5600, it is immune to the magnetic fields next to the motor, and it needs no magnet alignment. The extra cost ($6.99 more than Option 2) buys the correct travel range. If wear or cost becomes an issue, the AS5600 is the planned fallback.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p><strong>Motor Power Source</strong>
+<br>
+1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter</p>
+<pre><code>&lt;img width="300" height="208" alt="image" src="https://github.com/user-attachments/assets/06a5bf69-9a9f-4ab7-9c72-06d2f406a843" /&gt;
+
+
+* $19.40/each
+* [link to product](https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST60A12-P1J?qs=odmYgEirbwzBCeXKJrW1mg%3D%3D)
+
+| Pros                                      | Cons                                                             |
+| ----------------------------------------- | ---------------------------------------------------------------- |
+| Regulated 12 V at 5 A with 120 mVp-p ripple, no extra voltage regulator is needed on the motor rail. | The AC inlet is IEC C14, so a power cord must be purchased separately |
+| Overload and over voltage protection. | At the motor's 5 A stall current the supply would be at 100% of its rating, no margin |
+| 2.1 × 5.5 mm barrel plug and 4,059 units in stock | Tethered to a wall outlet, not portable |
+| Full datasheet is available |
+</code></pre>
+<ol>
+<li>
+<p>Adafruit 12 V 5 A switching power supply</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/6c7829d7-de89-4691-91d4-b94ad93d739d" data-desc-position="bottom"><img width="325" height="243" alt="image" src="https://github.com/user-attachments/assets/6c7829d7-de89-4691-91d4-b94ad93d739d"></a></p>
+<ul>
+<li>$24.95/each</li>
+<li><a href="https://www.adafruit.com/product/352">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regulated 12 V at 5 A with 120 mVp-p ripple, no extra voltage regulator is needed on the motor rail.</td>
+<td>The AC inlet is IEC C14, so a power cord must be purchased separately</td>
+</tr>
+<tr>
+<td>Overload and over voltage protection.</td>
+<td>At the motor's 5 A stall current the supply would be at 100% of its rating, no margin</td>
+</tr>
+<tr>
+<td>2.1 × 5.5 mm barrel plug and 4,059 units in stock</td>
+<td>Tethered to a wall outlet, not portable</td>
+</tr>
+<tr>
+<td>Full datasheet is available</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
 
 
 
