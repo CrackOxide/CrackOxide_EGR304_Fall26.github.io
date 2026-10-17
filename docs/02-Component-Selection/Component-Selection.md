@@ -45,6 +45,7 @@ title: Component Selection
     | Two channels, so the second channel could be paralleled for 2 A continuous or kept as a spare. | Three control inputs per channel plus a shared STBY pin, it uses more GPIO than our pin map |
     | 3 A peak current and PWM frequencies up to 100 kHz. |
    <br>
+   
 **Choice:** Option 1: Pololu DRV8874 single brushed DC motor driver carrier
 
 **Rationale:** The PH/EN interface is the only one of the three that matches the pin map already shared with the team (one PWM pin and one direction pin), so no firmware or wiring changes are needed. Its 37 V range leaves a large margin on the 12 V rail, while the TB6612FNG is near its 13.5 V limit. Built-in current regulation matters here because the selected motor can draw a much higher stall current (about 5 A, extrapolated) than the carrier's continuous rating, so a driver that can limit current in hardware protects both the motor and the supply. The extra $4.44 over the DRV8871 buys these features.
@@ -141,10 +142,12 @@ title: Component Selection
     | 12-bit absolute angle (4096 steps per revolution) | Whether the analog OUT pin is available on this board must be confirmed |
     | Can be read over I2C or analog voltage. | More design work needed |
 <br>
+
 **Choice:** Option 1, Bourns 6639S-1-103.
 <br>
 **Rationale:** The potentiometer matches the block diagram exactly: one analog wire to RA0 and nothing else to configure. A single-turn part fits an arm joint that moves less than one revolution, while the 10-turn Option 2 would waste most of its range. Unlike the AS5600, it is immune to the magnetic fields next to the motor, and it needs no magnet alignment. The extra cost ($6.99 more than Option 2) buys the correct travel range. If wear or cost becomes an issue, the AS5600 is the planned fallback.
 <br>
+
 ## Motor Power Source
 
 1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter
@@ -191,6 +194,7 @@ title: Component Selection
     | Adjustable power supply | Highest price |
     | | No separate datasheet and a suitable charger must also be bought |
 <br>
+
 **Choice:** Option 1, Mean Well GST60A12-P1J.
 <br>
 **Rationale:** It is a regulated, safety-approved supply with a full datasheet and enough current for the motor, and it is in stock. Its price is lower than the Adafruit supply, which was out of stock and has no datasheet, and the battery cannot deliver the motor's peak current. This is a wall supply, not a USB power pack, as the assignment requires. The operating current will be checked against the 25% margin rule in the Power Budget page; the DRV8874 current limit keeps the motor below the supply's 5 A rating.
