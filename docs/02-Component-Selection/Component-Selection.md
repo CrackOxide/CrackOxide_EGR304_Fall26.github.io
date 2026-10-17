@@ -50,7 +50,7 @@ title: Component Selection
 **Rationale:** The PH/EN interface is the only one of the three that matches the pin map already shared with the team (one PWM pin and one direction pin), so no firmware or wiring changes are needed. Its 37 V range leaves a large margin on the 12 V rail, while the TB6612FNG is near its 13.5 V limit. Built-in current regulation matters here because the selected motor can draw a much higher stall current (about 5 A, extrapolated) than the carrier's continuous rating, so a driver that can limit current in hardware protects both the motor and the supply. The extra $4.44 over the DRV8871 buys these features.
 
 ## DC Motor
-<br>
+
 1. 34:1 Metal Gearmotor 25Dx67L mm HP 12V with 48 CPR Encoder
 
     <img width="300" height="240" alt="image" src="https://github.com/user-attachments/assets/ffc5b4e5-fdd3-4698-b380-6c9480c22d9c" />
@@ -97,7 +97,7 @@ title: Component Selection
 **Rationale:** The 6 V rail keeps the whole system on one motor rail as the power budget guidance recommends. Its stall torque is about fourteen times that of the TT motor, which gives margin while the real torque requirement of the arm is still unknown. The higher price is acceptable because the lower-cost motors would have to be replaced if the arm load turns out to be heavier. 
 
 ## Position Sensor
-<br>
+
 1. Bourns 6639S-1-103, 10 kΩ single-turn conductive plastic precision potentiometer
 
     <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/e34d8ba1-1b92-40b1-bc82-2d9252d5a220" />
@@ -146,7 +146,7 @@ title: Component Selection
 **Rationale:** The potentiometer matches the block diagram exactly: one analog wire to RA0 and nothing else to configure. A single-turn part fits an arm joint that moves less than one revolution, while the 10-turn Option 2 would waste most of its range. Unlike the AS5600, it is immune to the magnetic fields next to the motor, and it needs no magnet alignment. The extra cost ($6.99 more than Option 2) buys the correct travel range. If wear or cost becomes an issue, the AS5600 is the planned fallback.
 <br>
 ## Motor Power Source
-<br>
+
 1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter
 
     <img width="300" height="208" alt="image" src="https://github.com/user-attachments/assets/06a5bf69-9a9f-4ab7-9c72-06d2f406a843" />
