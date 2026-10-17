@@ -574,6 +574,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#voltage-regulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voltage regulation
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -830,6 +839,15 @@
   <a href="#position-sensor" class="md-nav__link">
     <span class="md-ellipsis">
       Position Sensor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voltage-regulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voltage regulation
     </span>
   </a>
   
@@ -1250,25 +1268,77 @@
 </thead>
 <tbody>
 <tr>
-<td>Regulated 12 V at 5 A with 120 mVp-p ripple, no extra voltage regulator is needed on the motor rail.</td>
-<td>The AC inlet is IEC C14, so a power cord must be purchased separately</td>
+<td>12 V at up to 5 A with a 2.1 mm barrel plug on about a 40 inch cable.</td>
+<td>The page listed it as out of stock when checked</td>
 </tr>
 <tr>
-<td>Overload and over voltage protection.</td>
-<td>At the motor's 5 A stall current the supply would be at 100% of its rating, no margin</td>
+<td>UL approved and RoHS compliant</td>
+<td>More expensive than Option 1 for the same rating</td>
 </tr>
 <tr>
-<td>2.1 × 5.5 mm barrel plug and 4,059 units in stock</td>
-<td>Tethered to a wall outlet, not portable</td>
+<td>Datasheet</td>
+<td>No clearly datasheet is provided on the product page</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Tenergy 12 V 2000 mAh NiMH battery pack (10S1P)</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/91ac504f-592a-4118-9a8a-83eba4e4619c" data-desc-position="bottom"><img width="330" height="330" alt="image" src="https://github.com/user-attachments/assets/91ac504f-592a-4118-9a8a-83eba4e4619c"></a></p>
+<ul>
+<li>$36.49/each</li>
+<li><a href="https://power.tenergy.com/tenergy-nimh-12v-2000mah-battery-pack-w-bare-leads/">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portable, the arm can run without a wall outlet</td>
+<td>Maximum continuous discharge is 2 A, below the motor's stall current</td>
 </tr>
 <tr>
-<td>Full datasheet is available</td>
+<td>12 V nominal at 2000 mAh (24 Wh)</td>
+<td>Voltage sags as the cells discharge and rises when fully charged</td>
+</tr>
+<tr>
+<td>Adjustable power supply</td>
+<td>Highest price</td>
+</tr>
+<tr>
+<td></td>
+<td>No separate datasheet and a suitable charger must also be bought</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Choice:</strong> Option 1, Mean Well GST60A12-P1J.</td>
+<td></td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Rationale:</strong> It is a regulated, safety-approved supply with a full datasheet and enough current for the motor, and it is in stock. Its price is lower than the Adafruit supply, which was out of stock and has no datasheet, and the battery cannot deliver the motor's peak current. This is a wall supply, not a USB power pack, as the assignment requires. The operating current will be checked against the 25% margin rule in the Power Budget page; the DRV8874 current limit keeps the motor below the supply's 5 A rating.</td>
+<td></td>
+</tr>
+<tr>
+<td><br></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 </li>
 </ol>
+<h2 id="voltage-regulation">Voltage regulation</h2>
+<p>The 12V or 6V motor rail comes directly from the regulated Mean Well supply, so no additional regulator is needed for it. The Curiosity Nano is powered from USB and supplies the 3.3 V used by the potentiometer and logic. Power Budget details are to be calculated.</p>
 
 
 
