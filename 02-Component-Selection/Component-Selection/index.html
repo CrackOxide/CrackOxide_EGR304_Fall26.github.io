@@ -89,6 +89,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#h-bridge-motor-driver" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -508,6 +513,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Component Selection
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -517,6 +533,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#h-bridge-motor-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      H-Bridge Motor Driver
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dc-motor" class="md-nav__link">
+    <span class="md-ellipsis">
+      DC Motor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#position-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position Sensor
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -742,6 +802,41 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#h-bridge-motor-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      H-Bridge Motor Driver
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dc-motor" class="md-nav__link">
+    <span class="md-ellipsis">
+      DC Motor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#position-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position Sensor
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -765,7 +860,7 @@
 
   <h1>Component Selection</h1>
 
-<p><strong>H-Bridge Motor Driver</strong></p>
+<h2 id="h-bridge-motor-driver">H-Bridge Motor Driver</h2>
 <ol>
 <li>
 <p>Pololu DRV8874 single brushed DC motor driver carrier</p>
@@ -871,8 +966,8 @@
 </li>
 </ol>
 <p><strong>Rationale:</strong> The PH/EN interface is the only one of the three that matches the pin map already shared with the team (one PWM pin and one direction pin), so no firmware or wiring changes are needed. Its 37 V range leaves a large margin on the 12 V rail, while the TB6612FNG is near its 13.5 V limit. Built-in current regulation matters here because the selected motor can draw a much higher stall current (about 5 A, extrapolated) than the carrier's continuous rating, so a driver that can limit current in hardware protects both the motor and the supply. The extra $4.44 over the DRV8871 buys these features.</p>
-<p><strong>DC Motor</strong>
-<br>
+<h2 id="dc-motor">DC Motor</h2>
+<p><br>
 1. 34:1 Metal Gearmotor 25Dx67L mm HP 12V with 48 CPR Encoder</p>
 <pre><code>&lt;img width="300" height="240" alt="image" src="https://github.com/user-attachments/assets/ffc5b4e5-fdd3-4698-b380-6c9480c22d9c" /&gt;
 
@@ -961,8 +1056,8 @@
 </li>
 </ol>
 <p><strong>Rationale:</strong> The 6 V rail keeps the whole system on one motor rail as the power budget guidance recommends. Its stall torque is about fourteen times that of the TT motor, which gives margin while the real torque requirement of the arm is still unknown. The higher price is acceptable because the lower-cost motors would have to be replaced if the arm load turns out to be heavier. </p>
-<p><strong>Position Sensor</strong>
-<br>
+<h2 id="position-sensor">Position Sensor</h2>
+<p><br>
 1. Bourns 6639S-1-103, 10 kΩ single-turn conductive plastic precision potentiometer</p>
 <pre><code>&lt;img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/e34d8ba1-1b92-40b1-bc82-2d9252d5a220" /&gt;
 
@@ -1054,27 +1149,56 @@
 <td><strong>Rationale:</strong> The potentiometer matches the block diagram exactly: one analog wire to RA0 and nothing else to configure. A single-turn part fits an arm joint that moves less than one revolution, while the 10-turn Option 2 would waste most of its range. Unlike the AS5600, it is immune to the magnetic fields next to the motor, and it needs no magnet alignment. The extra cost ($6.99 more than Option 2) buys the correct travel range. If wear or cost becomes an issue, the AS5600 is the planned fallback.</td>
 <td></td>
 </tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td>## Motor Power Source</td>
+<td></td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+<tr>
+<td>1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/06a5bf69-9a9f-4ab7-9c72-06d2f406a843" data-desc-position="bottom"><img width="300" height="208" alt="image" src="https://github.com/user-attachments/assets/06a5bf69-9a9f-4ab7-9c72-06d2f406a843"></a></p>
+<ul>
+<li>$19.40/each</li>
+<li><a href="https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST60A12-P1J?qs=odmYgEirbwzBCeXKJrW1mg%3D%3D">link to product</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regulated 12 V at 5 A with 120 mVp-p ripple, no extra voltage regulator is needed on the motor rail.</td>
+<td>The AC inlet is IEC C14, so a power cord must be purchased separately</td>
+</tr>
+<tr>
+<td>Overload and over voltage protection.</td>
+<td>At the motor's 5 A stall current the supply would be at 100% of its rating, no margin</td>
+</tr>
+<tr>
+<td>2.1 × 5.5 mm barrel plug and 4,059 units in stock</td>
+<td>Tethered to a wall outlet, not portable</td>
+</tr>
+<tr>
+<td>Full datasheet is available</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </li>
-</ol>
-<p><strong>Motor Power Source</strong>
-<br>
-1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter</p>
-<pre><code>&lt;img width="300" height="208" alt="image" src="https://github.com/user-attachments/assets/06a5bf69-9a9f-4ab7-9c72-06d2f406a843" /&gt;
-
-
-* $19.40/each
-* [link to product](https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST60A12-P1J?qs=odmYgEirbwzBCeXKJrW1mg%3D%3D)
-
-| Pros                                      | Cons                                                             |
-| ----------------------------------------- | ---------------------------------------------------------------- |
-| Regulated 12 V at 5 A with 120 mVp-p ripple, no extra voltage regulator is needed on the motor rail. | The AC inlet is IEC C14, so a power cord must be purchased separately |
-| Overload and over voltage protection. | At the motor's 5 A stall current the supply would be at 100% of its rating, no margin |
-| 2.1 × 5.5 mm barrel plug and 4,059 units in stock | Tethered to a wall outlet, not portable |
-| Full datasheet is available |
-</code></pre>
-<ol>
 <li>
 <p>Adafruit 12 V 5 A switching power supply</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/6c7829d7-de89-4691-91d4-b94ad93d739d" data-desc-position="bottom"><img width="325" height="243" alt="image" src="https://github.com/user-attachments/assets/6c7829d7-de89-4691-91d4-b94ad93d739d"></a></p>
