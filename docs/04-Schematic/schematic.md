@@ -13,4 +13,4 @@ This schematic is design to support the control of arm motion.
 
 ## Resouces
 
-The schematic as a PDF download is available [*here*](ExampleSchematic.pdf), and the Zip folder of the project [*here*](dummyZip.zip).
+The schematic as a PDF download is available [*here*](arm_motion_control.pdf), and the Zip folder of the project [*here*](arm_motion_control.zip).
