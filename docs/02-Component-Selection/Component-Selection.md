@@ -307,13 +307,16 @@ The three ribbon inputs read 0 when the cable is unplugged, which the firmware t
 
 ### MCC Screenshots
 
-The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above.
+The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above. The generated code matches them: `pins.c` sets RC4 / RC5 → PWM1 outputs and RF0 → UART1 TX1 through PPS, makes RA1 the only analog input in use, and enables the weak pull-up only on RE1.
 
 ![MCC Application Builder](MCC_00_Application_Builder.png)
 **Figure 1:** MCC Application Builder. The project uses PWM1_16BIT, ADC (ADCC) and UART1, plus the Clock Control, Configuration Bits, Interrupt Manager and Pins system modules.
 
 ![MCC Pin Grid View](MCC_01_Pin_Grid.png)
 **Figure 2:** Pin Grid View. Locked pins: PWM1OUT1 → RC4, PWM1OUT2 → RC5, ADC ANx → RA1, UART1 TX1 → RF0 and RX1 → RF1, MCLR on RE3. The GPIO pins RD0–RD4, RE0 and RE1 are set in the Pins module.
+
+![MCC Pins table](MCC_02_Pins.png)
+**Figure 2b:** Pins table. Custom names for every pin; RA1 (SPEED_SET) is analog, all digital pins have Analog off; weak pull-up only on RE1 (BTN_DBG); no output starts high; UART1 TX1 on RF0 and RX1 on RF1.
 
 ![MCC Clock Control](MCC_03_Clock.png)
 **Figure 3:** Clock Control. HFINTOSC at 64 MHz with a divider of 1.
@@ -336,3 +339,4 @@ The screenshots below are from the MPLAB X project for this board (MCC Melody). 
 ![MCC UART1](MCC_07_UART.png)
 **Figure 9:** UART1. 115200 baud, 8N1, no flow control, for debug messages over the Nano's virtual COM port.
 
+**Project files:** the MPLAB X project with the generated MCC code is available as a [*Zip download*](Arm_Control_MPLABX.zip), and the MCC configuration file on its own as [*Arm_Control.mc3*](Arm_Control.mc3).
