@@ -695,6 +695,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#conclusions" class="md-nav__link">
     <span class="md-ellipsis">
       Conclusions
@@ -704,9 +713,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resouces" class="md-nav__link">
+  <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Resouces
+      Resources
     </span>
   </a>
   
@@ -818,6 +827,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#conclusions" class="md-nav__link">
     <span class="md-ellipsis">
       Conclusions
@@ -827,9 +845,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resouces" class="md-nav__link">
+  <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Resouces
+      Resources
     </span>
   </a>
   
@@ -861,17 +879,82 @@
   <h1>Power Budget</h1>
 
 <h2 id="overview">Overview</h2>
-<p>Write a overview of what you did and why you did a Power Budget.</p>
-<blockquote>
-<p>Capture your power budge as a image to display. Take time to get clean breaks and a well organized layout.</p>
-</blockquote>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../budgetPg1.png" data-desc-position="bottom"><img alt="budget1" height:_300_="height:&quot;300;&quot;" src="../budgetPg1.png" style="style" width:_350_="width:&quot;350&quot;"></a></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../budgetPg2.png" data-desc-position="bottom"><img alt="budget2" height:_300_="height:&quot;300;&quot;" src="../budgetPg2.png" style="style" width:_350_="width:&quot;350&quot;"></a></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../budgetPg3.png" data-desc-position="bottom"><img alt="budget3" height:_300_="height:&quot;300;&quot;" src="../budgetPg3.png" style="style" width:_350_="width:&quot;350&quot;"></a></p>
+<p>This power budget checks that every supply and regulator on the Arm Motion Control board (schematic Rev C) can deliver the worst-case current its loads can draw, with a 25 % safety margin. The board has two independent sources, and their grounds are tied together on the board:</p>
+<ul>
+<li><strong>9 V wall adapter</strong> (MEAN WELL GST25A09-P1J, 2.55 A) → J1 → F1 (1 A slow-blow) → D1 (1N5819), giving about 8.55 V. This feeds two regulators:<ul>
+<li><strong>+6 V motor rail:</strong> VR1, an LM317T set by R11 = 240 Ω and R12 = 910 Ω. It feeds the FAN8100N output stage (PVCC) and the Pololu #2370 6 V gearmotor.</li>
+<li><strong>+5 V logic rail:</strong> VR2, an L7805CV. It feeds the FAN8100N logic (VCC) and the power LED DS1.</li>
+</ul>
+</li>
+<li><strong>USB port of the PC</strong> (500 mA) → the Curiosity Nano's MIC5353 LDO → the <strong>+3.3 V rail</strong> for the PIC18F57Q43, the debug LED, the ribbon outputs and expansion header J4.</li>
+</ul>
+<p>All major parts are listed with their absolute maximum current ratings from the datasheets. Each rail table uses the worst case a part can draw in this circuit. For example, the motor is counted at its 0.67 A stall current, and the LEDs at the current set by their resistors. Every number has its source in the last column of the spreadsheet.</p>
+<p><a href="../power_budget_pg1.png"><img alt="Power budget page 1" src="../power_budget_pg1.png"></a>
+<strong>Figure 1:</strong> Power budget, page 1. Major components, +6 V rail and +5 V rail (click to enlarge).</p>
+<p><a href="../power_budget_pg2.png"><img alt="Power budget page 2" src="../power_budget_pg2.png"></a>
+<strong>Figure 2:</strong> Power budget, page 2. +3.3 V rail, external sources, fuse and thermal checks (click to enlarge).</p>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Rail / source</th>
+<th>Regulator or supply</th>
+<th style="text-align: right;">Rating (mA)</th>
+<th style="text-align: right;">Required with 25 % margin (mA)</th>
+<th style="text-align: right;">Remaining (mA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+6 V motor rail</td>
+<td>LM317T (VR1)</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">925.3</td>
+<td style="text-align: right;">574.8</td>
+</tr>
+<tr>
+<td>+5 V logic rail</td>
+<td>L7805CV (VR2)</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">13.5</td>
+<td style="text-align: right;">1486.5</td>
+</tr>
+<tr>
+<td>+3.3 V rail</td>
+<td>MIC5353 (Curiosity Nano)</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">99.0</td>
+<td style="text-align: right;">401.0</td>
+</tr>
+<tr>
+<td>9 V source</td>
+<td>MEAN WELL GST25A09-P1J</td>
+<td style="text-align: right;">2550</td>
+<td style="text-align: right;">946.8</td>
+<td style="text-align: right;">1603.3</td>
+</tr>
+<tr>
+<td>USB source</td>
+<td>PC USB 2.0 port</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">199.0</td>
+<td style="text-align: right;">301.0</td>
+</tr>
+</tbody>
+</table>
 <h2 id="conclusions">Conclusions</h2>
-<p>From the prepare Power Budget, .....</p>
-<h2 id="resouces">Resouces</h2>
-<p>The power budget as a PDF download is available <a href="../PowerBudgetExample.pdf"><em>here</em></a>, and a Microsoft Excel Sheet <a href="../PowerBudgetExample.xlsx"><em>here</em></a>.</p>
+<p>The budget shows the following:</p>
+<ul>
+<li><strong>Every rail and source has headroom at worst case.</strong> The tightest point is the +6 V rail, where motor stall plus margin uses about 62 % of the LM317T's 1.5 A rating.</li>
+<li><strong>The fuse is sized correctly.</strong> Worst-case input current through F1 is about 947 mA, under the 1 A rating. F1 is slow-blow, so it rides through motor start-up and short stalls, but it still opens on a sustained fault. In normal running the motor draws about 0.1–0.2 A, far below this.</li>
+<li><strong>VR1 needs a heatsink.</strong> At worst case it dissipates (8.55 − 6) V × 0.93 A ≈ 2.4 W, which is too much for a bare TO-220. The Aavid 577102B00000G heatsink is in the <a href="../../03-BOM/BOM/">BOM</a>. VR2 dissipates only about 0.08 W and needs none.</li>
+<li><strong>The FAN8100N stays well inside its limits.</strong> Its 1.5 A per-channel output rating is more than twice the motor's stall current. Its estimated saturation loss at stall, about 0.6 W, is under the 2.0 W package rating.</li>
+<li><strong>The 9 V input gives the LM317T enough dropout margin.</strong> After the reverse-polarity diode the input is 8.55 V, and the LM317T needs about 6 V + 2 V = 8 V.</li>
+<li><strong>One small risk is the LM317T minimum load.</strong> The R11 / R12 divider draws 5.2 mA. That is above the typical 3.5 mA minimum load in the datasheet but below its 10 mA worst case. With the motor off, the 6 V rail could drift slightly high. If this shows up on the bench, a smaller divider (for example R11 = 120 Ω, R12 = 453 Ω) fixes it.</li>
+</ul>
+<p>Two values are estimates rather than datasheet figures: the 25 mA allowance for the MCU core and the 100 mA allowance for the on-board debugger. Both are labeled as estimates in the spreadsheet.</p>
+<h2 id="resources">Resources</h2>
+<p>The power budget is available as a <a href="../Power_Budget_Arm_Motion_Control.pdf"><em>PDF download</em></a> and as an <a href="../Power_Budget_Arm_Motion_Control.xlsx"><em>Excel sheet</em></a>. The sheet's formulas recalculate if a value changes.</p>
 
 
 
