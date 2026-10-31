@@ -31,4 +31,4 @@ This schematic is the Arm Motion Control subsystem of Team 107 (Simple Education
 
 ## Resources
 
-The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) includes the custom YR_Custom symbol library and the finned FAN8100N footprint.
+The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) 
