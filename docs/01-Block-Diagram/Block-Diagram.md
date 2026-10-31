@@ -1,14 +1,31 @@
 ---
-title: Individal Block Diagram
-tags:
-- tag1
-- tag2
+title: Individual Block Diagram
 ---
 
 ## Overview
-This block diagram is to show the subsystems of the Arm Motion Control board, how power and signals flow between them, and how the board connects to the rest of the team. The board runs on a PIC18F57Q43 Curiosity Nano, powered by a 5 V USB supply, with 3.3 V logic and a 0–3.3 V analog range. The actuator is a regular DC motor driven by an H-bridge, which is powered by a separate external supply at 5V so that motor current does not pass through the microcontroller board. The sensor is a potentiometer on the arm joint (0–3.3 V analog output), and a local stop button provides a second stop input. The board connects to the Gripper & Object Handling board through an 8-pin ribbon cable: it receives SAFE_OK, RUN_REQ, OBJ_HELD and SPEED_SET, and sends GRIP_CMD and ARM_IN_POS. All grounds, which including USB, motor supply, H-bridge and ribbon pin 8 are tied together.<br>
 
-## Block Diagram 
-<img width="1441" height="887" alt="Ren_Inblock_diagram drawio" src="https://github.com/user-attachments/assets/7735b73e-fd93-42fb-9b3b-b98ede2e694d" />
-**Figure 1: Block Diagram**
+This block diagram shows the blocks of the Arm Motion Control board, how power and signals move between them, and how the board connects to the rest of the team.
 
+* **Microcontroller:** the board runs on a PIC18F57Q43 Curiosity Nano. The Nano is powered from its own USB port and uses 3.3 V logic with a 0–3.3 V analog range.
+* **Power:** a 9 V DC wall adapter (Mean Well GST25A09-P1J) plugs into a barrel jack.
+    * The input goes through a 1 A slow-blow fuse and a 1N5819 reverse-polarity diode.
+    * An LM317T, set by R11 = 240 Ω and R12 = 910 Ω, makes the 6.0 V motor rail.
+    * An L7805 makes the 5 V logic rail.
+    * Motor current never passes through the microcontroller board.
+* **Actuator:** an onsemi FAN8100N H-bridge (channel A) drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RB0 and RB1 provide the two PWM inputs through PPS.
+* **Debug:**
+    * A status LED on RE0.
+    * A push button on RE1, using the weak pull-up.
+    * Expansion header J4, which brings out 3.3 V, GND and the spare pins RA0, RA2, RB2 and RB3.
+* **Team connection:** the board connects to the Gripper & Object Handling board through the 8-pin ribbon cable (J3).
+    * It receives SAFE_OK, RUN_REQ, OBJ_HELD and the analog SPEED_SET.
+    * It sends GRIP_CMD and ARM_IN_POS.
+    * Pin 7 (GRIP_FORCE) is not used on this board and is left open. Pin 8 is GND.
+* **Ground:** all grounds are tied together. This includes USB, the 9 V supply, the H-bridge and ribbon pin 8.
+
+## Block Diagram
+
+![Arm Motion Control individual block diagram](Arm_Motion_Control_Individual_Block_Diagram.png)
+**Figure 1:** Arm Motion Control individual block diagram.
+
+The editable draw.io source is [*here*](Arm_Motion_Control_Individual_Block_Diagram.drawio).
