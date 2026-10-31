@@ -608,6 +608,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Microcontroller and MCC Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcc-screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCC Screenshots
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -896,6 +911,21 @@
       Microcontroller and MCC Configuration
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Microcontroller and MCC Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcc-screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCC Screenshots
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1535,14 +1565,21 @@
 <td>Clock Control</td>
 <td>—</td>
 <td>—</td>
-<td>HFINTOSC, 64 MHz</td>
+<td>HFINTOSC, 64 MHz, divider 1</td>
+</tr>
+<tr>
+<td>Configuration bits</td>
+<td>Configuration Bits</td>
+<td>—</td>
+<td>—</td>
+<td>External oscillator off; reset oscillator HFINTOSC 64 MHz; WDT disabled; low-voltage programming enabled (needed by the Nano's debugger); brown-out reset enabled</td>
 </tr>
 <tr>
 <td>Motor forward PWM (MOT_FWD → FAN8100N FORWARDA)</td>
 <td>PWM1_16BIT, output 1 (PWM1OUT1), routed with PPS</td>
 <td>RC4</td>
 <td>Output</td>
-<td>Duty cycle sets speed; 0 % when stopped; R8 100 kΩ pull-down holds the input low during reset</td>
+<td>FOSC clock, no prescale, left-aligned, 1 kHz; duty cycle sets speed, 0 % at start-up; R8 100 kΩ pull-down holds the input low during reset</td>
 </tr>
 <tr>
 <td>Motor reverse PWM (MOT_REV → FAN8100N REVERSEA)</td>
@@ -1556,7 +1593,7 @@
 <td>ADCC</td>
 <td>RA1 (ANA1)</td>
 <td>Analog input</td>
-<td>12-bit, VDD reference; 1 kΩ / 0.1 µF RC filter on the board</td>
+<td>Basic mode, 12-bit right-aligned, VDD / VSS reference, ADCRC clock (TAD = 1.67 µs), acquisition count 10 (16.7 µs); 1 kΩ / 0.1 µF RC filter on the board</td>
 </tr>
 <tr>
 <td>SAFE_OK (ribbon pin 1)</td>
@@ -1615,6 +1652,13 @@
 <td>Left as inputs; RA0 / RA2 are analog-capable for a future sensor</td>
 </tr>
 <tr>
+<td>Debug serial port (to the PC through the Nano's debugger)</td>
+<td>UART1</td>
+<td>RF0 (TX1), RF1 (RX1)</td>
+<td>Output / input</td>
+<td>115200 baud, 8 data bits, no parity, 1 stop bit; RF0 / RF1 are wired to the debugger's virtual COM port on the Nano</td>
+</tr>
+<tr>
 <td>Ribbon pin 7 (GRIP_FORCE)</td>
 <td>—</td>
 <td>—</td>
@@ -1625,6 +1669,26 @@
 </table>
 <p><strong>Why RC4 / RC5 for the motor PWM:</strong> on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.</p>
 <p>The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).</p>
+<h3 id="mcc-screenshots">MCC Screenshots</h3>
+<p>The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_00_Application_Builder.png" data-desc-position="bottom"><img alt="MCC Application Builder" src="../MCC_00_Application_Builder.png"></a>
+<strong>Figure 1:</strong> MCC Application Builder. The project uses PWM1_16BIT, ADC (ADCC) and UART1, plus the Clock Control, Configuration Bits, Interrupt Manager and Pins system modules.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_01_Pin_Grid.png" data-desc-position="bottom"><img alt="MCC Pin Grid View" src="../MCC_01_Pin_Grid.png"></a>
+<strong>Figure 2:</strong> Pin Grid View. Locked pins: PWM1OUT1 → RC4, PWM1OUT2 → RC5, ADC ANx → RA1, UART1 TX1 → RF0 and RX1 → RF1, MCLR on RE3. The GPIO pins RD0–RD4, RE0 and RE1 are set in the Pins module.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_03_Clock.png" data-desc-position="bottom"><img alt="MCC Clock Control" src="../MCC_03_Clock.png"></a>
+<strong>Figure 3:</strong> Clock Control. HFINTOSC at 64 MHz with a divider of 1.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_04a_Config_Bits.png" data-desc-position="bottom"><img alt="MCC Configuration Bits, CONFIG1 to CONFIG3" src="../MCC_04a_Config_Bits.png"></a>
+<strong>Figure 4:</strong> Configuration Bits, CONFIG1 to CONFIG3. External oscillator off, reset oscillator HFINTOSC 64 MHz, brown-out reset enabled.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_04b_Config_Bits.png" data-desc-position="bottom"><img alt="MCC Configuration Bits, CONFIG3 to CONFIG6" src="../MCC_04b_Config_Bits.png"></a>
+<strong>Figure 5:</strong> Configuration Bits, CONFIG3 to CONFIG6. Low-voltage programming enabled and the watchdog timer disabled.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_05_PWM.png" data-desc-position="bottom"><img alt="MCC PWM1_16BIT" src="../MCC_05_PWM.png"></a>
+<strong>Figure 6:</strong> PWM1_16BIT. FOSC clock with no prescaler, left-aligned mode at 1 kHz; both outputs start at 0 % duty cycle.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_06a_ADCC.png" data-desc-position="bottom"><img alt="MCC ADCC hardware settings" src="../MCC_06a_ADCC.png"></a>
+<strong>Figure 7:</strong> ADCC hardware settings. Positive input ANA1 (SPEED_SET), right-aligned result, VDD / VSS references, basic mode.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_06b_ADCC_Clock.png" data-desc-position="bottom"><img alt="MCC ADCC clock settings" src="../MCC_06b_ADCC_Clock.png"></a>
+<strong>Figure 8:</strong> ADCC clock settings. ADCRC clock (600 kHz, TAD = 1.667 µs), acquisition count 10.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_07_UART.png" data-desc-position="bottom"><img alt="MCC UART1" src="../MCC_07_UART.png"></a>
+<strong>Figure 9:</strong> UART1. 115200 baud, 8N1, no flow control, for debug messages over the Nano's virtual COM port.</p>
 
 
 
