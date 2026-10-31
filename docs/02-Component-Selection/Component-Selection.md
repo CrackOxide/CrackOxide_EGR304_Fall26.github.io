@@ -73,7 +73,7 @@ The same criteria were used for every part:
     | ---- | ---- |
     | Through-hole DIP with a heat-sink fin: fits the breadboard and the PCB directly, no breakout module needed. | Obsolete, so it cannot be reordered; the two parts in hand cover the breadboard and the PCB. |
     | 1.5 A peak output per channel, more than twice the 0.67 A motor stall current. | No current-sense output for the firmware. |
-    | Two logic inputs per channel (forward / reverse), driven directly by two PWM pins (RB0, RB1). | Bipolar output stage drops about 0.15 V at 0.2 A and up to 0.55 V at 0.4 A, so the motor sees slightly less than 6 V. |
+    | Two logic inputs per channel (forward / reverse), driven directly by the two PWM1 outputs (RC4, RC5). | Bipolar output stage drops about 0.15 V at 0.2 A and up to 0.55 V at 0.4 A, so the motor sees slightly less than 6 V. |
     | Built-in thermal shutdown with hysteresis and built-in clamp ("spark killing") diodes, so no external flyback diodes. | Supply limit is 9 V (10.5 V absolute), so it suits only low-voltage motors. |
     | Separate logic (VCC) and power (PVCC) supplies: 5 V logic, 6 V motor rail. | |
 
@@ -286,8 +286,8 @@ The team uses the **Microchip PIC18F57Q43 Curiosity Nano** (DM164150) on every b
 | Function | MCC module | Pin | Direction | Settings |
 |---|---|---|---|---|
 | System clock | Clock Control | — | — | HFINTOSC, 64 MHz |
-| Motor forward PWM (MOT_FWD → FAN8100N FORWARDA) | PWM1 (16-bit PWM), routed with PPS | RB0 | Output | Duty cycle sets speed; 0 % when stopped; R8 100 kΩ pull-down holds the input low during reset |
-| Motor reverse PWM (MOT_REV → FAN8100N REVERSEA) | PWM1 second output, routed with PPS | RB1 | Output | Only one of RB0 / RB1 is active at a time; R9 100 kΩ pull-down |
+| Motor forward PWM (MOT_FWD → FAN8100N FORWARDA) | PWM1_16BIT, output 1 (PWM1OUT1), routed with PPS | RC4 | Output | Duty cycle sets speed; 0 % when stopped; R8 100 kΩ pull-down holds the input low during reset |
+| Motor reverse PWM (MOT_REV → FAN8100N REVERSEA) | PWM1_16BIT, output 2 (PWM1OUT2), routed with PPS | RC5 | Output | Only one of RC4 / RC5 is active at a time; R9 100 kΩ pull-down |
 | SPEED_SET (ribbon pin 6) | ADCC | RA1 (ANA1) | Analog input | 12-bit, VDD reference; 1 kΩ / 0.1 µF RC filter on the board |
 | SAFE_OK (ribbon pin 1) | Pin Manager (GPIO) | RD0 | Digital input | External 10 kΩ pull-down, weak pull-up off |
 | RUN_REQ (ribbon pin 2) | Pin Manager (GPIO) | RD1 | Digital input | External 10 kΩ pull-down, weak pull-up off |
@@ -298,5 +298,7 @@ The team uses the **Microchip PIC18F57Q43 Curiosity Nano** (DM164150) on every b
 | Debug button SW1 | Pin Manager (GPIO) | RE1 | Digital input | Weak pull-up on (WPUE1 = 1), pressed = 0, debounced in firmware |
 | Expansion header J4 | — | RA0, RA2, RB2, RB3 | Not used yet | Left as inputs; RA0 / RA2 are analog-capable for a future sensor |
 | Ribbon pin 7 (GRIP_FORCE) | — | — | Not connected | Not used on this board |
+
+**Why RC4 / RC5 for the motor PWM:** on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.
 
 The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).
