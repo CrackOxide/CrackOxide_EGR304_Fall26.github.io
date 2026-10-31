@@ -25,17 +25,10 @@ This schematic is the Arm Motion Control subsystem of Team 107 (Simple Education
 
   The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.
 
-[![Arm Motion Control schematic, Rev C](arm_motion_control.png)](arm_motion_control.png)
+[![Arm Motion Control schematic, Rev C](Arm_Motion_Control_page-0001.png)](Arm_Motion_Control_page-0001.png)
 **Figure 1:** Arm Motion Control schematic, Rev C (click the image to open it at full size).
 
-## Revision notes (Rev C)
-
-* VR1 changed from an L7806 to an LM317T with R11 and R12, because the 7806 parts are obsolete at Mouser. This matches the [BOM](../03-BOM/BOM.md).
-* The H-bridge is the FAN8100N.
-* The position sensor and the stop button blocks were removed.
-* The debug button was simplified.
-* The motor rail is 6 V.
 
 ## Resources
 
-The schematic is available as a [*PDF download*](arm_motion_control.pdf). The [*KiCad 9 project (Zip)*](arm_motion_control.zip) includes the custom YR_Custom symbol library and the finned FAN8100N footprint.
+The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) 
