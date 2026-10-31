@@ -25,7 +25,7 @@ ROWS = [
      "https://www.st.com/resource/en/datasheet/l78.pdf", "Logic rail for the H-bridge VCC and the power LED."),
     (M, "Heat sink, TO-220, channel style, 25.9 C/W", "VR1 (heat sink)", 3, 1.07,
      "Aavid (Boyd)", "577102B00000G", "https://www.mouser.com/ProductDetail/Aavid/577102B00000G?qs=cR7Qvk1oinlekh9MFs6NUA%3D%3D",
-     "https://www.mouser.com/datasheet/2/2/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf", "VR1 dissipates up to 1.8 W at motor stall."),
+     "https://www.mouser.com/datasheet/2/2/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf", "VR1 dissipates up to about 2.4 W at worst case (see Power Budget)."),
     (M, "Schottky diode 1 A 40 V, DO-41 (reverse-polarity protection)", "D1", 3, 0.55,
      "onsemi", "1N5819RLG", "https://www.mouser.com/en/ProductDetail/onsemi/1N5819RLG?qs=y2kkmE52mdN7fhfvNgYV6A%3D%3D",
      "https://www.onsemi.com/pdf/datasheet/1n5817-d.pdf", ""),
@@ -38,7 +38,7 @@ ROWS = [
     (M, "Ceramic capacitor 0.33 uF 50 V X7R, radial, 5 mm lead spacing", "C1, C3", 6, 1.02,
      "Vishay BC Components", "K334K20X7RF5TH5", "https://www.mouser.com/ProductDetail/Vishay-BC-Components/K334K20X7RF5TH5?qs=lQAVKuKFhkL6tfc7l6Mmyw%3D%3D",
      "https://www.vishay.com/doc?45171", "Regulator input capacitors."),
-    (M, "Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing", "C2, C4, C5, C6, C8", 12, 0.27,
+    (M, "Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing", "C2, C4, C5, C6, C8", 12, 0.118,
      "Vishay BC Components", "K104K15X7RF5WH5", "https://www.mouser.com/en/ProductDetail/Vishay-BC-Components/K104K15X7RF5WH5?qs=8fb2TFeI5qGYDjl7%2BWZxcg%3D%3D",
      "https://www.vishay.com/doc?45171", "Regulator outputs, H-bridge bypass, SPEED_SET RC filter."),
     (M, "Aluminum electrolytic 47 uF 16 V, radial 5 x 11 mm", "C7", 3, 0.38,
@@ -59,7 +59,7 @@ ROWS = [
     (M, "Test point, miniature PC loop", "TP1, TP2", 4, 0.26,
      "Keystone Electronics", "5001", "https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D",
      "https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF", "+6 V and +5 V probe points."),
-    (M, "AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet", "External (J1)", 1, 14.30,
+    (M, "AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet", "External (J1)", 1, 13.70,
      "MEAN WELL", "GST25A09-P1J", "https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D",
      "https://www.meanwellusa.com/webapp/product/search.aspx?prod=GST25A", "System power source."),
     (M, "AC power cord NEMA 5-15P to IEC C13, 6 ft", "External (adapter)", 1, 6.39,
@@ -106,7 +106,9 @@ ROWS = [
 
 
 def money(v):
-    return "" if v is None else f"${v:,.2f}"
+    if v is None:
+        return ""
+    return f"${v:,.3f}" if round(v, 2) != round(v, 3) else f"${v:,.2f}"
 
 
 def link(text, url):
