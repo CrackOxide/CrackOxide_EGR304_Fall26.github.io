@@ -28,6 +28,24 @@ This schematic is the Arm Motion Control subsystem of Team 107 Simple Educationa
 ![Arm Motion Control schematic](Arm_Motion_Control_page-0001.png)
 **Figure 1:** Arm Motion Control schematic (click the image to enlarge).
 
+## 3.3 V Operation Check
+
+The PIC18F57Q43 on this board runs at **3.3 V**. It is powered by the Curiosity Nano's own MIC5353 regulator from USB, and the VTG pin (+3V3 in the schematic) is that regulator's output. Nothing on this board drives VTG. Every connection to the PIC was checked against 3.3 V operation:
+
+| Check | Requirement | Result |
+|---|---|---|
+| PIC18F57Q43 supply range | Operating voltage 1.8 V – 5.5 V (PIC18-Q43 family product brief) | 3.3 V is inside the range ✔ |
+| Curiosity Nano target voltage | MIC5353 adjustable 1.8 V – 5.1 V, **set to 3.3 V at the factory** ([user guide](../Appendix/Datasheets/PIC18F57Q43-Curiosity-Nano-HW-UserGuide-DS40002186B.pdf), sec. 3.3.1 "Target Regulator") | Leave the target voltage at 3.3 V in the MPLAB X project properties ✔ |
+| Regulator current | 3.3 V loads need about 99 mA with margin ([Power Budget](../05-Power-Budget/Power-Budget.md)); MIC5353 supplies 500 mA | ✔ |
+| PIC → FAN8100N inputs (RB0, RB1) | FAN8100N input high ≥ 1.8 V, input low ≤ 0.7 V, input current ≤ 200 µA; datasheet lists "3.3 V and 5 V micro-controller interface" ([datasheet](../Appendix/Datasheets/FAN8100N,MTC.pdf)) | A 3.3 V output is well above 1.8 V. The FAN8100N logic supply is 5 V, but its inputs only need 1.8 V, so no level shifter is needed ✔ |
+| SPEED_SET analog input (RA1) | ADC reference = VDD = 3.3 V; the User board's speed knob also runs from its Nano's 3.3 V, so the signal is 0 – 3.3 V | ✔ |
+| Ribbon signals to and from the other boards | All three boards use PIC18F57Q43 Curiosity Nanos at 3.3 V, so every logic level on the ribbon is 0 / 3.3 V | ✔ **All three Nanos must stay at 3.3 V.** If one board's target voltage were changed to 5 V, its outputs would exceed this PIC's 3.3 V supply. |
+| Debug LED DS2 on RE0 | (3.3 V − 2.1 V) / 330 Ω ≈ 3.6 mA, a small load for one I/O pin | ✔ |
+| Debug button SW1 on RE1 | Internal weak pull-up to 3.3 V; the button pulls to GND | ✔ |
+| J4 3.3 V pin | Comes from VTG, so an add-on sensor runs at the same 3.3 V logic level as the PIC | ✔ |
+
+The only 5 V and 6 V nets on the board are the FAN8100N supply pins (VCC, PVCC), the motor and the power LED. None of them connects to a PIC pin.
+
 ## How the Schematic Meets the User Needs and Product Requirements
 
 The team grouped its user needs into eleven categories and turned them into product requirements PR-01 to PR-18 ([user needs](https://egr304-2026-f-107.github.io/03-User-Needs-and%20Benchmarking/#organized-need-statements), [product requirements](https://egr304-2026-f-107.github.io/04-Product-Requirements/)). The table shows which parts of this schematic serve each need that applies to the Arm Motion Control board, and how.

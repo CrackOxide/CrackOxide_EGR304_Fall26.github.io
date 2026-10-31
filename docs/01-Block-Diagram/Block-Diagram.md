@@ -12,6 +12,7 @@ This block diagram shows the blocks of the Arm Motion Control board, how power a
     * An LM317T, set by R11 = 240 Ω and R12 = 910 Ω, makes the 6.0 V motor rail.
     * An L7805 makes the 5 V logic rail.
     * Motor current never passes through the microcontroller board.
+    * In the diagram, the power path is drawn only from the source to the regulators. Blocks that receive power have no supply lines pointing to them; instead the rail each block runs from is written in bold inside it (for example **PVCC +6 V / VCC +5 V** on the H-bridge, **3.3 V** on the LED, button and J4).
 * **Actuator:** an onsemi FAN8100N H-bridge drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RB0 and RB1 provide the two PWM inputs through PPS.
 * **Debug:**
     * A status LED on RE0.
