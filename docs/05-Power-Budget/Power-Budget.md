@@ -4,10 +4,10 @@ title: Power Budget
 
 ## Overview
 
-This power budget checks that every supply and regulator on the Arm Motion Control board (schematic Rev C) can deliver the worst-case current its loads can draw, with a 25 % safety margin. The board has two independent sources, and their grounds are tied together on the board:
+This power budget checks that every supply and regulator on the Arm Motion Control board can deliver the worst-case current its loads can draw, with a 25 % safety margin. The board has two independent sources, and their grounds are tied together on the board:
 
-* **9 V wall adapter** (MEAN WELL GST25A09-P1J, 2.55 A) → J1 → F1 (1 A slow-blow) → D1 (1N5819), giving about 8.55 V. This feeds two regulators:
-    * **+6 V motor rail:** VR1, an LM317T set by R11 = 240 Ω and R12 = 910 Ω. It feeds the FAN8100N output stage (PVCC) and the Pololu #2370 6 V gearmotor.
+* **9 V wall adapter**  → J1 → F1 → D1 giving about 8.55 V. This feeds two regulators:
+    * **+6 V motor rail:** VR1, an LM317T set by R11 = 240 Ω and R12 = 910 Ω. It feeds the FAN8100N output stage and the Pololu #2370 6 V gearmotor.
     * **+5 V logic rail:** VR2, an L7805CV. It feeds the FAN8100N logic (VCC) and the power LED DS1.
 * **USB port of the PC** (500 mA) → the Curiosity Nano's MIC5353 LDO → the **+3.3 V rail** for the PIC18F57Q43, the debug LED, the ribbon outputs and expansion header J4.
 
