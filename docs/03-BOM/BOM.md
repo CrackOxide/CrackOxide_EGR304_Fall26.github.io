@@ -76,6 +76,8 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 
 <!-- BOM:END -->
 
+(BOM6.png)
+
 ## Remark
 
 * **C7 (47 uF)** has a 2 mm lead pitch; the PCB footprint will be set to match.
