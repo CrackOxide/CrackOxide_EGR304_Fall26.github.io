@@ -31,17 +31,17 @@ The table is sorted by vendor, one section per purchase request. Prices and stoc
 | DC power jack 2.1 x 5.5 mm, PCB mount | 3 | $0.70 | $2.10 | Same Sky (CUI) | PJ-102A | [Mouser](https://www.mouser.com/en/ProductDetail/Same-Sky/PJ-102A?qs=WyjlAZoYn50UKjtnxOz%2Bqg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/6118/1/pj_102a.pdf) | J1 |
 | Fuse clip for 5 mm (5 x 20 mm) fuse, PCB mount | 4 | $0.33 | $1.32 | Keystone Electronics | 3517 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/3517?qs=qOqV1E1P08RwsK9hgzJijw%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/3517.PDF) | F1 (holder) |
 | Ceramic capacitor 0.33 uF 50 V X7R, radial, 5 mm lead spacing | 6 | $1.02 | $6.12 | Vishay BC Components | K334K20X7RF5TH5 | [Mouser](https://www.mouser.com/ProductDetail/Vishay-BC-Components/K334K20X7RF5TH5?qs=lQAVKuKFhkL6tfc7l6Mmyw%3D%3D) | [Datasheet](https://www.vishay.com/doc?45171) | C1, C3 |
-| Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing | 12 | $0.27 | $3.24 | Vishay BC Components | K104K15X7RF5WH5 | [Mouser](https://www.mouser.com/en/ProductDetail/Vishay-BC-Components/K104K15X7RF5WH5?qs=8fb2TFeI5qGYDjl7%2BWZxcg%3D%3D) | [Datasheet](https://www.vishay.com/doc?45171) | C2, C4, C5, C6, C8 |
+| Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing | 12 | $0.118 | $1.416 | Vishay BC Components | K104K15X7RF5WH5 | [Mouser](https://www.mouser.com/en/ProductDetail/Vishay-BC-Components/K104K15X7RF5WH5?qs=8fb2TFeI5qGYDjl7%2BWZxcg%3D%3D) | [Datasheet](https://www.vishay.com/doc?45171) | C2, C4, C5, C6, C8 |
 | Aluminum electrolytic 47 uF 16 V, radial 5 x 11 mm | 3 | $0.38 | $1.14 | Panasonic | EEU-FC1C470H | [Mouser](https://www.mouser.com/ProductDetail/Panasonic/EEU-FC1C470H?qs=/C1U95aQ15vhemYBctOGEw%3D%3D) | [Datasheet](https://industrial.panasonic.com/cdbs/www-data/pdf/RDF0000/ABA0000C1209.pdf) | C7 |
 | Terminal block, 2 position, 5.0 mm pitch | 2 | $0.53 | $1.06 | Phoenix Contact | 1935161 | [Mouser](https://www.mouser.com/ProductDetail/Phoenix-Contact/1935161?qs=W3wJikR1%252BS6eKzfFl8Rbew%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/507/9/phoenix_contact_1935161_en.pdf) | J2 |
 | Shrouded box header 2 x 4, 2.54 mm, through hole | 2 | $2.88 | $5.76 | Samtec | TST-104-01-G-D | [Mouser](https://www.mouser.com/ProductDetail/Samtec/TST-104-01-G-D?qs=rU5fayqh%2BE32/80vAsdSrw%3D%3D) | [Datasheet](https://suddendocs.samtec.com/prints/tst-1xx-xx-x-x-xx-xx-mkt.pdf) | J3 |
 | IDC ribbon cable assembly, 2 x 4, 2.54 mm, 9 in | 1 | $6.46 | $6.46 | Samtec | IDSD-04-D-09.00 | [Mouser](https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D) | [Datasheet](https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D) | Team cable |
 | Tactile switch 6 x 6 mm, through hole | 3 | $0.35 | $1.05 | Omron | B3F-1000 | [Mouser](https://www.mouser.com/ProductDetail/Omron-Electronics/B3F-1000?qs=lK7M36XCk6JQHckSc1xIsg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/39/1/en_b3f.pdf) | SW1 |
 | Test point, miniature PC loop | 4 | $0.26 | $1.04 | Keystone Electronics | 5001 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF) | TP1, TP2 |
-| AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet | 1 | $14.30 | $14.30 | MEAN WELL | GST25A09-P1J | [Mouser](https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D) | [Datasheet](https://www.meanwellusa.com/webapp/product/search.aspx?prod=GST25A) | External (J1) |
+| AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet | 1 | $13.70 | $13.70 | MEAN WELL | GST25A09-P1J | [Mouser](https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D) | [Datasheet](https://www.meanwellusa.com/webapp/product/search.aspx?prod=GST25A) | External (J1) |
 | AC power cord NEMA 5-15P to IEC C13, 6 ft | 1 | $6.39 | $6.39 | Same Sky | AC-C13-R NA | [Mouser](https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D) | [Datasheet](https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D) | External (adapter) |
 
-**Mouser Electronics subtotal: $58.92** (16 line items)
+**Mouser Electronics subtotal: $56.50** (16 line items)
 
 ### Pololu
 
@@ -72,7 +72,7 @@ The table is sorted by vendor, one section per purchase request. Prices and stoc
 
 These parts are already in hand, handed out in class or taken from Peralta 109 stock, so they are not on a purchase request.
 
-**Total to order: $130.77** (Mouser $58.92 + Pololu $71.85, before shipping and tax).
+**Total to order: $128.35** (Mouser $56.50 + Pololu $71.85, before shipping and tax).
 
 <!-- BOM:END -->
 
@@ -87,3 +87,4 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 ## Resources
 
 * The same BOM as a spreadsheet: [bom.csv](bom.csv)
+* Purchase requests (class order form, one per vendor): Mouser [xlsx](purchase-requests/EGR-3x4-Purchase-Request_Mouser_Ren.xlsx) / [pdf](purchase-requests/EGR-3x4-Purchase-Request_Mouser_Ren.pdf), Pololu [xlsx](purchase-requests/EGR-3x4-Purchase-Request_Pololu_Ren.xlsx) / [pdf](purchase-requests/EGR-3x4-Purchase-Request_Pololu_Ren.pdf)
