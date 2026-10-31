@@ -13,10 +13,10 @@ This power budget checks that every supply and regulator on the Arm Motion Contr
 
 All major parts are listed with their absolute maximum current ratings from the datasheets. Each rail table uses the worst case a part can draw in this circuit. For example, the motor is counted at its 0.67 A stall current, and the LEDs at the current set by their resistors. Every number has its source in the last column of the spreadsheet.
 
-[![Power budget page 1](power_budget_pg1.png)](power_budget_pg1.png)
+![Power budget page 1](power_budget_pg1.png)
 **Figure 1:** Power budget, page 1. Major components, +6 V rail and +5 V rail (click to enlarge).
 
-[![Power budget page 2](power_budget_pg2.png)](power_budget_pg2.png)
+![Power budget page 2](power_budget_pg2.png)
 **Figure 2:** Power budget, page 2. +3.3 V rail, external sources, fuse and thermal checks (click to enlarge).
 
 ## Summary

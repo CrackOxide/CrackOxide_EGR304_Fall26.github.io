@@ -25,10 +25,10 @@ This schematic is the Arm Motion Control subsystem of Team 107 (Simple Education
 
   The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.
 
-[![Arm Motion Control schematic](Arm_Motion_Control_page-0001.png)](Arm_Motion_Control_page-0001.png)
-**Figure 1:** Arm Motion Control schematic.
+![Arm Motion Control schematic](Arm_Motion_Control_page-0001.png)
+**Figure 1:** Arm Motion Control schematic (click the image to enlarge).
 
 
 ## Resources
 
-The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) 
+The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) includes the custom YR_Custom symbol library and the finned FAN8100N footprint.
