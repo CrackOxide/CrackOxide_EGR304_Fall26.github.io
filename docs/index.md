@@ -7,7 +7,7 @@ tags:
 <center>
 <font size= "6"> Yixiang Ren Datasheet</font><br>
 as part of<br>
-<font size= "8"> Project Name</font><br>
+<font size= "8"> Low-cost Modular Desktop Robotic Arm</font><br>
 for<br>
 <font size= "5"> Team 107 </font><br>
 
