@@ -7,7 +7,7 @@ hide:
 
 ## Overview
 
-This page lists every component of the **Arm Motion Control** subsystem (Team 107), taken from the reference designators of the subsystem schematic (Rev C: PIC18F57Q43 Curiosity Nano, FAN8100N H-bridge, 6 V gearmotor, 9 V input with 6 V and 5 V linear regulators, 8-pin team ribbon connector). It also lists the off-board items the system needs to run (wall adapter, power cord, motor, ribbon cable) and the debugging and expansion hardware (test points, headers, IC socket, fuse and fuse clips).
+This page lists every component of the **Arm Motion Control** subsystem, taken from the subsystem schematic . It also lists the off-board items the system needs to run and the debugging and expansion hardware.
 
 How the quantities were chosen:
 
@@ -17,7 +17,7 @@ How the quantities were chosen:
 
 The table is sorted by vendor, one section per purchase request. Prices and stock were checked on the vendor pages on 2026-10-30 and should be re-checked before the order is sent.
 
-## Bill of Materials (Table)
+## Bill of Materials
 
 <!-- BOM:START -->
 ### Mouser Electronics
@@ -76,16 +76,11 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 
 <!-- BOM:END -->
 
-## Notes on part choices
+## Remark
 
-* **VR1 changed from L7806 to LM317T.** The L7806CV, L7806ABV and MC7806 parts are listed as obsolete or not orderable at Mouser, and ordering obsolete parts is one of the listed common mistakes. The LM317T is set to 6.0 V with R11 = 240 Ohm and R12 = 910 Ohm (Vout = 1.25 V x (1 + 910 / 240) = 6.0 V). The [Rev C schematic](../04-Schematic/schematic.md) shows this change (VR1 = LM317T plus R11 / R12).
-* **U1 FAN8100N is already in hand.** It is obsolete, so it is not ordered; two are needed (breadboard and PCB).
 * **C7 (47 uF)** has a 2 mm lead pitch; the PCB footprint will be set to match.
 * **Team cable:** one 2 x 4 IDC ribbon cable is listed for the link to the Gripper board. The team will confirm who orders the shared cables so they are not bought twice.
-* Mouser has more than 10 line items, so the purchase request will include a link to the Mouser shopping cart.
 
 ## Resources
 
 * The same BOM as a spreadsheet: [bom.csv](bom.csv)
-* The CSV also has a Notes column with the reason for each part.
-* `build_bom.py` regenerates the table above and `bom.csv` from one list, so both stay in sync when parts change.
