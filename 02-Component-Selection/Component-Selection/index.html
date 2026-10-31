@@ -1088,7 +1088,7 @@
 <td>No current-sense output for the firmware.</td>
 </tr>
 <tr>
-<td>Two logic inputs per channel (forward / reverse), driven directly by two PWM pins (RB0, RB1).</td>
+<td>Two logic inputs per channel (forward / reverse), driven directly by the two PWM1 outputs (RC4, RC5).</td>
 <td>Bipolar output stage drops about 0.15 V at 0.2 A and up to 0.55 V at 0.4 A, so the motor sees slightly less than 6 V.</td>
 </tr>
 <tr>
@@ -1539,17 +1539,17 @@
 </tr>
 <tr>
 <td>Motor forward PWM (MOT_FWD → FAN8100N FORWARDA)</td>
-<td>PWM1 (16-bit PWM), routed with PPS</td>
-<td>RB0</td>
+<td>PWM1_16BIT, output 1 (PWM1OUT1), routed with PPS</td>
+<td>RC4</td>
 <td>Output</td>
 <td>Duty cycle sets speed; 0 % when stopped; R8 100 kΩ pull-down holds the input low during reset</td>
 </tr>
 <tr>
 <td>Motor reverse PWM (MOT_REV → FAN8100N REVERSEA)</td>
-<td>PWM1 second output, routed with PPS</td>
-<td>RB1</td>
+<td>PWM1_16BIT, output 2 (PWM1OUT2), routed with PPS</td>
+<td>RC5</td>
 <td>Output</td>
-<td>Only one of RB0 / RB1 is active at a time; R9 100 kΩ pull-down</td>
+<td>Only one of RC4 / RC5 is active at a time; R9 100 kΩ pull-down</td>
 </tr>
 <tr>
 <td>SPEED_SET (ribbon pin 6)</td>
@@ -1623,6 +1623,7 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Why RC4 / RC5 for the motor PWM:</strong> on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.</p>
 <p>The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).</p>
 
 

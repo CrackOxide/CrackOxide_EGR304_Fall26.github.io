@@ -864,7 +864,7 @@
 <li>In the diagram, the power path is drawn only from the source to the regulators. Blocks that receive power have no supply lines pointing to them; instead the rail each block runs from is written in bold inside it (for example <strong>PVCC +6 V / VCC +5 V</strong> on the H-bridge, <strong>3.3 V</strong> on the LED, button and J4).</li>
 </ul>
 </li>
-<li><strong>Actuator:</strong> an onsemi FAN8100N H-bridge drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RB0 and RB1 provide the two PWM inputs through PPS.</li>
+<li><strong>Actuator:</strong> an onsemi FAN8100N H-bridge drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RC4 and RC5 (PWM1 outputs 1 and 2, routed with PPS) provide the two PWM inputs.</li>
 <li><strong>Debug:</strong><ul>
 <li>A status LED on RE0.</li>
 <li>A push button on RE1, using the weak pull-up.</li>

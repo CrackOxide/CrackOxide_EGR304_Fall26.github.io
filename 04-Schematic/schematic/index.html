@@ -875,7 +875,7 @@
 <ul>
 <li><strong>Power:</strong> a 9 V DC barrel jack feeds a 1 A slow-blow fuse and a 1N5819 reverse-polarity Schottky diode, giving VIN_PROT of about 8.55 V. VR1 is an LM317T set to 6.0 V by R11 = 240 Ω and R12 = 910 Ω, using Vout = 1.25 V × (1 + 910 / 240) = 6.0 V. This 6 V rail is the motor rail. VR2 makes the +5 V logic rail for the H-bridge VCC and the power LED DS1. Each regulator has 0.33 µF on its input and 0.1 µF on its output. Test points TP1 and TP2 are on the 6 V and 5 V rails.</li>
 <li><strong>Microcontroller:</strong> PIC18F57Q43 Curiosity Nano, powered from its own USB port with 3.3 V logic.</li>
-<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives the 6 V Pololu #2370 gearmotor through M+ and M−. The motor has only these two pins. RB0 and RB1 supply PWM through PPS. The motor supply has 47 µF and 0.1 µF bulk and decoupling capacitors.</li>
+<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives the 6 V Pololu #2370 gearmotor through M+ and M−. The motor has only these two pins. RC4 and RC5 supply PWM (PWM1 outputs 1 and 2, routed with PPS; PWM1 cannot be routed to PORTB on this PIC). The motor supply has 47 µF and 0.1 µF bulk and decoupling capacitors.</li>
 <li><strong>Debug and expansion:</strong><ul>
 <li>A status LED on RE0.</li>
 <li>A push button on RE1, using the weak pull-up.</li>
@@ -897,6 +897,7 @@
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
 <strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<p><strong>Revision 2.2:</strong> the motor PWM lines MOT_FWD and MOT_REV moved from RB0 / RB1 to <strong>RC4 / RC5</strong>. MCC showed that the PIC18F57Q43 can route its PWM1 outputs only to PORTC and PORTF, and neither PWM1 nor CCP1 / CCP2 can reach PORTB. Only the two Nano pins changed; R8, R9 and the FAN8100N side are the same.</p>
 <h2 id="33-v-operation-check">3.3 V Operation Check</h2>
 <p>The PIC18F57Q43 on this board runs at <strong>3.3 V</strong>. It is powered by the Curiosity Nano's own MIC5353 regulator from USB, and the VTG pin (+3V3 in the schematic) is that regulator's output. Nothing on this board drives VTG. Every connection to the PIC was checked against 3.3 V operation:</p>
 <table>
@@ -924,7 +925,7 @@
 <td>✔</td>
 </tr>
 <tr>
-<td>PIC → FAN8100N inputs (RB0, RB1)</td>
+<td>PIC → FAN8100N inputs (RC4, RC5)</td>
 <td>FAN8100N input high ≥ 1.8 V, input low ≤ 0.7 V, input current ≤ 200 µA; datasheet lists "3.3 V and 5 V micro-controller interface" (<a href="../../Appendix/Datasheets/FAN8100N%2CMTC.pdf">datasheet</a>)</td>
 <td>A 3.3 V output is well above 1.8 V. The FAN8100N logic supply is 5 V, but its inputs only need 1.8 V, so no level shifter is needed ✔</td>
 </tr>
@@ -977,7 +978,7 @@
 <tr>
 <td><strong>Accuracy &amp; Repeatability</strong></td>
 <td>PR-01, PR-02, PR-04</td>
-<td>VR1 LM317T regulated 6 V rail; C6, C7 on the motor supply; PWM on RB0 / RB1</td>
+<td>VR1 LM317T regulated 6 V rail; C6, C7 on the motor supply; PWM on RC4 / RC5</td>
 <td>The motor always sees a regulated 6.0 V (set by 1 % resistors R11 / R12) instead of a raw adapter voltage, so the same PWM duty gives the same speed every run. Bulk and bypass capacitors keep the rail steady when the motor starts.</td>
 </tr>
 <tr>
@@ -1030,7 +1031,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Signal path, start to finish:</strong> the User board raises SAFE_OK and RUN_REQ → the PIC reads SPEED_SET on the ADC and drives PWM on RB0 (forward) or RB1 (reverse) → the FAN8100N switches the 6 V rail across the motor → when the move is done the PIC raises ARM_IN_POS and GRIP_CMD → the Gripper board answers on OBJ_HELD → the arm moves to the place position. At any point, SAFE_OK going low sets both PWM outputs to 0 % and the motor stops.</p>
+<p><strong>Signal path, start to finish:</strong> the User board raises SAFE_OK and RUN_REQ → the PIC reads SPEED_SET on the ADC and drives PWM on RC4 (forward) or RC5 (reverse) → the FAN8100N switches the 6 V rail across the motor → when the move is done the PIC raises ARM_IN_POS and GRIP_CMD → the Gripper board answers on OBJ_HELD → the arm moves to the place position. At any point, SAFE_OK going low sets both PWM outputs to 0 % and the motor stops.</p>
 <h2 id="resources">Resources</h2>
 <p>The schematic is available as a <a href="../Arm_Motion_Control.pdf"><em>PDF download</em></a>. The <a href="../Arm_Motion_Control.zip"><em>KiCad 9 project (Zip)</em></a> includes the custom YR_Custom symbol library and the finned FAN8100N footprint.</p>
 
