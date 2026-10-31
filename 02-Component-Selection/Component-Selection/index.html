@@ -1670,11 +1670,13 @@
 <p><strong>Why RC4 / RC5 for the motor PWM:</strong> on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.</p>
 <p>The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).</p>
 <h3 id="mcc-screenshots">MCC Screenshots</h3>
-<p>The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above.</p>
+<p>The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above. The generated code matches them: <code>pins.c</code> sets RC4 / RC5 → PWM1 outputs and RF0 → UART1 TX1 through PPS, makes RA1 the only analog input in use, and enables the weak pull-up only on RE1.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_00_Application_Builder.png" data-desc-position="bottom"><img alt="MCC Application Builder" src="../MCC_00_Application_Builder.png"></a>
 <strong>Figure 1:</strong> MCC Application Builder. The project uses PWM1_16BIT, ADC (ADCC) and UART1, plus the Clock Control, Configuration Bits, Interrupt Manager and Pins system modules.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_01_Pin_Grid.png" data-desc-position="bottom"><img alt="MCC Pin Grid View" src="../MCC_01_Pin_Grid.png"></a>
 <strong>Figure 2:</strong> Pin Grid View. Locked pins: PWM1OUT1 → RC4, PWM1OUT2 → RC5, ADC ANx → RA1, UART1 TX1 → RF0 and RX1 → RF1, MCLR on RE3. The GPIO pins RD0–RD4, RE0 and RE1 are set in the Pins module.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_02_Pins.png" data-desc-position="bottom"><img alt="MCC Pins table" src="../MCC_02_Pins.png"></a>
+<strong>Figure 2b:</strong> Pins table. Custom names for every pin; RA1 (SPEED_SET) is analog, all digital pins have Analog off; weak pull-up only on RE1 (BTN_DBG); no output starts high; UART1 TX1 on RF0 and RX1 on RF1.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_03_Clock.png" data-desc-position="bottom"><img alt="MCC Clock Control" src="../MCC_03_Clock.png"></a>
 <strong>Figure 3:</strong> Clock Control. HFINTOSC at 64 MHz with a divider of 1.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_04a_Config_Bits.png" data-desc-position="bottom"><img alt="MCC Configuration Bits, CONFIG1 to CONFIG3" src="../MCC_04a_Config_Bits.png"></a>
@@ -1689,6 +1691,7 @@
 <strong>Figure 8:</strong> ADCC clock settings. ADCRC clock (600 kHz, TAD = 1.667 µs), acquisition count 10.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_07_UART.png" data-desc-position="bottom"><img alt="MCC UART1" src="../MCC_07_UART.png"></a>
 <strong>Figure 9:</strong> UART1. 115200 baud, 8N1, no flow control, for debug messages over the Nano's virtual COM port.</p>
+<p><strong>Project files:</strong> the MPLAB X project with the generated MCC code is available as a <a href="../Arm_Control_MPLABX.zip"><em>Zip download</em></a>, and the MCC configuration file on its own as <a href="../Arm_Control.mc3"><em>Arm_Control.mc3</em></a>.</p>
 
 
 
