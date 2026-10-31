@@ -649,9 +649,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resouces" class="md-nav__link">
+  <a href="#revision-notes-rev-c" class="md-nav__link">
     <span class="md-ellipsis">
-      Resouces
+      Revision notes (Rev C)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
     </span>
   </a>
   
@@ -809,9 +818,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resouces" class="md-nav__link">
+  <a href="#revision-notes-rev-c" class="md-nav__link">
     <span class="md-ellipsis">
-      Resouces
+      Revision notes (Rev C)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
     </span>
   </a>
   
@@ -843,11 +861,42 @@
   <h1>Schematic</h1>
 
 <h2 id="overview">Overview</h2>
-<p>This schematic is design to support the control of arm motion.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://github.com/user-attachments/assets/0fbdc555-e939-4c50-b7b9-979f4646345b" data-desc-position="bottom"><img width="7016" height="4961" alt="arm_motion_control_page-0001" src="https://github.com/user-attachments/assets/0fbdc555-e939-4c50-b7b9-979f4646345b"></a>
-<strong>Figure 1:</strong> Schematic v1.1.</p>
-<h2 id="resouces">Resouces</h2>
-<p>The schematic as a PDF download is available <a href="../arm_motion_control.pdf"><em>here</em></a>, and the Zip folder of the project <a href="../arm_motion_control.zip"><em>here</em></a>.</p>
+<p>This schematic is the Arm Motion Control subsystem of Team 107 (Simple Educational Robotic Arm). It is drawn in KiCad 9 with US/ANSI symbols, and parts are joined by wires rather than net labels wherever possible, so the signal path can be followed by eye. The sheet has five blocks:</p>
+<ul>
+<li><strong>Power:</strong> a 9 V DC barrel jack (J1) feeds a 1 A slow-blow fuse (F1) and a 1N5819 reverse-polarity Schottky diode (D1), giving VIN_PROT of about 8.55 V. VR1 is an LM317T set to 6.0 V by R11 = 240 Ω and R12 = 910 Ω, using Vout = 1.25 V × (1 + 910 / 240) = 6.0 V. This 6 V rail is the motor rail. VR2 (L7805) makes the +5 V logic rail for the H-bridge VCC and the power LED DS1. Each regulator has 0.33 µF on its input and 0.1 µF on its output. Test points TP1 and TP2 are on the 6 V and 5 V rails.</li>
+<li><strong>Microcontroller:</strong> a PIC18F57Q43 Curiosity Nano (A1), powered from its own USB port with 3.3 V logic.</li>
+<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge (U1, finned 12-DIPH package) drives the 6 V Pololu #2370 gearmotor through M+ and M−. The motor has only these two pins. RB0 and RB1 supply PWM through PPS. The motor supply has 47 µF and 0.1 µF bulk and decoupling capacitors.</li>
+<li><strong>Debug and expansion:</strong><ul>
+<li>A status LED on RE0.</li>
+<li>A push button on RE1, using the weak pull-up.</li>
+<li>J4, a 6-pin expansion header carrying 3.3 V, GND, RA0, RA2, RB2 and RB3.</li>
+</ul>
+</li>
+<li><strong>Team ribbon (J3, 2×4 IDC):</strong> pins 1 to 8 carry, in order:<ul>
+<li>SAFE_OK (in)</li>
+<li>RUN_REQ (in)</li>
+<li>GRIP_CMD (out)</li>
+<li>OBJ_HELD (in)</li>
+<li>ARM_IN_POS (out)</li>
+<li>SPEED_SET (analog in)</li>
+<li>pin 7, which is not used on this board</li>
+<li>GND</li>
+</ul>
+</li>
+</ul>
+<p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
+<p><a href="../arm_motion_control.png"><img alt="Arm Motion Control schematic, Rev C" src="../arm_motion_control.png"></a>
+<strong>Figure 1:</strong> Arm Motion Control schematic, Rev C (click the image to open it at full size).</p>
+<h2 id="revision-notes-rev-c">Revision notes (Rev C)</h2>
+<ul>
+<li>VR1 changed from an L7806 to an LM317T with R11 and R12, because the 7806 parts are obsolete at Mouser. This matches the <a href="../../03-BOM/BOM/">BOM</a>.</li>
+<li>The H-bridge is the FAN8100N.</li>
+<li>The position sensor and the stop button blocks were removed.</li>
+<li>The debug button was simplified.</li>
+<li>The motor rail is 6 V.</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<p>The schematic is available as a <a href="../arm_motion_control.pdf"><em>PDF download</em></a>. The <a href="../arm_motion_control.zip"><em>KiCad 9 project (Zip)</em></a> includes the custom YR_Custom symbol library and the finned FAN8100N footprint.</p>
 
 
 
