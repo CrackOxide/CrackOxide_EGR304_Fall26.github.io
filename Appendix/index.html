@@ -15,8 +15,6 @@
         <link rel="prev" href="../05-Power-Budget/Power-Budget/">
       
       
-        <link rel="next" href="another-subfile/">
-      
       
       <link rel="icon" href="../static/logo304.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
@@ -26,7 +24,7 @@
 
     
       
-        <title>Appendix - Main Page - EGR 304 Data Sheet for Yixiang Ren</title>
+        <title>Appendix - Datasheets - EGR 304 Data Sheet for Yixiang Ren</title>
       
     
     
@@ -89,6 +87,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#datasheets" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -120,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Appendix - Main Page
+              Appendix - Datasheets
             
           </span>
         </div>
@@ -644,14 +647,6 @@
           
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -682,11 +677,6 @@
 
             </a>
             
-              
-              <label class="md-nav__link md-nav__link--active" for="__nav_7" id="__nav_7_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
           </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
@@ -696,90 +686,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="another-subfile/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Appendix - Another Subfile
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="basic-markdown-examples/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Appendix - Basic Markdown Examples
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="charts/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Appendix - Charts Example
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="esp-32-table/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Appendix - Example Controller Table for the ESP32
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
           </ul>
@@ -807,6 +713,23 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#datasheets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datasheets
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -828,9 +751,155 @@
   
 
 
-  <h1>Appendix - Main Page</h1>
+  <h1>Appendix - Datasheets</h1>
 
-<p>The Appendix is where supporting information goes that is not in the main body.</p>
+<h2 id="datasheets">Datasheets</h2>
+<p>Local copies of the datasheets for every part on the <a href="../03-BOM/BOM/">Bill of Materials</a>, saved in this repository so they stay available if a vendor page changes. Reference designators match the <a href="../04-Schematic/schematic/">schematic</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Manufacturer / Part Number</th>
+<th>Reference Designators</th>
+<th>Datasheet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dual H-bridge motor driver</td>
+<td>onsemi (Fairchild) FAN8100N</td>
+<td>U1</td>
+<td><a href="Datasheets/FAN8100N%2CMTC.pdf">FAN8100N, MTC</a></td>
+</tr>
+<tr>
+<td>MCU board</td>
+<td>Microchip PIC18F57Q43 Curiosity Nano (DM164150)</td>
+<td>A1</td>
+<td><a href="Datasheets/PIC18F57Q43-Curiosity-Nano-HW-UserGuide-DS40002186B.pdf">Hardware User Guide</a></td>
+</tr>
+<tr>
+<td>DC gearmotor, 250:1 Micro Metal MP 6 V</td>
+<td>Pololu #2370</td>
+<td>B1</td>
+<td><a href="Datasheets/pololu-micro-metal-gearmotors-rev-6-2.pdf">Micro Metal Gearmotors</a></td>
+</tr>
+<tr>
+<td>Adjustable regulator (6 V rail)</td>
+<td>STMicroelectronics LM317T</td>
+<td>VR1</td>
+<td><a href="Datasheets/DS_lm217.pdf">LM217, LM317</a></td>
+</tr>
+<tr>
+<td>5 V regulator</td>
+<td>STMicroelectronics L7805CV</td>
+<td>VR2</td>
+<td><a href="Datasheets/DS_l78.pdf">L78</a></td>
+</tr>
+<tr>
+<td>TO-220 heat sink</td>
+<td>Aavid (Boyd) 577102B00000G</td>
+<td>VR1 heat sink</td>
+<td><a href="Datasheets/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf">Board-level heat sinks</a></td>
+</tr>
+<tr>
+<td>Schottky diode 1 A 40 V</td>
+<td>onsemi 1N5819RLG</td>
+<td>D1</td>
+<td><a href="Datasheets/1N5817-D.PDF">1N5817 – 1N5819</a></td>
+</tr>
+<tr>
+<td>Fuse 1 A slow-blow, 5 × 20 mm</td>
+<td>Littelfuse 0218001.MXP</td>
+<td>F1</td>
+<td><a href="Datasheets/Littelfuse-Fuse-218-Datasheet.pdf">218 series</a></td>
+</tr>
+<tr>
+<td>Fuse clip</td>
+<td>Keystone 3517</td>
+<td>F1 holder</td>
+<td><a href="Datasheets/3517.pdf">3517</a></td>
+</tr>
+<tr>
+<td>DC power jack 2.1 × 5.5 mm</td>
+<td>Same Sky PJ-102A</td>
+<td>J1</td>
+<td><a href="Datasheets/pj_102a.pdf">PJ-102A</a></td>
+</tr>
+<tr>
+<td>9 V 2.55 A wall adapter</td>
+<td>MEAN WELL GST25A09-P1J</td>
+<td>External (J1)</td>
+<td><a href="Datasheets/GST25A-SPEC.pdf">GST25A series</a></td>
+</tr>
+<tr>
+<td>AC power cord</td>
+<td>Same Sky AC-C13-R NA</td>
+<td>External (adapter)</td>
+<td><a href="Datasheets/ac-c13-r-na.pdf">AC-C13-R NA</a></td>
+</tr>
+<tr>
+<td>Ceramic capacitors 0.33 µF / 0.1 µF</td>
+<td>Vishay K334K20X7RF5TH5 / K104K15X7RF5WH5</td>
+<td>C1–C6, C8</td>
+<td><a href="Datasheets/kseries.pdf">K series</a></td>
+</tr>
+<tr>
+<td>Electrolytic capacitor 47 µF 16 V</td>
+<td>Panasonic EEU-FC1C470H</td>
+<td>C7</td>
+<td><a href="Datasheets/ABA0000C1209.pdf">FC series</a></td>
+</tr>
+<tr>
+<td>Carbon film resistors 1/4 W</td>
+<td>Stackpole CF14 series</td>
+<td>R1–R10</td>
+<td><a href="Datasheets/SEI_CF_CFM.pdf">CF / CFM series</a></td>
+</tr>
+<tr>
+<td>LED 3 mm green</td>
+<td>Kingbright WP710A10SGD</td>
+<td>DS1</td>
+<td><a href="Datasheets/WP710A10SGD.pdf">WP710A10SGD</a></td>
+</tr>
+<tr>
+<td>LED 3 mm yellow</td>
+<td>Kingbright WP710A10YD</td>
+<td>DS2</td>
+<td><a href="Datasheets/WP710A10YD.pdf">WP710A10YD</a></td>
+</tr>
+<tr>
+<td>Tactile switch</td>
+<td>Omron B3F-1000</td>
+<td>SW1</td>
+<td><a href="Datasheets/en_b3f.pdf">B3F</a></td>
+</tr>
+<tr>
+<td>Test point</td>
+<td>Keystone 5001</td>
+<td>TP1, TP2</td>
+<td><a href="Datasheets/5000_5004.pdf">5000 – 5004</a></td>
+</tr>
+<tr>
+<td>Terminal block 2-position</td>
+<td>Phoenix Contact 1935161</td>
+<td>J2</td>
+<td><a href="Datasheets/phoenix_contact_1935161_en.pdf">1935161</a></td>
+</tr>
+<tr>
+<td>Shrouded header 2 × 4</td>
+<td>Samtec TST-104-01-G-D</td>
+<td>J3</td>
+<td><a href="Datasheets/tst-1xx-xx-x-x-xx-xx-mkt.pdf">TST series</a></td>
+</tr>
+<tr>
+<td>IDC ribbon cable 2 × 4</td>
+<td>Samtec IDSD-04-D-09.00</td>
+<td>Team cable</td>
+<td><a href="Datasheets/idsd.pdf">IDSD series</a></td>
+</tr>
+</tbody>
+</table>
+<p>Generic stock parts (DIP socket, 1 × 40 male and female headers) have no part-specific datasheet.</p>
 
 
 
@@ -885,22 +954,6 @@
           </a>
         
         
-          
-          <a href="another-subfile/" class="md-footer__link md-footer__link--next" aria-label="Next: Appendix - Another Subfile">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Appendix - Another Subfile
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
-            </div>
-          </a>
-        
       </nav>
     
   
@@ -909,7 +962,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 team-name-here
+      Copyright © 2026 Yixiang Ren, Team 107
     </div>
   
   

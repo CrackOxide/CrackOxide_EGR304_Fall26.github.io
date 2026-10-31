@@ -458,6 +458,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#where-to-find-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to find things
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -714,14 +723,6 @@
           
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -809,6 +810,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#where-to-find-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to find things
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -845,24 +855,82 @@ as part of<br>
 <font size="8"> Simple Educational Robotic Arm</font><br>
 for<br>
 <font size="5"> Team 107 </font><br><p></p>
-<p><strong>Submission: Sep, 02, 2026</strong>
+<p><strong>Submission: Oct 30, 2026</strong>
 </p></center><p></p>
 <h2 id="introduction">Introduction</h2>
-<ul>
-<li>This needs to be updated so that a reader gets an idea of the purpose of this datasheet.</li>
-</ul>
+<p>This datasheet documents the <strong>Arm Motion Control</strong> subsystem of Team 107's robotic arm, designed by Yixiang Ren for EGR 304 Embedded Systems Design at Arizona State University. It collects the design work for this one board: the block diagram, how each part was chosen, the bill of materials, the schematic and the power budget. A reader can use it to understand, build, test or modify the board without other documents.</p>
 <h3 id="project-summary">Project Summary</h3>
-<ul>
-<li>This needs to be updated to reflect <ins>your version</ins> of the team project, so when shared not via the team's report, the reader gets an idea of the direction of the project and how your work will contribute to the overall success.</li>
-<li>Add context that ties into the link to your <a href="https://embedded-systems-design.github.io/EGR304TeamTemplate/">team report.</a></li>
-</ul>
+<p>Team 107 is building a <strong>Simple Educational Robotic Arm</strong>: a low-cost desktop arm that performs repeatable pick-and-place tasks and is meant for students, educators and hobbyists who are learning robotics and embedded systems. The system is split into three boards, each with its own PIC18F57Q43 Curiosity Nano, linked in a daisy chain by an 8-pin ribbon cable:</p>
+<table>
+<thead>
+<tr>
+<th>Board</th>
+<th>Owner</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Arm Motion Control</strong> (this datasheet)</td>
+<td>Yixiang Ren</td>
+<td>Drives the arm joint motor and reports when the arm is in position</td>
+</tr>
+<tr>
+<td>Gripper &amp; Object Handling</td>
+<td>Canyon Miller</td>
+<td>Opens and closes the gripper and senses the held object</td>
+</tr>
+<tr>
+<td>User Controls &amp; Safety</td>
+<td>Dunyue Yang</td>
+<td>Start, stop and speed inputs, status LEDs and buzzer</td>
+</tr>
+</tbody>
+</table>
+<p>The full project, including user needs, product requirements, the team block diagram and the software proposal, is in the <a href="https://egr304-2026-f-107.github.io/"><strong>Team 107 report</strong></a>.</p>
 <h3 id="my-contribution">My Contribution</h3>
+<p>The Arm Motion Control board turns commands from the team into arm movement:</p>
 <ul>
-<li>This needs to be updated to reflect a team introduction</li>
-<li>Content should also help an unfamiliar reader navigate to areas of interest. Information like:</li>
+<li><strong>Power:</strong> it takes a 9 V wall adapter, protects the input with a fuse and a reverse-polarity diode, and makes a 6 V motor rail (LM317T) and a 5 V logic rail (L7805).</li>
+<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives a 6 V Pololu micro gearmotor in both directions, with speed set by PWM from the PIC.</li>
+<li><strong>Team link:</strong> on the ribbon cable it reads SAFE_OK, RUN_REQ, OBJ_HELD and the analog SPEED_SET, and it sends GRIP_CMD and ARM_IN_POS. An unplugged cable reads as "stop".</li>
+<li><strong>Debug and expansion:</strong> a status LED, a push button, test points on both rails and a spare-I/O header (J4) make the board easy to test and to extend.</li>
 </ul>
-<p>To review the details listed of the material used to construct the subsection, you can review it in the <a href="03-BOM/BOM/">"Bill of Materials"</a> section of the datasheet.</p>
-<p>For all the sections Hello</p>
+<h3 id="where-to-find-things">Where to find things</h3>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What it contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01-Block-Diagram/Block-Diagram/">01 Block Diagram</a></td>
+<td>How power and signals move through the board and connect to the team</td>
+</tr>
+<tr>
+<td><a href="02-Component-Selection/Component-Selection/">02 Component Selection</a></td>
+<td>Options compared for each major part, the decisions and the MCC pin configuration</td>
+</tr>
+<tr>
+<td><a href="03-BOM/BOM/">03 BOM</a></td>
+<td>Every part with quantity, cost, vendor and datasheet links, plus the purchase requests</td>
+</tr>
+<tr>
+<td><a href="04-Schematic/schematic/">04 Schematic</a></td>
+<td>The KiCad schematic (image, PDF and project zip) and how it meets the user needs</td>
+</tr>
+<tr>
+<td><a href="05-Power-Budget/Power-Budget/">05 Power Budget</a></td>
+<td>Worst-case current on every rail and source, and what it means for the design</td>
+</tr>
+<tr>
+<td><a href="Appendix/">Appendix</a></td>
+<td>Datasheets for every part on the BOM</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -925,7 +993,7 @@ for<br>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 team-name-here
+      Copyright © 2026 Yixiang Ren, Team 107
     </div>
   
   

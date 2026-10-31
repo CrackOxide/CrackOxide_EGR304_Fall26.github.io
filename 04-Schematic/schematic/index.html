@@ -649,6 +649,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the Schematic Meets the User Needs and Product Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
       Resources
@@ -732,14 +741,6 @@
           
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -809,6 +810,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the Schematic Meets the User Needs and Product Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
       Resources
@@ -868,9 +878,84 @@
 </ul>
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
-<strong>Figure 1:</strong> Arm Motion Control schematic</p>
+<strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<h2 id="how-the-schematic-meets-the-user-needs-and-product-requirements">How the Schematic Meets the User Needs and Product Requirements</h2>
+<p>The team grouped its user needs into eleven categories and turned them into product requirements PR-01 to PR-18 (<a href="https://egr304-2026-f-107.github.io/03-User-Needs-and%20Benchmarking/#organized-need-statements">user needs</a>, <a href="https://egr304-2026-f-107.github.io/04-Product-Requirements/">product requirements</a>). The table shows which parts of this schematic serve each need that applies to the Arm Motion Control board, and how.</p>
+<table>
+<thead>
+<tr>
+<th>User need category</th>
+<th>Requirements</th>
+<th>What in the schematic serves it</th>
+<th>How it works</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Safety</strong></td>
+<td>PR-12, PR-14, Reg. 6.3, 6.7</td>
+<td>R2, R3, R5 pull-downs on SAFE_OK, RUN_REQ, OBJ_HELD; R8, R9 pull-downs on the H-bridge inputs; F1; D1; FAN8100N thermal shutdown</td>
+<td>If the ribbon cable is unplugged or the User board drops SAFE_OK, the inputs read 0 and the firmware stops the motor. R8 and R9 hold both H-bridge inputs low while the PIC resets, so the motor cannot twitch at power-up. F1 (1 A slow-blow) opens on a short, D1 blocks a reversed adapter, and the FAN8100N shuts down if it overheats during a stall.</td>
+</tr>
+<tr>
+<td><strong>Accuracy &amp; Repeatability</strong></td>
+<td>PR-01, PR-02, PR-04</td>
+<td>VR1 LM317T regulated 6 V rail; C6, C7 on the motor supply; PWM on RB0 / RB1</td>
+<td>The motor always sees a regulated 6.0 V (set by 1 % resistors R11 / R12) instead of a raw adapter voltage, so the same PWM duty gives the same speed every run. Bulk and bypass capacitors keep the rail steady when the motor starts.</td>
+</tr>
+<tr>
+<td><strong>Programming &amp; Control</strong></td>
+<td>PR-07, PR-16</td>
+<td>FAN8100N forward / reverse inputs on two PWM pins; SPEED_SET on RA1 (ADC)</td>
+<td>Speed and direction are two duty-cycle values, which is easy for a student to change in code and see on the arm. SPEED_SET from the User board is read by the ADC through a 1 kΩ / 0.1 µF filter, so the speed knob gives a smooth reading.</td>
+</tr>
+<tr>
+<td><strong>Gripper &amp; Object Handling</strong> (team link)</td>
+<td>PR-01, PR-03</td>
+<td>J3 ribbon: GRIP_CMD and ARM_IN_POS outputs with R4, R6 (330 Ω); OBJ_HELD input</td>
+<td>The arm tells the gripper when to close and reports when it is in position, and it waits for OBJ_HELD before moving on. The 330 Ω resistors limit current if two boards ever drive the same wire.</td>
+</tr>
+<tr>
+<td><strong>Documentation &amp; Troubleshooting</strong></td>
+<td>PR-09, PR-18</td>
+<td>TP1 (+6 V), TP2 (+5 V); power LED DS1; debug LED DS2 on RE0; button SW1 on RE1</td>
+<td>DS1 shows at a glance that the 5 V rail is up. The test points let a user check both rails with a meter. DS2 and SW1 let the firmware show its state and step through a sequence during troubleshooting.</td>
+</tr>
+<tr>
+<td><strong>Sensors, Vision &amp; Expansion</strong></td>
+<td>PR-10, PR-11</td>
+<td>J4 header (3.3 V, GND, RA0, RA2, RB2, RB3); unused FAN8100N channel B</td>
+<td>A sensor such as a joint potentiometer or magnetic encoder can be added on J4 (RA0 and RA2 are analog-capable) without a new PCB. The second H-bridge channel is available for a second motor.</td>
+</tr>
+<tr>
+<td><strong>Calibration, Maintenance &amp; Repair</strong></td>
+<td>PR-05, PR-10</td>
+<td>U1 in a socket; Curiosity Nano on female headers; J2 screw terminal for the motor</td>
+<td>The driver, the MCU board and the motor can each be replaced without desoldering.</td>
+</tr>
+<tr>
+<td><strong>Assembly, Wiring &amp; Components</strong></td>
+<td>PR-10, PR-14</td>
+<td>All through-hole parts; keyed 2×4 shrouded header J3; parts run within ratings</td>
+<td>The board can be hand-soldered and built on a breadboard first. The keyed header prevents the ribbon from being plugged in backwards. The <a href="../../05-Power-Budget/Power-Budget/">Power Budget</a> shows every part stays within its limits.</td>
+</tr>
+<tr>
+<td><strong>Power, Stability &amp; Physical Design</strong></td>
+<td>PR-13, PR-14, Reg. 6.1</td>
+<td>9 V adapter, VR1 with heat sink, VR2, separate motor and logic rails</td>
+<td>Everything runs from a low-voltage desktop adapter. The motor and the logic have separate regulators, so motor noise does not reach the logic supply, and VR1's heat sink keeps it cool at stall.</td>
+</tr>
+<tr>
+<td><strong>Cost &amp; Accessibility</strong></td>
+<td>PR-15, PR-17</td>
+<td>FAN8100N and passives already in hand; common TO-220 regulators</td>
+<td>The parts to order cost $128.35 in total, and every part is a common, documented through-hole component.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Signal path, start to finish:</strong> the User board raises SAFE_OK and RUN_REQ → the PIC reads SPEED_SET on the ADC and drives PWM on RB0 (forward) or RB1 (reverse) → the FAN8100N switches the 6 V rail across the motor → when the move is done the PIC raises ARM_IN_POS and GRIP_CMD → the Gripper board answers on OBJ_HELD → the arm moves to the place position. At any point, SAFE_OK going low sets both PWM outputs to 0 % and the motor stops.</p>
 <h2 id="resources">Resources</h2>
-<p>The schematic is available as a <a href="../Arm_Motion_Control.pdf"><em>PDF download</em></a>. The <a href="../Arm_Motion_Control.zip"><em>KiCad 9 project (Zip)</em></a> </p>
+<p>The schematic is available as a <a href="../Arm_Motion_Control.pdf"><em>PDF download</em></a>. The <a href="../Arm_Motion_Control.zip"><em>KiCad 9 project (Zip)</em></a> includes the custom YR_Custom symbol library and the finned FAN8100N footprint.</p>
 
 
 
@@ -949,7 +1034,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 team-name-here
+      Copyright © 2026 Yixiang Ren, Team 107
     </div>
   
   
