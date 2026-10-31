@@ -87,4 +87,4 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 ## Resources
 
 * The same BOM as a spreadsheet: [bom.csv](bom.csv)
-* Purchase requests (class order form, one per vendor): Mouser [xlsx](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.pdf), Pololu [xlsx](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.pdf)
+* Purchase requests: Mouser [xlsx](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.pdf), Pololu [xlsx](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.pdf)
