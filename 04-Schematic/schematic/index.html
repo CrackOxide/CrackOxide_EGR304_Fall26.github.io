@@ -649,6 +649,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#33-v-operation-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 V Operation Check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       How the Schematic Meets the User Needs and Product Requirements
@@ -810,6 +819,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#33-v-operation-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 V Operation Check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       How the Schematic Meets the User Needs and Product Requirements
@@ -879,6 +897,65 @@
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
 <strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<h2 id="33-v-operation-check">3.3 V Operation Check</h2>
+<p>The PIC18F57Q43 on this board runs at <strong>3.3 V</strong>. It is powered by the Curiosity Nano's own MIC5353 regulator from USB, and the VTG pin (+3V3 in the schematic) is that regulator's output. Nothing on this board drives VTG. Every connection to the PIC was checked against 3.3 V operation:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Requirement</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PIC18F57Q43 supply range</td>
+<td>Operating voltage 1.8 V – 5.5 V (PIC18-Q43 family product brief)</td>
+<td>3.3 V is inside the range ✔</td>
+</tr>
+<tr>
+<td>Curiosity Nano target voltage</td>
+<td>MIC5353 adjustable 1.8 V – 5.1 V, <strong>set to 3.3 V at the factory</strong> (<a href="../../Appendix/Datasheets/PIC18F57Q43-Curiosity-Nano-HW-UserGuide-DS40002186B.pdf">user guide</a>, sec. 3.3.1 "Target Regulator")</td>
+<td>Leave the target voltage at 3.3 V in the MPLAB X project properties ✔</td>
+</tr>
+<tr>
+<td>Regulator current</td>
+<td>3.3 V loads need about 99 mA with margin (<a href="../../05-Power-Budget/Power-Budget/">Power Budget</a>); MIC5353 supplies 500 mA</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>PIC → FAN8100N inputs (RB0, RB1)</td>
+<td>FAN8100N input high ≥ 1.8 V, input low ≤ 0.7 V, input current ≤ 200 µA; datasheet lists "3.3 V and 5 V micro-controller interface" (<a href="../../Appendix/Datasheets/FAN8100N%2CMTC.pdf">datasheet</a>)</td>
+<td>A 3.3 V output is well above 1.8 V. The FAN8100N logic supply is 5 V, but its inputs only need 1.8 V, so no level shifter is needed ✔</td>
+</tr>
+<tr>
+<td>SPEED_SET analog input (RA1)</td>
+<td>ADC reference = VDD = 3.3 V; the User board's speed knob also runs from its Nano's 3.3 V, so the signal is 0 – 3.3 V</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Ribbon signals to and from the other boards</td>
+<td>All three boards use PIC18F57Q43 Curiosity Nanos at 3.3 V, so every logic level on the ribbon is 0 / 3.3 V</td>
+<td>✔ <strong>All three Nanos must stay at 3.3 V.</strong> If one board's target voltage were changed to 5 V, its outputs would exceed this PIC's 3.3 V supply.</td>
+</tr>
+<tr>
+<td>Debug LED DS2 on RE0</td>
+<td>(3.3 V − 2.1 V) / 330 Ω ≈ 3.6 mA, a small load for one I/O pin</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Debug button SW1 on RE1</td>
+<td>Internal weak pull-up to 3.3 V; the button pulls to GND</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>J4 3.3 V pin</td>
+<td>Comes from VTG, so an add-on sensor runs at the same 3.3 V logic level as the PIC</td>
+<td>✔</td>
+</tr>
+</tbody>
+</table>
+<p>The only 5 V and 6 V nets on the board are the FAN8100N supply pins (VCC, PVCC), the motor and the power LED. None of them connects to a PIC pin.</p>
 <h2 id="how-the-schematic-meets-the-user-needs-and-product-requirements">How the Schematic Meets the User Needs and Product Requirements</h2>
 <p>The team grouped its user needs into eleven categories and turned them into product requirements PR-01 to PR-18 (<a href="https://egr304-2026-f-107.github.io/03-User-Needs-and%20Benchmarking/#organized-need-statements">user needs</a>, <a href="https://egr304-2026-f-107.github.io/04-Product-Requirements/">product requirements</a>). The table shows which parts of this schematic serve each need that applies to the Arm Motion Control board, and how.</p>
 <table>
