@@ -605,13 +605,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bill-of-materials-table" class="md-nav__link">
+  <a href="#bill-of-materials" class="md-nav__link">
     <span class="md-ellipsis">
-      Bill of Materials (Table)
+      Bill of Materials
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Bill of Materials (Table)">
+    <nav class="md-nav" aria-label="Bill of Materials">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -647,9 +647,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes-on-part-choices" class="md-nav__link">
+  <a href="#remark" class="md-nav__link">
     <span class="md-ellipsis">
-      Notes on part choices
+      Remark
     </span>
   </a>
   
@@ -864,13 +864,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bill-of-materials-table" class="md-nav__link">
+  <a href="#bill-of-materials" class="md-nav__link">
     <span class="md-ellipsis">
-      Bill of Materials (Table)
+      Bill of Materials
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Bill of Materials (Table)">
+    <nav class="md-nav" aria-label="Bill of Materials">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -906,9 +906,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes-on-part-choices" class="md-nav__link">
+  <a href="#remark" class="md-nav__link">
     <span class="md-ellipsis">
-      Notes on part choices
+      Remark
     </span>
   </a>
   
@@ -949,7 +949,7 @@
   <h1>Bill of Materials</h1>
 
 <h2 id="overview">Overview</h2>
-<p>This page lists every component of the <strong>Arm Motion Control</strong> subsystem (Team 107), taken from the reference designators of the subsystem schematic (Rev C: PIC18F57Q43 Curiosity Nano, FAN8100N H-bridge, 6 V gearmotor, 9 V input with 6 V and 5 V linear regulators, 8-pin team ribbon connector). It also lists the off-board items the system needs to run (wall adapter, power cord, motor, ribbon cable) and the debugging and expansion hardware (test points, headers, IC socket, fuse and fuse clips).</p>
+<p>This page lists every component of the <strong>Arm Motion Control</strong> subsystem, taken from the subsystem schematic . It also lists the off-board items the system needs to run and the debugging and expansion hardware.</p>
 <p>How the quantities were chosen:</p>
 <ul>
 <li>One set for a breadboard prototype, one set for the subsystem PCB, and one or two spares, as the assignment asks.</li>
@@ -957,7 +957,7 @@
 <li>Parts that are in hand, handed out in class or kept in Peralta 109 (resistors, LEDs, fuses, IC sockets, headers) are still listed, but they are not on a purchase request.</li>
 </ul>
 <p>The table is sorted by vendor, one section per purchase request. Prices and stock were checked on the vendor pages on 2026-10-30 and should be re-checked before the order is sent.</p>
-<h2 id="bill-of-materials-table">Bill of Materials (Table)</h2>
+<h2 id="bill-of-materials">Bill of Materials</h2>
 <!-- BOM:START -->
 <h3 id="mouser-electronics">Mouser Electronics</h3>
 <table>
@@ -1360,19 +1360,14 @@
 <p><strong>Total to order: $130.77</strong> (Mouser $58.92 + Pololu $71.85, before shipping and tax).</p>
 <!-- BOM:END -->
 
-<h2 id="notes-on-part-choices">Notes on part choices</h2>
+<h2 id="remark">Remark</h2>
 <ul>
-<li><strong>VR1 changed from L7806 to LM317T.</strong> The L7806CV, L7806ABV and MC7806 parts are listed as obsolete or not orderable at Mouser, and ordering obsolete parts is one of the listed common mistakes. The LM317T is set to 6.0 V with R11 = 240 Ohm and R12 = 910 Ohm (Vout = 1.25 V x (1 + 910 / 240) = 6.0 V). The <a href="../../04-Schematic/schematic/">Rev C schematic</a> shows this change (VR1 = LM317T plus R11 / R12).</li>
-<li><strong>U1 FAN8100N is already in hand.</strong> It is obsolete, so it is not ordered; two are needed (breadboard and PCB).</li>
 <li><strong>C7 (47 uF)</strong> has a 2 mm lead pitch; the PCB footprint will be set to match.</li>
 <li><strong>Team cable:</strong> one 2 x 4 IDC ribbon cable is listed for the link to the Gripper board. The team will confirm who orders the shared cables so they are not bought twice.</li>
-<li>Mouser has more than 10 line items, so the purchase request will include a link to the Mouser shopping cart.</li>
 </ul>
 <h2 id="resources">Resources</h2>
 <ul>
 <li>The same BOM as a spreadsheet: <a href="../bom.csv">bom.csv</a></li>
-<li>The CSV also has a Notes column with the reason for each part.</li>
-<li><code>build_bom.py</code> regenerates the table above and <code>bom.csv</code> from one list, so both stay in sync when parts change.</li>
 </ul>
 
 
