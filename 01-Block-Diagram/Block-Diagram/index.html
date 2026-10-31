@@ -846,21 +846,21 @@
 <p>This block diagram shows the blocks of the Arm Motion Control board, how power and signals move between them, and how the board connects to the rest of the team.</p>
 <ul>
 <li><strong>Microcontroller:</strong> the board runs on a PIC18F57Q43 Curiosity Nano. The Nano is powered from its own USB port and uses 3.3 V logic with a 0–3.3 V analog range.</li>
-<li><strong>Power:</strong> a 9 V DC wall adapter (Mean Well GST25A09-P1J) plugs into a barrel jack.<ul>
+<li><strong>Power:</strong> a 9 V DC wall adapter plugs into a barrel jack.<ul>
 <li>The input goes through a 1 A slow-blow fuse and a 1N5819 reverse-polarity diode.</li>
 <li>An LM317T, set by R11 = 240 Ω and R12 = 910 Ω, makes the 6.0 V motor rail.</li>
 <li>An L7805 makes the 5 V logic rail.</li>
 <li>Motor current never passes through the microcontroller board.</li>
 </ul>
 </li>
-<li><strong>Actuator:</strong> an onsemi FAN8100N H-bridge (channel A) drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RB0 and RB1 provide the two PWM inputs through PPS.</li>
+<li><strong>Actuator:</strong> an onsemi FAN8100N H-bridge drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RB0 and RB1 provide the two PWM inputs through PPS.</li>
 <li><strong>Debug:</strong><ul>
 <li>A status LED on RE0.</li>
 <li>A push button on RE1, using the weak pull-up.</li>
 <li>Expansion header J4, which brings out 3.3 V, GND and the spare pins RA0, RA2, RB2 and RB3.</li>
 </ul>
 </li>
-<li><strong>Team connection:</strong> the board connects to the Gripper &amp; Object Handling board through the 8-pin ribbon cable (J3).<ul>
+<li><strong>Team connection:</strong> the board connects to the Gripper &amp; Object Handling board through the 8-pin ribbon cable.<ul>
 <li>It receives SAFE_OK, RUN_REQ, OBJ_HELD and the analog SPEED_SET.</li>
 <li>It sends GRIP_CMD and ARM_IN_POS.</li>
 <li>Pin 7 (GRIP_FORCE) is not used on this board and is left open. Pin 8 is GND.</li>
