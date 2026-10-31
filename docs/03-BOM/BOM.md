@@ -76,8 +76,8 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 
 <!-- BOM:END -->
 
-(BOM6.png)
-
+[(BOM6.png)](https://github.com/CrackOxide/CrackOxide_EGR304_Fall26.github.io/blob/main/docs/03-BOM/BOM6.png?raw=true)
+**Figure1.BOM**
 ## Remark
 
 * **C7 (47 uF)** has a 2 mm lead pitch; the PCB footprint will be set to match.
