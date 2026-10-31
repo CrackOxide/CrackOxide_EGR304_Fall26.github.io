@@ -879,10 +879,10 @@
   <h1>Power Budget</h1>
 
 <h2 id="overview">Overview</h2>
-<p>This power budget checks that every supply and regulator on the Arm Motion Control board (schematic Rev C) can deliver the worst-case current its loads can draw, with a 25 % safety margin. The board has two independent sources, and their grounds are tied together on the board:</p>
+<p>This power budget checks that every supply and regulator on the Arm Motion Control board can deliver the worst-case current its loads can draw, with a 25 % safety margin. The board has two independent sources, and their grounds are tied together on the board:</p>
 <ul>
-<li><strong>9 V wall adapter</strong> (MEAN WELL GST25A09-P1J, 2.55 A) → J1 → F1 (1 A slow-blow) → D1 (1N5819), giving about 8.55 V. This feeds two regulators:<ul>
-<li><strong>+6 V motor rail:</strong> VR1, an LM317T set by R11 = 240 Ω and R12 = 910 Ω. It feeds the FAN8100N output stage (PVCC) and the Pololu #2370 6 V gearmotor.</li>
+<li><strong>9 V wall adapter</strong>  → J1 → F1 → D1 giving about 8.55 V. This feeds two regulators:<ul>
+<li><strong>+6 V motor rail:</strong> VR1, an LM317T set by R11 = 240 Ω and R12 = 910 Ω. It feeds the FAN8100N output stage and the Pololu #2370 6 V gearmotor.</li>
 <li><strong>+5 V logic rail:</strong> VR2, an L7805CV. It feeds the FAN8100N logic (VCC) and the power LED DS1.</li>
 </ul>
 </li>
