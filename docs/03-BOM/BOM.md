@@ -7,7 +7,7 @@ hide:
 
 ## Overview
 
-This page lists every component of the **Arm Motion Control** subsystem, taken from the subsystem schematic . It also lists the off-board items the system needs to run and the debugging and expansion hardware.
+This page lists every component of the **Arm Motion Control** subsystem, taken from the subsystem schematic. It also lists the off-board items the system needs to run and the debugging and expansion hardware.
 
 How the quantities were chosen:
 
@@ -76,8 +76,9 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 
 <!-- BOM:END -->
 
-[(BOM6.png)](https://github.com/CrackOxide/CrackOxide_EGR304_Fall26.github.io/blob/main/docs/03-BOM/BOM6.png?raw=true)
-**Figure1.BOM**
+![BOM spreadsheet (bom.csv opened in Excel)](BOM6.png)
+**Figure 1:** BOM spreadsheet (bom.csv opened in Excel; click the image to enlarge).
+
 ## Remark
 
 * **C7 (47 uF)** has a 2 mm lead pitch; the PCB footprint will be set to match.

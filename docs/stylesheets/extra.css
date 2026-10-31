@@ -10,3 +10,17 @@ blockquote{
         color: var(--md-typeset-color);
     }
 }
+/* Printing / "Save as PDF": keep wide tables (BOM) on the page instead of cutting off columns */
+@media print {
+    .md-typeset__scrollwrap { overflow: visible !important; margin: 0 !important; }
+    .md-typeset__table { padding: 0 !important; }
+    .md-typeset table:not([class]) {
+        display: table !important;
+        width: 100% !important;
+        font-size: 0.5rem !important;
+        table-layout: auto;
+    }
+    .md-typeset table:not([class]) th,
+    .md-typeset table:not([class]) td { padding: 0.25em 0.4em !important; word-break: break-word; }
+    .md-typeset table:not([class]) tr { break-inside: avoid; }
+}
