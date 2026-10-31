@@ -12,7 +12,7 @@ This page lists every component of the **Arm Motion Control** subsystem, taken f
 How the quantities were chosen:
 
 * One set for a breadboard prototype, one set for the subsystem PCB, and one or two spares, as the assignment asks.
-* Through-hole parts only (nothing smaller than 0805), so every part can be hand-soldered and used on a breadboard.
+* Through-hole parts only, so every part can be hand-soldered and used on a breadboard.
 * Parts that are in hand, handed out in class or kept in Peralta 109 (resistors, LEDs, fuses, IC sockets, headers) are still listed, but they are not on a purchase request.
 
 The table is sorted by vendor, one section per purchase request. Prices and stock were checked on the vendor pages on 2026-10-30 and should be re-checked before the order is sent.
