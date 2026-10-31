@@ -1,7 +1,24 @@
 ---
 title: Component Selection
 ---
+
+## Overview
+
+This page records how each major part of the **Arm Motion Control** board was chosen. For every function, at least three options were compared, the decision is stated, and the reason is tied to the team's product requirements (PR numbers from the [team report](https://egr304-2026-f-107.github.io/04-Product-Requirements/)). Several choices changed after the first submission; each section says what changed and why.
+
+The same criteria were used for every part:
+
+| Criterion | Why it matters | Related requirements |
+|---|---|---|
+| Current and voltage ratings above the worst case in this circuit, with margin | Parts must stay inside their limits, including at motor stall | PR-14, Regulation 6.7 |
+| Fits the class rules: through-hole (nothing smaller than 0805), not obsolete when ordered, full datasheet, no breakout module without approval | The board must be hand-soldered, prototyped on a breadboard and reviewed | PR-10, PR-14 |
+| Uses parts already in hand or stocked in Peralta 109 where possible | Keeps the subsystem inside the team budget | PR-17 |
+| Simple interface to the PIC18F57Q43 (few pins, no extra drivers) | Easier firmware and easier for students to follow | PR-07, PR-15, PR-16 |
+| Leaves room to add parts later (sockets, spare pins, header) | The arm is meant to be modified and expanded | PR-10, PR-11 |
+| Fails safe (protection features, known state when unplugged) | Motion must stop predictably | PR-12, Regulation 6.3 / 6.7 |
+
 ## H-Bridge Motor Driver
+
 
 1. Pololu DRV8874 single brushed DC motor driver carrier
 
@@ -44,13 +61,28 @@ title: Component Selection
     | Lowest price                                            | No current sensing or regulation.      |
     | Two channels, so the second channel could be paralleled for 2 A continuous or kept as a spare. | Three control inputs per channel plus a shared STBY pin, it uses more GPIO than our pin map |
     | 3 A peak current and PWM frequencies up to 100 kHz. |
-   <br>
-   
-**Choice:** Option 1: Pololu DRV8874 single brushed DC motor driver carrier
 
-**Rationale:** The PH/EN interface is the only one of the three that matches the pin map already shared with the team (one PWM pin and one direction pin), so no firmware or wiring changes are needed. Its 37 V range leaves a large margin on the 12 V rail, while the TB6612FNG is near its 13.5 V limit. Built-in current regulation matters here because the selected motor can draw a much higher stall current (about 5 A, extrapolated) than the carrier's continuous rating, so a driver that can limit current in hardware protects both the motor and the supply. The extra $4.44 over the DRV8871 buys these features.
+4. onsemi (Fairchild) FAN8100N low-voltage dual-channel DC motor driver, 12-DIPH-300 with heat-sink fin (**selected**)
+
+    <img width="200" alt="FAN8100N 12-DIPH-300 package (from the FAN8100N datasheet)" src="../fan8100n_12diph.png" />
+
+    * Already in hand (two parts), so $0 to the order
+    * [Datasheet](https://datasheet.sic-components.com/FAN8100N%2CMTC.pdf)
+
+    | Pros | Cons |
+    | ---- | ---- |
+    | Through-hole DIP with a heat-sink fin: fits the breadboard and the PCB directly, no breakout module needed. | Obsolete, so it cannot be reordered; the two parts in hand cover the breadboard and the PCB. |
+    | 1.5 A peak output per channel, more than twice the 0.67 A motor stall current. | No current-sense output for the firmware. |
+    | Two logic inputs per channel (forward / reverse), driven directly by two PWM pins (RB0, RB1). | Bipolar output stage drops about 0.15 V at 0.2 A and up to 0.55 V at 0.4 A, so the motor sees slightly less than 6 V. |
+    | Built-in thermal shutdown with hysteresis and built-in clamp ("spark killing") diodes, so no external flyback diodes. | Supply limit is 9 V (10.5 V absolute), so it suits only low-voltage motors. |
+    | Separate logic (VCC) and power (PVCC) supplies: 5 V logic, 6 V motor rail. | |
+
+**Choice:** Option 4, onsemi FAN8100N.
+
+**Rationale:** The first submission chose the DRV8874 carrier for a 12 V, 5 A-stall motor. When the design moved to the 6 V micro gearmotor (0.67 A stall), that much driver was no longer needed, and all three earlier options are breakout modules, which the class asks us not to order without approval. The FAN8100N is a bare through-hole IC that is already in hand (PR-17), it is rated above the motor stall current (PR-14), and its thermal shutdown and internal clamp diodes protect the board if the motor stalls (Regulation 6.7). Its forward / reverse inputs map to two PWM outputs, so speed and direction are set with two pins and no extra logic (PR-07, PR-15). It sits in a socket, so it can be replaced without soldering (PR-10). Only channel A is used; channel B inputs are tied to ground.
 
 ## DC Motor
+
 
 1. 34:1 Metal Gearmotor 25Dx67L mm HP 12V with 48 CPR Encoder
 
@@ -76,7 +108,7 @@ title: Component Selection
     | Pros                                      | Cons                                                             |
     | ----------------------------------------- | ---------------------------------------------------------------- |
     | Very compact with metal gears, saves arm weight. | Stall torque is only 1.6 kg·cm, about one seventh of Option 1 |
-    | Low stall current fits any of the three drivers. | Manufactor warns that stalling can damage the motor or gearbox |
+    | Low stall current fits any of the three drivers. | Manufacturer warns that stalling can damage the motor or gearbox |
     | The extended motor shaft allows a magnetic encoder to be added later. | No encoder included |
     | Datasheet available |
 
@@ -91,13 +123,14 @@ title: Component Selection
     | ----------------------------------------- | ---------------------------------------------------------------- |
     | Lowest price | Stall torque is only 0.8 kg·cm at 6 V, too low for a loaded arm joint. |
     | Light with a 1:48 gearbox and 200 mm leads ending in 0.1" connectors. | Rated 3 V to 6 V, needs a separate lower-voltage rail. |
-    | TLow current (1.5 A stall at 6 V).| No encoder included |The product sheet is only a basic specification sheet and there is no full datasheet, which the assignment warns against |
-    <br>
-**Choice:** Option 2: Pololu 250:1 Micro Metal Gearmotor MP 6V
+    | Low current (1.5 A stall at 6 V). | No encoder included; only a basic specification sheet, no full datasheet. |
 
-**Rationale:** The 6 V rail keeps the whole system on one motor rail as the power budget guidance recommends. Its stall torque is about fourteen times that of the TT motor, which gives margin while the real torque requirement of the arm is still unknown. The higher price is acceptable because the lower-cost motors would have to be replaced if the arm load turns out to be heavier. 
+**Choice:** Option 2, Pololu 250:1 Micro Metal Gearmotor MP 6V.
+
+**Rationale:** Its 0.67 A stall current is within the FAN8100N (1.5 A) and the LM317T 6 V regulator (1.5 A) with margin, so the whole motor path stays inside its ratings (PR-14, see the [Power Budget](../05-Power-Budget/Power-Budget.md)). Option 1 needs 5 A at stall, which would need a much larger driver and supply. Its 1.6 kg·cm stall torque is about twice that of the TT motor, which gives margin while the arm load is still being defined, and its metal gears and small size keep the arm light and stable (PR-04, PR-13). At $23.95 it is far cheaper than Option 1 (PR-17). The extended back shaft leaves room to add an encoder later (PR-11).
 
 ## Position Sensor
+
 
 1. Bourns 6639S-1-103, 10 kΩ single-turn conductive plastic precision potentiometer
 
@@ -141,14 +174,13 @@ title: Component Selection
     | Contactless, so there is no wear | The motor's magnets and currents can disturb the magnetic reading |
     | 12-bit absolute angle (4096 steps per revolution) | Whether the analog OUT pin is available on this board must be confirmed |
     | Can be read over I2C or analog voltage. | More design work needed |
-<br>
 
-**Choice:** Option 1, Bourns 6639S-1-103.
-<br>
-**Rationale:** The potentiometer matches the block diagram exactly: one analog wire to RA0 and nothing else to configure. A single-turn part fits an arm joint that moves less than one revolution, while the 10-turn Option 2 would waste most of its range. Unlike the AS5600, it is immune to the magnetic fields next to the motor, and it needs no magnet alignment. The extra cost ($6.99 more than Option 2) buys the correct travel range. If wear or cost becomes an issue, the AS5600 is the planned fallback.
-<br>
+**Choice:** No position sensor in the current design (Rev B onward).
+
+**Rationale:** After the first submission the team simplified the arm board, and the position sensor was removed so that the first prototype has fewer parts and less firmware. The arm moves the joint at a set PWM duty for a set time and then raises ARM_IN_POS on the ribbon cable. To keep the option open (PR-11), analog-capable pin RA0 (ANA0) and 3.3 V are brought out on expansion header J4, so Option 1 or Option 3 can be added later without changing the PCB.
 
 ## Motor Power Source
+
 
 1. Mean Well GST60A12-P1J, 12 V 5 A desktop AC adapter
 
@@ -177,7 +209,7 @@ title: Component Selection
     | ----------------------------------------- | ---------------------------------------------------------------- |
     | 12 V at up to 5 A with a 2.1 mm barrel plug on about a 40 inch cable. | The page listed it as out of stock when checked |
     | UL approved and RoHS compliant | More expensive than Option 1 for the same rating |
-    | Datasheet | No clearly datasheet is provided on the product page |
+    | Datasheet | No clear datasheet is provided on the product page |
     
 3. Tenergy 12 V 2000 mAh NiMH battery pack (10S1P)
 
@@ -191,16 +223,80 @@ title: Component Selection
     | ----------------------------------------- | ---------------------------------------------------------------- |
     | Portable, the arm can run without a wall outlet | Maximum continuous discharge is 2 A, below the motor's stall current |
     | 12 V nominal at 2000 mAh (24 Wh) | Voltage sags as the cells discharge and rises when fully charged |
-    | Adjustable power supply | Highest price |
+    | Rechargeable | Highest price |
     | | No separate datasheet and a suitable charger must also be bought |
-<br>
 
-**Choice:** Option 1, Mean Well GST60A12-P1J.
-<br>
-**Rationale:** It is a regulated, safety-approved supply with a full datasheet and enough current for the motor, and it is in stock. Its price is lower than the Adafruit supply, which was out of stock and has no datasheet, and the battery cannot deliver the motor's peak current. This is a wall supply, not a USB power pack, as the assignment requires. The operating current will be checked against the 25% margin rule in the Power Budget page; the DRV8874 current limit keeps the motor below the supply's 5 A rating.
-<br>
+4. MEAN WELL GST25A09-P1J, 9 V 2.55 A desktop AC adapter (**selected**)
 
+    <img width="260" alt="MEAN WELL GST25A adapter (from the GST25A datasheet)" src="../gst25a.png" />
 
-## Voltage regulation
+    * $13.70/each
+    * [link to product](https://www.mouser.com/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D)
 
-The 12V or 6V motor rail comes directly from the regulated Mean Well supply, so no additional regulator is needed for it. The Curiosity Nano is powered from USB and supplies the 3.3 V used by the potentiometer and logic. Power Budget details are to be calculated.
+    | Pros | Cons |
+    | ---- | ---- |
+    | 9 V is just enough for the LM317T to make 6 V after the reverse-polarity diode (8.55 V available, about 8 V needed). | Needs a separate IEC C13 power cord (also on the BOM). |
+    | 2.55 A rating, well above the 947 mA worst-case input current. | Low stock at Mouser (37 when checked), so it should be ordered early. |
+    | Lower voltage than a 12 V supply, so VR1 dissipates about 2.4 W instead of about 5 W. | Tethered to a wall outlet, not portable. |
+    | Short-circuit, overload and over-voltage protection; full datasheet; 2.1 × 5.5 mm plug. | |
+
+**Choice:** Option 4, MEAN WELL GST25A09-P1J.
+
+**Rationale:** The first submission chose a 12 V 5 A adapter for the 12 V motor. With the 6 V motor, the [Power Budget](../05-Power-Budget/Power-Budget.md) shows a worst-case input current of about 947 mA, so 5 A is not needed, and a lower input voltage keeps the 6 V linear regulator cool: (8.55 V − 6 V) × 0.93 A ≈ 2.4 W at 9 V, compared with about 5 W from 12 V. The 9 V supply still leaves enough headroom for the LM317T dropout. It is a regulated, protected, low-voltage desktop supply (Regulation 6.1), it costs less than the 12 V options (PR-17), and the battery pack was rejected because it cannot deliver stall current and needs a charger.
+
+## Voltage Regulation
+
+The board needs a 6 V motor rail and a 5 V logic rail from the 9 V input. The 3.3 V logic rail is made by the MIC5353 regulator on the Curiosity Nano, which runs from USB.
+
+1. STMicroelectronics L7806CV, fixed 6 V regulator, TO-220
+
+    | Pros | Cons |
+    | ---- | ---- |
+    | Fixed 6 V output, no external resistors. | L7806CV, L7806ABV and MC7806 are listed as obsolete or not orderable at Mouser, and ordering obsolete parts is a listed common mistake. |
+
+2. STMicroelectronics LM317T, adjustable regulator, TO-220 (**selected for the 6 V rail, VR1**)
+
+    <img width="150" alt="TO-220 package (from the LM317 datasheet)" src="../lm317_to220.png" />
+
+    * $0.76/each, [link to product](https://www.mouser.com/ProductDetail/STMicroelectronics/LM317T?qs=swDD%2BF%2Bps7c8uLyY%2B3mJJw%3D%3D)
+
+    | Pros | Cons |
+    | ---- | ---- |
+    | In stock and cheap; 1.5 A output, current limit, thermal shutdown. | Needs two resistors: R11 = 240 Ω and R12 = 910 Ω give Vout = 1.25 V × (1 + 910 / 240) = 6.0 V. |
+    | Output can be trimmed if the motor needs a different voltage. | Needs about 2 V of headroom and a heat sink at full load (2.4 W). |
+
+3. STMicroelectronics L7805CV, fixed 5 V regulator, TO-220 (**selected for the 5 V rail, VR2**)
+
+    <img width="130" alt="TO-220 package (from the L78 datasheet)" src="../l7805_to220.png" />
+
+    * $0.60/each, [link to product](https://www.mouser.com/ProductDetail/STMicroelectronics/L7805CV?qs=9NrABl3fj%2FqplZAHiYUxWg%3D%3D)
+
+    | Pros | Cons |
+    | ---- | ---- |
+    | Fixed 5 V, 1.5 A, current limit and thermal shutdown; only 0.33 µF in and 0.1 µF out. | Linear regulator wastes power as heat, which is negligible at about 14 mA (0.08 W). |
+
+**Choice:** LM317T for the 6 V motor rail and L7805CV for the 5 V logic rail.
+
+**Rationale:** A fixed 6 V regulator would be simplest, but none was orderable, so the LM317T is set to 6.0 V with two 1 % resistors. Both regulators are TO-220 through-hole parts with built-in current limiting and thermal shutdown (PR-14, Regulation 6.7), and both are cheap and in stock (PR-17). The power budget sets the heat sink for VR1 and confirms that VR2 needs none. Keeping the motor rail and logic rail on separate regulators stops motor current spikes from disturbing the FAN8100N logic supply.
+
+## Microcontroller and MCC Configuration
+
+The team uses the **Microchip PIC18F57Q43 Curiosity Nano** (DM164150) on every board. It is powered and programmed over USB, runs at 3.3 V, and plugs into female headers so it can be removed (PR-10). The table below is the MCC configuration for this board: every peripheral and pin the Arm Motion Control firmware uses.
+
+| Function | MCC module | Pin | Direction | Settings |
+|---|---|---|---|---|
+| System clock | Clock Control | — | — | HFINTOSC, 64 MHz |
+| Motor forward PWM (MOT_FWD → FAN8100N FORWARDA) | PWM1 (16-bit PWM), routed with PPS | RB0 | Output | Duty cycle sets speed; 0 % when stopped; R8 100 kΩ pull-down holds the input low during reset |
+| Motor reverse PWM (MOT_REV → FAN8100N REVERSEA) | PWM1 second output, routed with PPS | RB1 | Output | Only one of RB0 / RB1 is active at a time; R9 100 kΩ pull-down |
+| SPEED_SET (ribbon pin 6) | ADCC | RA1 (ANA1) | Analog input | 12-bit, VDD reference; 1 kΩ / 0.1 µF RC filter on the board |
+| SAFE_OK (ribbon pin 1) | Pin Manager (GPIO) | RD0 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| RUN_REQ (ribbon pin 2) | Pin Manager (GPIO) | RD1 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| GRIP_CMD (ribbon pin 3) | Pin Manager (GPIO) | RD2 | Digital output | 330 Ω series resistor, starts low |
+| OBJ_HELD (ribbon pin 4) | Pin Manager (GPIO) | RD3 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| ARM_IN_POS (ribbon pin 5) | Pin Manager (GPIO) | RD4 | Digital output | 330 Ω series resistor, starts low |
+| Debug LED DS2 | Pin Manager (GPIO) | RE0 | Digital output | 330 Ω to the LED, about 3.6 mA |
+| Debug button SW1 | Pin Manager (GPIO) | RE1 | Digital input | Weak pull-up on (WPUE1 = 1), pressed = 0, debounced in firmware |
+| Expansion header J4 | — | RA0, RA2, RB2, RB3 | Not used yet | Left as inputs; RA0 / RA2 are analog-capable for a future sensor |
+| Ribbon pin 7 (GRIP_FORCE) | — | — | Not connected | Not used on this board |
+
+The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).

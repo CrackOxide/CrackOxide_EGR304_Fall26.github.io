@@ -28,4 +28,6 @@ This block diagram shows the blocks of the Arm Motion Control board, how power a
 ![Arm Motion Control individual block diagram](Arm_Motion_Control_Individual_Block_Diagram.png)
 **Figure 1:** Arm Motion Control individual block diagram.
 
-The editable draw.io source is [*here*](Arm_Motion_Control_Individual_Block_Diagram.drawio).
+## Resources
+
+The block diagram source files (the editable draw.io file and the exported PNG) are available as a [*Zip download*](Arm_Motion_Control_Individual_Block_Diagram_source.zip). The draw.io file can also be opened directly: [*Arm_Motion_Control_Individual_Block_Diagram.drawio*](Arm_Motion_Control_Individual_Block_Diagram.drawio).

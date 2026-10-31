@@ -35,11 +35,11 @@ The table is sorted by vendor, one section per purchase request. Prices and stoc
 | Aluminum electrolytic 47 uF 16 V, radial 5 x 11 mm | 3 | $0.38 | $1.14 | Panasonic | EEU-FC1C470H | [Mouser](https://www.mouser.com/ProductDetail/Panasonic/EEU-FC1C470H?qs=/C1U95aQ15vhemYBctOGEw%3D%3D) | [Datasheet](https://industrial.panasonic.com/cdbs/www-data/pdf/RDF0000/ABA0000C1209.pdf) | C7 |
 | Terminal block, 2 position, 5.0 mm pitch | 2 | $0.53 | $1.06 | Phoenix Contact | 1935161 | [Mouser](https://www.mouser.com/ProductDetail/Phoenix-Contact/1935161?qs=W3wJikR1%252BS6eKzfFl8Rbew%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/507/9/phoenix_contact_1935161_en.pdf) | J2 |
 | Shrouded box header 2 x 4, 2.54 mm, through hole | 2 | $2.88 | $5.76 | Samtec | TST-104-01-G-D | [Mouser](https://www.mouser.com/ProductDetail/Samtec/TST-104-01-G-D?qs=rU5fayqh%2BE32/80vAsdSrw%3D%3D) | [Datasheet](https://suddendocs.samtec.com/prints/tst-1xx-xx-x-x-xx-xx-mkt.pdf) | J3 |
-| IDC ribbon cable assembly, 2 x 4, 2.54 mm, 9 in | 1 | $6.46 | $6.46 | Samtec | IDSD-04-D-09.00 | [Mouser](https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D) | [Datasheet](https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D) | Team cable |
+| IDC ribbon cable assembly, 2 x 4, 2.54 mm, 9 in | 1 | $6.46 | $6.46 | Samtec | IDSD-04-D-09.00 | [Mouser](https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D) | [Datasheet](../Appendix/Datasheets/idsd.pdf) | Team cable |
 | Tactile switch 6 x 6 mm, through hole | 3 | $0.35 | $1.05 | Omron | B3F-1000 | [Mouser](https://www.mouser.com/ProductDetail/Omron-Electronics/B3F-1000?qs=lK7M36XCk6JQHckSc1xIsg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/39/1/en_b3f.pdf) | SW1 |
 | Test point, miniature PC loop | 4 | $0.26 | $1.04 | Keystone Electronics | 5001 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF) | TP1, TP2 |
 | AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet | 1 | $13.70 | $13.70 | MEAN WELL | GST25A09-P1J | [Mouser](https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D) | [Datasheet](https://www.meanwellusa.com/webapp/product/search.aspx?prod=GST25A) | External (J1) |
-| AC power cord NEMA 5-15P to IEC C13, 6 ft | 1 | $6.39 | $6.39 | Same Sky | AC-C13-R NA | [Mouser](https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D) | [Datasheet](https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D) | External (adapter) |
+| AC power cord NEMA 5-15P to IEC C13, 6 ft | 1 | $6.39 | $6.39 | Same Sky | AC-C13-R NA | [Mouser](https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D) | [Datasheet](../Appendix/Datasheets/ac-c13-r-na.pdf) | External (adapter) |
 
 **Mouser Electronics subtotal: $56.50** (16 line items)
 
@@ -65,7 +65,7 @@ The table is sorted by vendor, one section per purchase request. Prices and stoc
 | Resistor 240 Ohm 1/4 W 1 %, axial | 3 | - | - | Stackpole | RNF14FTD240R | [Mouser](https://www.mouser.com/c/?q=RNF14FTD240R) | [Datasheet](https://www.ibselectronics.biz/datasheet/Misc/RNF14FTD20K0.pdf) | R11 |
 | Resistor 910 Ohm 1/4 W 1 %, axial | 3 | - | - | Stackpole | RNF14FTD910R | [Mouser](https://www.mouser.com/c/?q=RNF14FTD910R) | [Datasheet](https://www.ibselectronics.biz/datasheet/Misc/RNF14FTD20K0.pdf) | R12 |
 | LED 3 mm green, diffused | 3 | - | - | Kingbright | WP710A10SGD | [Mouser](https://www.mouser.com/ProductDetail/Kingbright/WP710A10SGD?qs=jBF9H7RTBaS5vBvRdVQZww%3D%3D) | [Datasheet](https://www.mouser.fi/datasheet/3/308/1/WP710A10SGD.pdf) | DS1 |
-| LED 3 mm yellow, diffused | 3 | - | - | Kingbright | WP710A10YD | [Digi-Key](https://www.digikey.com/en/products/detail/kingbright/WP710A10YD/2769824) | [Datasheet](https://www.digikey.com/en/products/detail/kingbright/WP710A10YD/2769824) | DS2 |
+| LED 3 mm yellow, diffused | 3 | - | - | Kingbright | WP710A10YD | [Digi-Key](https://www.digikey.com/en/products/detail/kingbright/WP710A10YD/2769824) | [Datasheet](../Appendix/Datasheets/WP710A10YD.pdf) | DS2 |
 | DIP IC socket, 14 pin, 0.3 in | 2 | - | - | Generic | DIP-14 socket | - | - | U1 (socket) |
 | Male breakaway header 1 x 40, 2.54 mm | 1 | - | - | Pololu | item #965 | [Pololu](https://www.pololu.com/product/965) | [Datasheet](https://www.pololu.com/product/965) | J4 + breadboard pins |
 | Female header 1 x 40, 2.54 mm | 2 | - | - | Generic | 1 x 40 female header | - | - | A1 (socket) |
@@ -88,3 +88,4 @@ These parts are already in hand, handed out in class or taken from Peralta 109 s
 
 * The same BOM as a spreadsheet: [bom.csv](bom.csv)
 * Purchase requests: Mouser [xlsx](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Mouser_Ren.pdf), Pololu [xlsx](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.xlsx) / [pdf](purchase-requests/EGR-304-Purchase-Request_Pololu_Ren.pdf)
+* Local copies of all datasheets: [Appendix - Datasheets](../Appendix/index.md)
