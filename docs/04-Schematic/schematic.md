@@ -13,6 +13,8 @@ This schematic is the Arm Motion Control subsystem of Team 107 Simple Educationa
     * A status LED on RE0.
     * A push button on RE1, using the weak pull-up.
     * J4, a 6-pin expansion header carrying 3.3 V, GND, RA0, RA2, RB2 and RB3.
+    * J5, a 6-pin test header (0.1 in pitch) carrying PWM1, PWM2, SPEED_SET, ARM_IN_POS and two GND pins for a scope or logic analyser.
+    * Test points TP1 (+6 V), TP2 (+5 V) and TP3 (GND).
 * **Team link (J3):** an unshrouded 2 × 4 pin header (2.54 mm). The other boards connect with eight female-to-female jumper wires, one per signal. Pins 1 to 8 carry, in order:
     * SAFE_OK (in)
     * RUN_REQ (in)
@@ -27,6 +29,11 @@ This schematic is the Arm Motion Control subsystem of Team 107 Simple Educationa
 
 ![Arm Motion Control schematic](Arm_Motion_Control_page-0001.png)
 **Figure 1:** Arm Motion Control schematic (click the image to enlarge).
+
+**Revision 2.5 (2026-11-06), test points for PCB bring-up:**
+
+* **J5** test header (1 × 6, 2.54 mm): pin 1 PWM1 (RC4), 2 PWM2 (RC5), 3 SPEED_SET (RA1), 4 ARM_IN_POS (RD4, before R6), 5–6 GND. The nets have named labels (PWM1, PWM2, SPEED_SET, ARM_IN_POS).
+* **TP3**: a GND test point next to TP1 and TP2, so both rails can be measured against a nearby ground.
 
 **Revision 2.4 (2026-11-06), footprints checked for PCB layout:** no circuit changes; the netlist is the same as rev 2.3.
 
@@ -74,14 +81,14 @@ Every part on the board has a through-hole footprint that was checked against it
 | J1 | PJ-102A | BarrelJack_Horizontal | PJ-102A layout: pins 1–2 6.0 mm apart, pin 3 4.7 mm to the side, slotted holes |
 | J2 | Phoenix 1935161 | TerminalBlock_Phoenix_PT-1,5-2-5.0-H | 5 mm pitch, 1.3 mm holes |
 | J3 | 2 × 4 pin header | PinHeader_2x04_P2.54mm_Vertical | 2.54 mm grid |
-| J4 | 1 × 6 pin header | PinHeader_1x06_P2.54mm_Vertical | 2.54 mm grid |
+| J4, J5 | 1 × 6 pin headers | PinHeader_1x06_P2.54mm_Vertical | 2.54 mm grid |
 | C1, C3 | Vishay K334K20 (size 20) | C_Disc_D5.1mm_W3.2mm_P5.00mm | 5.0 × 3.2 mm body, 5.0 mm leads |
 | C2, C4–C6, C8 | Vishay K104K15 (size 15) | C_Disc_D5.0mm_W2.5mm_P5.00mm | 4.0 × 2.6 mm body, 5.0 mm leads |
 | C7 | Panasonic EEU-FC1C470H | CP_Radial_D5.0mm_P2.00mm | 5 mm diameter, 2.0 mm leads |
 | R1–R12 | 1/4 W axial | R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal | 1/4 W body, 10.16 mm lead bend |
 | DS1, DS2 | 3 mm LEDs | LED_D3.0mm | 2.54 mm leads; pad 1 = cathode |
 | SW1 | Omron B3F-1000 | SW_PUSH_6mm | 6.5 × 4.5 mm pin pattern |
-| TP1, TP2 | Keystone 5001 | TestPoint_Keystone_5000-5004_Miniature | Keystone 5000–5004 |
+| TP1–TP3 | Keystone 5001 | TestPoint_Keystone_5000-5004_Miniature | Keystone 5000–5004 |
 
 **Layout notes:** the 577102B00000G heat sink on VR1 has no PCB tabs. It is held by the TO-220 mounting screw, so leave about 10 mm of clear space behind VR1's tab. The LM317T tab is at +6 V, so the heat sink must not touch other parts. Keep the motor current path (J1 → F1 → D1 → VR1 → U1 → J2) short and wide, at least 0.6 mm (25 mil) for 0.65 A worst case.
 
@@ -95,7 +102,7 @@ The team grouped its user needs into eleven categories and turned them into prod
 | **Accuracy & Repeatability** | PR-01, PR-02, PR-04 | VR1 LM317T regulated 6 V rail; C6, C7 on the motor supply; PWM on RC4 / RC5 | The motor always sees a regulated 6.0 V (set by 1 % resistors R11 / R12) instead of a raw adapter voltage, so the same PWM duty gives the same speed every run. Bulk and bypass capacitors keep the rail steady when the motor starts. |
 | **Programming & Control** | PR-07, PR-16 | FAN8100N forward / reverse inputs on two PWM pins; SPEED_SET on RA1 (ADC) | Speed and direction are two duty-cycle values, which is easy for a student to change in code and see on the arm. SPEED_SET from the User board is read by the ADC through a 1 kΩ / 0.1 µF filter, so the speed knob gives a smooth reading. |
 | **Gripper & Object Handling** (team link) | PR-01, PR-03 | J3 team link: GRIP_CMD and ARM_IN_POS outputs with R4, R6 (330 Ω); OBJ_HELD input | The arm tells the gripper when to close and reports when it is in position, and it waits for OBJ_HELD before moving on. The 330 Ω resistors limit current if two boards ever drive the same wire. |
-| **Documentation & Troubleshooting** | PR-09, PR-18 | TP1 (+6 V), TP2 (+5 V); power LED DS1; debug LED DS2 on RE0; button SW1 on RE1 | DS1 shows at a glance that the 5 V rail is up. The test points let a user check both rails with a meter. DS2 and SW1 let the firmware show its state and step through a sequence during troubleshooting. |
+| **Documentation & Troubleshooting** | PR-09, PR-18 | TP1 (+6 V), TP2 (+5 V), TP3 (GND); J5 test header; power LED DS1; debug LED DS2 on RE0; button SW1 on RE1 | DS1 shows at a glance that the 5 V rail is up. The test points let a user check both rails against a nearby ground, and J5 brings the PWM, speed and in-position signals to a 0.1 in header for a scope or logic analyser. DS2 and SW1 let the firmware show its state and step through a sequence during troubleshooting. |
 | **Sensors, Vision & Expansion** | PR-10, PR-11 | J4 header (3.3 V, GND, RA0, RA2, RB2, RB3); unused FAN8100N channel B | A sensor such as a joint potentiometer or magnetic encoder can be added on J4 (RA0 and RA2 are analog-capable) without a new PCB. The second H-bridge channel is available for a second motor. |
 | **Calibration, Maintenance & Repair** | PR-05, PR-10 | Curiosity Nano on two 1 × 28 female headers; J2 screw terminal for the motor; through-hole U1 | The MCU board and the motor can each be replaced without desoldering. U1 is soldered directly, because its heat-sink fin leads do not fit a DIP socket, but as a through-hole part it can still be desoldered and replaced with ordinary tools. |
 | **Assembly, Wiring & Components** | PR-10, PR-14 | All through-hole parts; J3 2 × 4 pin header with labelled pins; parts run within ratings | The board can be hand-soldered and built on a breadboard first. J3 is not keyed, so pin 1 and the signal names are marked next to it and GND uses a fixed wire colour. A wire plugged into the wrong pin cannot damage anything: the header carries only 3.3 V logic and GND, outputs have 330 Ω series resistors, and inputs have pull-downs. The [Power Budget](../05-Power-Budget/Power-Budget.md) shows every part stays within its limits. |
@@ -106,4 +113,4 @@ The team grouped its user needs into eleven categories and turned them into prod
 
 ## Resources
 
-The schematic is available as a [*PDF download*](Arm_Motion_Control.pdf). The [*KiCad 9 project (Zip)*](Arm_Motion_Control.zip) includes the custom YR_Custom symbol library and the finned FAN8100N footprint.
+The schematic (rev 2.5) is available as a [*PDF download*](Arm_Motion_Control.pdf). The complete KiCad project (schematic, PCB layout and the YR_Custom symbol and footprint libraries) and the Gerber files are on the [PCB Design](../06-PCB-Design/PCB-Design.md) page.

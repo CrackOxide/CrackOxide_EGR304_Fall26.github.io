@@ -26,7 +26,7 @@ Local copies of the datasheets for every part on the [Bill of Materials](../03-B
 | LED 3 mm green | Kingbright WP710A10SGD | DS1 | [WP710A10SGD](Datasheets/WP710A10SGD.pdf) |
 | LED 3 mm yellow | Kingbright WP710A10YD | DS2 | [WP710A10YD](Datasheets/WP710A10YD.pdf) |
 | Tactile switch | Omron B3F-1000 | SW1 | [B3F](Datasheets/en_b3f.pdf) |
-| Test point | Keystone 5001 | TP1, TP2 | [5000 – 5004](Datasheets/5000_5004.pdf) |
+| Test point | Keystone 5001 | TP1–TP3 | [5000 – 5004](Datasheets/5000_5004.pdf) |
 | Terminal block 2-position | Phoenix Contact 1935161 | J2 | [1935161](Datasheets/phoenix_contact_1935161_en.pdf) |
 
-Generic stock parts (1 × 40 male and female headers, the M3 heat-sink screw, the 2 × 4 pin header J3 and the female-to-female jumper wires) have no part-specific datasheet.
+Generic stock parts (1 × 40 male and female headers, the M3 heat-sink screw, the 2 × 4 pin header J3, the 1 × 6 test header J5 and the female-to-female jumper wires) have no part-specific datasheet.

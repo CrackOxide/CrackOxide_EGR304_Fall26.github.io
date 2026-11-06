@@ -27,7 +27,7 @@ The table has three sections: parts to order from Mouser, parts already in hand,
 | Heat sink, TO-220, channel style, 25.9 C/W | 3 | $1.07 | $3.21 | Aavid (Boyd) | 577102B00000G | [Mouser](https://www.mouser.com/ProductDetail/Aavid/577102B00000G?qs=cR7Qvk1oinlekh9MFs6NUA%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/2/2/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf) | VR1 (heat sink) |
 | Fuse clip for 5 mm (5 x 20 mm) fuse, PCB mount | 4 | $0.33 | $1.32 | Keystone Electronics | 3517 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/3517?qs=qOqV1E1P08RwsK9hgzJijw%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/3517.PDF) | F1 (holder) |
 | Tactile switch 6 x 6 mm, through hole | 3 | $0.35 | $1.05 | Omron | B3F-1000 | [Mouser](https://www.mouser.com/ProductDetail/Omron-Electronics/B3F-1000?qs=lK7M36XCk6JQHckSc1xIsg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/39/1/en_b3f.pdf) | SW1 |
-| Test point, miniature PC loop | 4 | $0.26 | $1.04 | Keystone Electronics | 5001 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF) | TP1, TP2 |
+| Test point, miniature PC loop | 4 | $0.26 | $1.04 | Keystone Electronics | 5001 | [Mouser](https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D) | [Datasheet](https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF) | TP1-TP3 |
 | Micro metal DC gearmotor 6 V, 50 rpm, 298:1 | 3 | $7.50 | $22.50 | DFRobot | FIT0579 | [Mouser](https://www.mouser.com/ProductDetail/426-FIT0579) | [Datasheet](https://www.robotshop.com/products/dfrobot-micro-metal-dc-geared-motor-6v-50rpm-250gcm) | B1 (off-board) |
 
 **Mouser order subtotal: $29.12** (5 line items, on the Mouser purchase request)
@@ -67,7 +67,7 @@ These parts are already in hand. They are still used in the design but are not o
 | LED 3 mm green, diffused | 3 | - | - | Kingbright | WP710A10SGD | [Mouser](https://www.mouser.com/ProductDetail/Kingbright/WP710A10SGD?qs=jBF9H7RTBaS5vBvRdVQZww%3D%3D) | [Datasheet](https://www.mouser.fi/datasheet/3/308/1/WP710A10SGD.pdf) | DS1 |
 | LED 3 mm yellow, diffused | 3 | - | - | Kingbright | WP710A10YD | [Digi-Key](https://www.digikey.com/en/products/detail/kingbright/WP710A10YD/2769824) | [Datasheet](../Appendix/Datasheets/WP710A10YD.pdf) | DS2 |
 | M3 x 8 mm screw, nut and washer (TO-220 to heat sink) | 2 | - | - | Generic | M3 screw set | - | - | VR1 (heat sink mounting) |
-| Male breakaway header 1 x 40, 2.54 mm | 1 | - | - | Pololu | item #965 | [Pololu](https://www.pololu.com/product/965) | [Datasheet](https://www.pololu.com/product/965) | J4 + breadboard pins |
+| Male breakaway header 1 x 40, 2.54 mm | 1 | - | - | Pololu | item #965 | [Pololu](https://www.pololu.com/product/965) | [Datasheet](https://www.pololu.com/product/965) | J4, J5 + breadboard pins |
 | Female header 1 x 40, 2.54 mm | 2 | - | - | Generic | 1 x 40 female header | - | - | A1 (socket) |
 
 These parts are handed out in class or taken from Peralta 109 stock, so they are not on a purchase request.
