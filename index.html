@@ -319,6 +319,26 @@
     
     
       <li class="md-tabs__item">
+        <a href="06-PCB-Design/PCB-Design/" class="md-tabs__link">
+          
+  
+    
+  
+  06 PCB Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="Appendix/" class="md-tabs__link">
           
   
@@ -720,6 +740,52 @@
     
       
         
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="06-PCB-Design/PCB-Design/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    06 PCB Design
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
           
         
       
@@ -894,7 +960,7 @@ for<br>
 <li><strong>Power:</strong> it takes a 9 V wall adapter, protects the input with a fuse and a reverse-polarity diode, and makes a 6 V motor rail (LM317T) and a 5 V logic rail (L7805).</li>
 <li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives a 6 V DFRobot FIT0579 micro gearmotor in both directions, with speed set by PWM from the PIC.</li>
 <li><strong>Team link:</strong> on the 8-pin team link (2 × 4 pin header and jumper wires) it reads SAFE_OK, RUN_REQ, OBJ_HELD and the analog SPEED_SET, and it sends GRIP_CMD and ARM_IN_POS. An unplugged wire reads as "stop".</li>
-<li><strong>Debug and expansion:</strong> a status LED, a push button, test points on both rails and a spare-I/O header (J4) make the board easy to test and to extend.</li>
+<li><strong>Debug and expansion:</strong> a status LED, a push button, test points on both rails and GND, a 0.1 in test header (J5) and a spare-I/O header (J4) make the board easy to test and to extend.</li>
 </ul>
 <h3 id="where-to-find-things">Where to find things</h3>
 <table>
@@ -924,6 +990,10 @@ for<br>
 <tr>
 <td><a href="05-Power-Budget/Power-Budget/">05 Power Budget</a></td>
 <td>Worst-case current on every rail and source, and what it means for the design</td>
+</tr>
+<tr>
+<td><a href="06-PCB-Design/PCB-Design/">06 PCB Design</a></td>
+<td>The two-layer PCB layout (top and bottom), the KiCad project and the Gerber files</td>
 </tr>
 <tr>
 <td><a href="Appendix/">Appendix</a></td>

@@ -321,6 +321,26 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../06-PCB-Design/PCB-Design/" class="md-tabs__link">
+          
+  
+    
+  
+  06 PCB Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../Appendix/" class="md-tabs__link">
           
   
@@ -756,6 +776,52 @@
     
       
         
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../06-PCB-Design/PCB-Design/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    06 PCB Design
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
           
         
       
@@ -898,6 +964,8 @@
 <li>A status LED on RE0.</li>
 <li>A push button on RE1, using the weak pull-up.</li>
 <li>J4, a 6-pin expansion header carrying 3.3 V, GND, RA0, RA2, RB2 and RB3.</li>
+<li>J5, a 6-pin test header (0.1 in pitch) carrying PWM1, PWM2, SPEED_SET, ARM_IN_POS and two GND pins for a scope or logic analyser.</li>
+<li>Test points TP1 (+6 V), TP2 (+5 V) and TP3 (GND).</li>
 </ul>
 </li>
 <li><strong>Team link (J3):</strong> an unshrouded 2 × 4 pin header (2.54 mm). The other boards connect with eight female-to-female jumper wires, one per signal. Pins 1 to 8 carry, in order:<ul>
@@ -915,6 +983,11 @@
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
 <strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<p><strong>Revision 2.5 (2026-11-06), test points for PCB bring-up:</strong></p>
+<ul>
+<li><strong>J5</strong> test header (1 × 6, 2.54 mm): pin 1 PWM1 (RC4), 2 PWM2 (RC5), 3 SPEED_SET (RA1), 4 ARM_IN_POS (RD4, before R6), 5–6 GND. The nets have named labels (PWM1, PWM2, SPEED_SET, ARM_IN_POS).</li>
+<li><strong>TP3</strong>: a GND test point next to TP1 and TP2, so both rails can be measured against a nearby ground.</li>
+</ul>
 <p><strong>Revision 2.4 (2026-11-06), footprints checked for PCB layout:</strong> no circuit changes; the netlist is the same as rev 2.3.</p>
 <ul>
 <li><strong>A1:</strong> new footprint <code>YR_Curiosity_Nano_PIC18F57Q43</code> (2 × 28 pins, 2.54 mm pitch, rows 15.24 mm apart). The symbol pin numbers were changed to the Curiosity Nano's edge-pin numbers (for example RC4 = pin 11, RD0 = pin 20, VTG = pin 51), so the schematic and the board use the same numbers.</li>
@@ -1048,8 +1121,8 @@
 <td>2.54 mm grid</td>
 </tr>
 <tr>
-<td>J4</td>
-<td>1 × 6 pin header</td>
+<td>J4, J5</td>
+<td>1 × 6 pin headers</td>
 <td>PinHeader_1x06_P2.54mm_Vertical</td>
 <td>2.54 mm grid</td>
 </tr>
@@ -1090,7 +1163,7 @@
 <td>6.5 × 4.5 mm pin pattern</td>
 </tr>
 <tr>
-<td>TP1, TP2</td>
+<td>TP1–TP3</td>
 <td>Keystone 5001</td>
 <td>TestPoint_Keystone_5000-5004_Miniature</td>
 <td>Keystone 5000–5004</td>
@@ -1137,8 +1210,8 @@
 <tr>
 <td><strong>Documentation &amp; Troubleshooting</strong></td>
 <td>PR-09, PR-18</td>
-<td>TP1 (+6 V), TP2 (+5 V); power LED DS1; debug LED DS2 on RE0; button SW1 on RE1</td>
-<td>DS1 shows at a glance that the 5 V rail is up. The test points let a user check both rails with a meter. DS2 and SW1 let the firmware show its state and step through a sequence during troubleshooting.</td>
+<td>TP1 (+6 V), TP2 (+5 V), TP3 (GND); J5 test header; power LED DS1; debug LED DS2 on RE0; button SW1 on RE1</td>
+<td>DS1 shows at a glance that the 5 V rail is up. The test points let a user check both rails against a nearby ground, and J5 brings the PWM, speed and in-position signals to a 0.1 in header for a scope or logic analyser. DS2 and SW1 let the firmware show its state and step through a sequence during troubleshooting.</td>
 </tr>
 <tr>
 <td><strong>Sensors, Vision &amp; Expansion</strong></td>
@@ -1174,7 +1247,7 @@
 </table>
 <p><strong>Signal path, start to finish:</strong> the User board raises SAFE_OK and RUN_REQ → the PIC reads SPEED_SET on the ADC and drives PWM on RC4 (forward) or RC5 (reverse) → the FAN8100N switches the 6 V rail across the motor → when the move is done the PIC raises ARM_IN_POS and GRIP_CMD → the Gripper board answers on OBJ_HELD → the arm moves to the place position. At any point, SAFE_OK going low sets both PWM outputs to 0 % and the motor stops.</p>
 <h2 id="resources">Resources</h2>
-<p>The schematic is available as a <a href="../Arm_Motion_Control.pdf"><em>PDF download</em></a>. The <a href="../Arm_Motion_Control.zip"><em>KiCad 9 project (Zip)</em></a> includes the custom YR_Custom symbol library and the finned FAN8100N footprint.</p>
+<p>The schematic (rev 2.5) is available as a <a href="../Arm_Motion_Control.pdf"><em>PDF download</em></a>. The complete KiCad project (schematic, PCB layout and the YR_Custom symbol and footprint libraries) and the Gerber files are on the <a href="../../06-PCB-Design/PCB-Design/">PCB Design</a> page.</p>
 
 
 
