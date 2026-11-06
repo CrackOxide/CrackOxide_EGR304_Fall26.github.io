@@ -259,13 +259,13 @@ Motor specifications are from the Mouser product page and the DFRobot specificat
     | Pros | Cons |
     | ---- | ---- |
     | 9 V is just enough for the LM317T to make 6 V after the reverse-polarity diode (8.55 V available, about 8 V needed). | Needs a separate IEC C13 power cord (also on the BOM). |
-    | 2.55 A rating, well above the 947 mA worst-case input current. | Low stock at Mouser (37 when checked), so it should be ordered early. |
+    | 2.55 A rating, well above the 647 mA worst-case input current. | Low stock at Mouser (37 when checked), so it should be ordered early. |
     | Lower voltage than a 12 V supply, so VR1 dissipates about 2.4 W instead of about 5 W. | Tethered to a wall outlet, not portable. |
     | Short-circuit, overload and over-voltage protection; full datasheet; 2.1 × 5.5 mm plug. | |
 
 **Choice:** Option 4, MEAN WELL GST25A09-P1J.
 
-**Rationale:** The first submission chose a 12 V 5 A adapter for the 12 V motor. With the 6 V motor, the [Power Budget](../05-Power-Budget/Power-Budget.md) shows a worst-case input current of about 947 mA, so 5 A is not needed, and a lower input voltage keeps the 6 V linear regulator cool: (8.55 V − 6 V) × 0.93 A ≈ 2.4 W at 9 V, compared with about 5 W from 12 V. The 9 V supply still leaves enough headroom for the LM317T dropout. It is a regulated, protected, low-voltage desktop supply (Regulation 6.1), it costs less than the 12 V options (PR-17), and the battery pack was rejected because it cannot deliver stall current and needs a charger.
+**Rationale:** The first submission chose a 12 V 5 A adapter for the 12 V motor. With the 6 V motor, the [Power Budget](../05-Power-Budget/Power-Budget.md) shows a worst-case input current of about 647 mA with the FIT0579 motor, so 5 A is not needed, and a lower input voltage keeps the 6 V linear regulator cool: (8.55 V − 6 V) × 0.63 A ≈ 1.6 W at 9 V, compared with about 3.5 W from 12 V. The 9 V supply still leaves enough headroom for the LM317T dropout. It is a regulated, protected, low-voltage desktop supply (Regulation 6.1), it costs less than the 12 V options (PR-17), and the battery pack was rejected because it cannot deliver stall current and needs a charger.
 
 ## Voltage Regulation
 
@@ -312,21 +312,21 @@ The team uses the **Microchip PIC18F57Q43 Curiosity Nano** (DM164150) on every b
 | Configuration bits | Configuration Bits | — | — | External oscillator off; reset oscillator HFINTOSC 64 MHz; WDT disabled; low-voltage programming enabled (needed by the Nano's debugger); brown-out reset enabled |
 | Motor forward PWM (MOT_FWD → FAN8100N FORWARDA) | PWM1_16BIT, output 1 (PWM1OUT1), routed with PPS | RC4 | Output | FOSC clock, no prescale, left-aligned, 1 kHz; duty cycle sets speed, 0 % at start-up; R8 100 kΩ pull-down holds the input low during reset |
 | Motor reverse PWM (MOT_REV → FAN8100N REVERSEA) | PWM1_16BIT, output 2 (PWM1OUT2), routed with PPS | RC5 | Output | Only one of RC4 / RC5 is active at a time; R9 100 kΩ pull-down |
-| SPEED_SET (ribbon pin 6) | ADCC | RA1 (ANA1) | Analog input | Basic mode, 12-bit right-aligned, VDD / VSS reference, ADCRC clock (TAD = 1.67 µs), acquisition count 10 (16.7 µs); 1 kΩ / 0.1 µF RC filter on the board |
-| SAFE_OK (ribbon pin 1) | Pin Manager (GPIO) | RD0 | Digital input | External 10 kΩ pull-down, weak pull-up off |
-| RUN_REQ (ribbon pin 2) | Pin Manager (GPIO) | RD1 | Digital input | External 10 kΩ pull-down, weak pull-up off |
-| GRIP_CMD (ribbon pin 3) | Pin Manager (GPIO) | RD2 | Digital output | 330 Ω series resistor, starts low |
-| OBJ_HELD (ribbon pin 4) | Pin Manager (GPIO) | RD3 | Digital input | External 10 kΩ pull-down, weak pull-up off |
-| ARM_IN_POS (ribbon pin 5) | Pin Manager (GPIO) | RD4 | Digital output | 330 Ω series resistor, starts low |
+| SPEED_SET (team-link pin 6) | ADCC | RA1 (ANA1) | Analog input | Basic mode, 12-bit right-aligned, VDD / VSS reference, ADCRC clock (TAD = 1.67 µs), acquisition count 10 (16.7 µs); 1 kΩ / 0.1 µF RC filter on the board |
+| SAFE_OK (team-link pin 1) | Pin Manager (GPIO) | RD0 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| RUN_REQ (team-link pin 2) | Pin Manager (GPIO) | RD1 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| GRIP_CMD (team-link pin 3) | Pin Manager (GPIO) | RD2 | Digital output | 330 Ω series resistor, starts low |
+| OBJ_HELD (team-link pin 4) | Pin Manager (GPIO) | RD3 | Digital input | External 10 kΩ pull-down, weak pull-up off |
+| ARM_IN_POS (team-link pin 5) | Pin Manager (GPIO) | RD4 | Digital output | 330 Ω series resistor, starts low |
 | Debug LED DS2 | Pin Manager (GPIO) | RE0 | Digital output | 330 Ω to the LED, about 3.6 mA |
 | Debug button SW1 | Pin Manager (GPIO) | RE1 | Digital input | Weak pull-up on (WPUE1 = 1), pressed = 0, debounced in firmware |
 | Expansion header J4 | — | RA0, RA2, RB2, RB3 | Not used yet | Left as inputs; RA0 / RA2 are analog-capable for a future sensor |
 | Debug serial port (to the PC through the Nano's debugger) | UART1 | RF0 (TX1), RF1 (RX1) | Output / input | 115200 baud, 8 data bits, no parity, 1 stop bit; RF0 / RF1 are wired to the debugger's virtual COM port on the Nano |
-| Ribbon pin 7 (GRIP_FORCE) | — | — | Not connected | Not used on this board |
+| Team-link pin 7 (GRIP_FORCE) | — | — | Not connected | Not used on this board |
 
 **Why RC4 / RC5 for the motor PWM:** on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.
 
-The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).
+The three team-link inputs read 0 when a wire is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).
 
 ### MCC Screenshots
 

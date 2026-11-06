@@ -10,7 +10,7 @@ Local copies of the datasheets for every part on the [Bill of Materials](../03-B
 |---|---|---|---|
 | Dual H-bridge motor driver | onsemi (Fairchild) FAN8100N | U1 | [FAN8100N, MTC](Datasheets/FAN8100N,MTC.pdf) |
 | MCU board | Microchip PIC18F57Q43 Curiosity Nano (DM164150) | A1 | [Hardware User Guide](Datasheets/PIC18F57Q43-Curiosity-Nano-HW-UserGuide-DS40002186B.pdf) |
-| DC gearmotor, 250:1 Micro Metal MP 6 V | Pololu #2370 | B1 | [Micro Metal Gearmotors](Datasheets/pololu-micro-metal-gearmotors-rev-6-2.pdf) |
+| DC gearmotor 6 V, 50 rpm, 298:1 | DFRobot FIT0579 | B1 | [Specifications (RobotShop)](https://www.robotshop.com/products/dfrobot-micro-metal-dc-geared-motor-6v-50rpm-250gcm); no full datasheet is published |
 | Adjustable regulator (6 V rail) | STMicroelectronics LM317T | VR1 | [LM217, LM317](Datasheets/DS_lm217.pdf) |
 | 5 V regulator | STMicroelectronics L7805CV | VR2 | [L78](Datasheets/DS_l78.pdf) |
 | TO-220 heat sink | Aavid (Boyd) 577102B00000G | VR1 heat sink | [Board-level heat sinks](Datasheets/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf) |
@@ -28,7 +28,5 @@ Local copies of the datasheets for every part on the [Bill of Materials](../03-B
 | Tactile switch | Omron B3F-1000 | SW1 | [B3F](Datasheets/en_b3f.pdf) |
 | Test point | Keystone 5001 | TP1, TP2 | [5000 – 5004](Datasheets/5000_5004.pdf) |
 | Terminal block 2-position | Phoenix Contact 1935161 | J2 | [1935161](Datasheets/phoenix_contact_1935161_en.pdf) |
-| Shrouded header 2 × 4 | Samtec TST-104-01-G-D | J3 | [TST series](Datasheets/tst-1xx-xx-x-x-xx-xx-mkt.pdf) |
-| IDC ribbon cable 2 × 4 | Samtec IDSD-04-D-09.00 | Team cable | [IDSD series](Datasheets/idsd.pdf) |
 
-Generic stock parts (DIP socket, 1 × 40 male and female headers) have no part-specific datasheet.
+Generic stock parts (DIP socket, 1 × 40 male and female headers, the 2 × 4 pin header J3 and the female-to-female jumper wires) have no part-specific datasheet.

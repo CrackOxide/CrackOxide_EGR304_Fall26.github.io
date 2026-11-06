@@ -13,16 +13,16 @@ This block diagram shows the blocks of the Arm Motion Control board, how power a
     * An L7805 makes the 5 V logic rail.
     * Motor current never passes through the microcontroller board.
     * In the diagram, the power path is drawn only from the source to the regulators. Blocks that receive power have no supply lines pointing to them; instead the rail each block runs from is written in bold inside it (for example **PVCC +6 V / VCC +5 V** on the H-bridge, **3.3 V** on the LED, button and J4).
-* **Actuator:** an onsemi FAN8100N H-bridge drives a 6 V Pololu #2370 DC gearmotor. The motor has two wires, M+ and M−. RC4 and RC5 (PWM1 outputs 1 and 2, routed with PPS) provide the two PWM inputs.
+* **Actuator:** an onsemi FAN8100N H-bridge drives a 6 V DFRobot FIT0579 DC gearmotor (298:1). The motor has two wires, M+ and M−. RC4 and RC5 (PWM1 outputs 1 and 2, routed with PPS) provide the two PWM inputs.
 * **Debug:**
     * A status LED on RE0.
     * A push button on RE1, using the weak pull-up.
     * Expansion header J4, which brings out 3.3 V, GND and the spare pins RA0, RA2, RB2 and RB3.
-* **Team connection:** the board connects to the Gripper & Object Handling board through the 8-pin ribbon cable.
+* **Team connection:** the board connects to the Gripper & Object Handling board through the 8-pin team link: a 2 × 4 pin header (J3) and female-to-female jumper wires, one per signal.
     * It receives SAFE_OK, RUN_REQ, OBJ_HELD and the analog SPEED_SET.
     * It sends GRIP_CMD and ARM_IN_POS.
     * Pin 7 (GRIP_FORCE) is not used on this board and is left open. Pin 8 is GND.
-* **Ground:** all grounds are tied together. This includes USB, the 9 V supply, the H-bridge and ribbon pin 8.
+* **Ground:** all grounds are tied together. This includes USB, the 9 V supply, the H-bridge and team-link pin 8.
 
 ## Block Diagram
 
