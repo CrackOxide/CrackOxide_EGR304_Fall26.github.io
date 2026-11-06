@@ -1502,7 +1502,7 @@
 <td>Needs a separate IEC C13 power cord (also on the BOM).</td>
 </tr>
 <tr>
-<td>2.55 A rating, well above the 947 mA worst-case input current.</td>
+<td>2.55 A rating, well above the 647 mA worst-case input current.</td>
 <td>Low stock at Mouser (37 when checked), so it should be ordered early.</td>
 </tr>
 <tr>
@@ -1518,7 +1518,7 @@
 </li>
 </ol>
 <p><strong>Choice:</strong> Option 4, MEAN WELL GST25A09-P1J.</p>
-<p><strong>Rationale:</strong> The first submission chose a 12 V 5 A adapter for the 12 V motor. With the 6 V motor, the <a href="../../05-Power-Budget/Power-Budget/">Power Budget</a> shows a worst-case input current of about 947 mA, so 5 A is not needed, and a lower input voltage keeps the 6 V linear regulator cool: (8.55 V − 6 V) × 0.93 A ≈ 2.4 W at 9 V, compared with about 5 W from 12 V. The 9 V supply still leaves enough headroom for the LM317T dropout. It is a regulated, protected, low-voltage desktop supply (Regulation 6.1), it costs less than the 12 V options (PR-17), and the battery pack was rejected because it cannot deliver stall current and needs a charger.</p>
+<p><strong>Rationale:</strong> The first submission chose a 12 V 5 A adapter for the 12 V motor. With the 6 V motor, the <a href="../../05-Power-Budget/Power-Budget/">Power Budget</a> shows a worst-case input current of about 647 mA with the FIT0579 motor, so 5 A is not needed, and a lower input voltage keeps the 6 V linear regulator cool: (8.55 V − 6 V) × 0.63 A ≈ 1.6 W at 9 V, compared with about 3.5 W from 12 V. The 9 V supply still leaves enough headroom for the LM317T dropout. It is a regulated, protected, low-voltage desktop supply (Regulation 6.1), it costs less than the 12 V options (PR-17), and the battery pack was rejected because it cannot deliver stall current and needs a charger.</p>
 <h2 id="voltage-regulation">Voltage Regulation</h2>
 <p>The board needs a 6 V motor rail and a 5 V logic rail from the 9 V input. The 3.3 V logic rail is made by the MIC5353 regulator on the Curiosity Nano, which runs from USB.</p>
 <ol>
@@ -1630,42 +1630,42 @@
 <td>Only one of RC4 / RC5 is active at a time; R9 100 kΩ pull-down</td>
 </tr>
 <tr>
-<td>SPEED_SET (ribbon pin 6)</td>
+<td>SPEED_SET (team-link pin 6)</td>
 <td>ADCC</td>
 <td>RA1 (ANA1)</td>
 <td>Analog input</td>
 <td>Basic mode, 12-bit right-aligned, VDD / VSS reference, ADCRC clock (TAD = 1.67 µs), acquisition count 10 (16.7 µs); 1 kΩ / 0.1 µF RC filter on the board</td>
 </tr>
 <tr>
-<td>SAFE_OK (ribbon pin 1)</td>
+<td>SAFE_OK (team-link pin 1)</td>
 <td>Pin Manager (GPIO)</td>
 <td>RD0</td>
 <td>Digital input</td>
 <td>External 10 kΩ pull-down, weak pull-up off</td>
 </tr>
 <tr>
-<td>RUN_REQ (ribbon pin 2)</td>
+<td>RUN_REQ (team-link pin 2)</td>
 <td>Pin Manager (GPIO)</td>
 <td>RD1</td>
 <td>Digital input</td>
 <td>External 10 kΩ pull-down, weak pull-up off</td>
 </tr>
 <tr>
-<td>GRIP_CMD (ribbon pin 3)</td>
+<td>GRIP_CMD (team-link pin 3)</td>
 <td>Pin Manager (GPIO)</td>
 <td>RD2</td>
 <td>Digital output</td>
 <td>330 Ω series resistor, starts low</td>
 </tr>
 <tr>
-<td>OBJ_HELD (ribbon pin 4)</td>
+<td>OBJ_HELD (team-link pin 4)</td>
 <td>Pin Manager (GPIO)</td>
 <td>RD3</td>
 <td>Digital input</td>
 <td>External 10 kΩ pull-down, weak pull-up off</td>
 </tr>
 <tr>
-<td>ARM_IN_POS (ribbon pin 5)</td>
+<td>ARM_IN_POS (team-link pin 5)</td>
 <td>Pin Manager (GPIO)</td>
 <td>RD4</td>
 <td>Digital output</td>
@@ -1700,7 +1700,7 @@
 <td>115200 baud, 8 data bits, no parity, 1 stop bit; RF0 / RF1 are wired to the debugger's virtual COM port on the Nano</td>
 </tr>
 <tr>
-<td>Ribbon pin 7 (GRIP_FORCE)</td>
+<td>Team-link pin 7 (GRIP_FORCE)</td>
 <td>—</td>
 <td>—</td>
 <td>Not connected</td>
@@ -1709,7 +1709,7 @@
 </tbody>
 </table>
 <p><strong>Why RC4 / RC5 for the motor PWM:</strong> on the PIC18F57Q43 the PPS can route the 16-bit PWM1 outputs only to PORTC and PORTF (checked in the MCC Pin Grid; CCP1 / CCP2 cannot reach PORTB either). RC4 and RC5 were chosen because RC0 / RC1 are reserved for the Nano's optional 32 kHz crystal, RF0 / RF1 carry the debugger's virtual serial port and RF3 drives the Nano's on-board LED. The schematic was changed to match in revision 2.2.</p>
-<p>The three ribbon inputs read 0 when the cable is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).</p>
+<p>The three team-link inputs read 0 when a wire is unplugged, which the firmware treats as "stop", and both motor PWM outputs start at 0 % on reset, so the motor cannot move until SAFE_OK and RUN_REQ are high (PR-12).</p>
 <h3 id="mcc-screenshots">MCC Screenshots</h3>
 <p>The screenshots below are from the MPLAB X project for this board (MCC Melody). They show every module and pin listed in the table above. The generated code matches them: <code>pins.c</code> sets RC4 / RC5 → PWM1 outputs and RF0 → UART1 TX1 through PPS, makes RA1 the only analog input in use, and enables the weak pull-up only on RE1.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../MCC_00_Application_Builder.png" data-desc-position="bottom"><img alt="MCC Application Builder" src="../MCC_00_Application_Builder.png"></a>

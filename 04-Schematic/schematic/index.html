@@ -875,14 +875,14 @@
 <ul>
 <li><strong>Power:</strong> a 9 V DC barrel jack feeds a 1 A slow-blow fuse and a 1N5819 reverse-polarity Schottky diode, giving VIN_PROT of about 8.55 V. VR1 is an LM317T set to 6.0 V by R11 = 240 Ω and R12 = 910 Ω, using Vout = 1.25 V × (1 + 910 / 240) = 6.0 V. This 6 V rail is the motor rail. VR2 makes the +5 V logic rail for the H-bridge VCC and the power LED DS1. Each regulator has 0.33 µF on its input and 0.1 µF on its output. Test points TP1 and TP2 are on the 6 V and 5 V rails.</li>
 <li><strong>Microcontroller:</strong> PIC18F57Q43 Curiosity Nano, powered from its own USB port with 3.3 V logic.</li>
-<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives the 6 V Pololu #2370 gearmotor through M+ and M−. The motor has only these two pins. RC4 and RC5 supply PWM (PWM1 outputs 1 and 2, routed with PPS; PWM1 cannot be routed to PORTB on this PIC). The motor supply has 47 µF and 0.1 µF bulk and decoupling capacitors.</li>
+<li><strong>Motor drive:</strong> an onsemi FAN8100N H-bridge drives the 6 V DFRobot FIT0579 gearmotor (298:1, 430 mA maximum at stall) through M+ and M−. The motor has only these two pins. RC4 and RC5 supply PWM (PWM1 outputs 1 and 2, routed with PPS; PWM1 cannot be routed to PORTB on this PIC). The motor supply has 47 µF and 0.1 µF bulk and decoupling capacitors.</li>
 <li><strong>Debug and expansion:</strong><ul>
 <li>A status LED on RE0.</li>
 <li>A push button on RE1, using the weak pull-up.</li>
 <li>J4, a 6-pin expansion header carrying 3.3 V, GND, RA0, RA2, RB2 and RB3.</li>
 </ul>
 </li>
-<li><strong>Team ribbon:</strong> pins 1 to 8 carry, in order:<ul>
+<li><strong>Team link (J3):</strong> an unshrouded 2 × 4 pin header (2.54 mm). The other boards connect with eight female-to-female jumper wires, one per signal. Pins 1 to 8 carry, in order:<ul>
 <li>SAFE_OK (in)</li>
 <li>RUN_REQ (in)</li>
 <li>GRIP_CMD (out)</li>
@@ -897,6 +897,11 @@
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
 <strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<p><strong>Revision 2.3 (2026-11-06):</strong></p>
+<ul>
+<li><strong>Motor:</strong> B1 changed from the Pololu #2370 to the DFRobot FIT0579 (Mouser 426-FIT0579) for budget and efficiency reasons; see <a href="../../02-Component-Selection/Component-Selection/">Component Selection</a>. It has the same 6 V rating and two-wire connection, so the drive circuit is unchanged.</li>
+<li><strong>Team link:</strong> J3 changed from a keyed IDC box header with a ribbon cable to an unshrouded 2 × 4 pin header used with female-to-female jumper wires. The footprint is now <code>PinHeader_2x04_P2.54mm_Vertical</code>. Its pad positions and pin numbers are the same as the old IDC footprint, so the pin assignment and wiring do not change.</li>
+</ul>
 <p><strong>Revision 2.2:</strong> the motor PWM lines MOT_FWD and MOT_REV moved from RB0 / RB1 to <strong>RC4 / RC5</strong>. MCC showed that the PIC18F57Q43 can route its PWM1 outputs only to PORTC and PORTF, and neither PWM1 nor CCP1 / CCP2 can reach PORTB. Only the two Nano pins changed; R8, R9 and the FAN8100N side are the same.</p>
 <h2 id="33-v-operation-check">3.3 V Operation Check</h2>
 <p>The PIC18F57Q43 on this board runs at <strong>3.3 V</strong>. It is powered by the Curiosity Nano's own MIC5353 regulator from USB, and the VTG pin (+3V3 in the schematic) is that regulator's output. Nothing on this board drives VTG. Every connection to the PIC was checked against 3.3 V operation:</p>
@@ -935,8 +940,8 @@
 <td>✔</td>
 </tr>
 <tr>
-<td>Ribbon signals to and from the other boards</td>
-<td>All three boards use PIC18F57Q43 Curiosity Nanos at 3.3 V, so every logic level on the ribbon is 0 / 3.3 V</td>
+<td>Team-link signals to and from the other boards</td>
+<td>All three boards use PIC18F57Q43 Curiosity Nanos at 3.3 V, so every logic level on the team link is 0 / 3.3 V</td>
 <td>✔ <strong>All three Nanos must stay at 3.3 V.</strong> If one board's target voltage were changed to 5 V, its outputs would exceed this PIC's 3.3 V supply.</td>
 </tr>
 <tr>
@@ -973,7 +978,7 @@
 <td><strong>Safety</strong></td>
 <td>PR-12, PR-14, Reg. 6.3, 6.7</td>
 <td>R2, R3, R5 pull-downs on SAFE_OK, RUN_REQ, OBJ_HELD; R8, R9 pull-downs on the H-bridge inputs; F1; D1; FAN8100N thermal shutdown</td>
-<td>If the ribbon cable is unplugged or the User board drops SAFE_OK, the inputs read 0 and the firmware stops the motor. R8 and R9 hold both H-bridge inputs low while the PIC resets, so the motor cannot twitch at power-up. F1 (1 A slow-blow) opens on a short, D1 blocks a reversed adapter, and the FAN8100N shuts down if it overheats during a stall.</td>
+<td>If a jumper wire or the whole team link is unplugged or the User board drops SAFE_OK, the inputs read 0 and the firmware stops the motor. R8 and R9 hold both H-bridge inputs low while the PIC resets, so the motor cannot twitch at power-up. F1 (1 A slow-blow) opens on a short, D1 blocks a reversed adapter, and the FAN8100N shuts down if it overheats during a stall.</td>
 </tr>
 <tr>
 <td><strong>Accuracy &amp; Repeatability</strong></td>
@@ -990,7 +995,7 @@
 <tr>
 <td><strong>Gripper &amp; Object Handling</strong> (team link)</td>
 <td>PR-01, PR-03</td>
-<td>J3 ribbon: GRIP_CMD and ARM_IN_POS outputs with R4, R6 (330 Ω); OBJ_HELD input</td>
+<td>J3 team link: GRIP_CMD and ARM_IN_POS outputs with R4, R6 (330 Ω); OBJ_HELD input</td>
 <td>The arm tells the gripper when to close and reports when it is in position, and it waits for OBJ_HELD before moving on. The 330 Ω resistors limit current if two boards ever drive the same wire.</td>
 </tr>
 <tr>
@@ -1014,8 +1019,8 @@
 <tr>
 <td><strong>Assembly, Wiring &amp; Components</strong></td>
 <td>PR-10, PR-14</td>
-<td>All through-hole parts; keyed 2×4 shrouded header J3; parts run within ratings</td>
-<td>The board can be hand-soldered and built on a breadboard first. The keyed header prevents the ribbon from being plugged in backwards. The <a href="../../05-Power-Budget/Power-Budget/">Power Budget</a> shows every part stays within its limits.</td>
+<td>All through-hole parts; J3 2 × 4 pin header with labelled pins; parts run within ratings</td>
+<td>The board can be hand-soldered and built on a breadboard first. J3 is not keyed, so pin 1 and the signal names are marked next to it and GND uses a fixed wire colour. A wire plugged into the wrong pin cannot damage anything: the header carries only 3.3 V logic and GND, outputs have 330 Ω series resistors, and inputs have pull-downs. The <a href="../../05-Power-Budget/Power-Budget/">Power Budget</a> shows every part stays within its limits.</td>
 </tr>
 <tr>
 <td><strong>Power, Stability &amp; Physical Design</strong></td>

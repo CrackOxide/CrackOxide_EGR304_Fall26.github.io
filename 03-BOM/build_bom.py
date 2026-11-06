@@ -10,64 +10,63 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
-M = "Mouser Electronics"
-P = "Pololu"
-L = "Peralta 109 / in hand (not ordered)"
+M = "Mouser Electronics (to order)"
+H = "In hand (still used, not ordered again)"
+L = "Peralta 109 / class stock (not ordered)"
 
 # vendor, description, refs, qty, unit (USD or None), manufacturer, mfr #, vendor URL, datasheet URL, note
 ROWS = [
-    (M, "Adjustable linear regulator, 1.5 A, TO-220 (set to 6.0 V for the motor rail)", "VR1", 3, 0.76,
+    (H, "Adjustable linear regulator, 1.5 A, TO-220 (set to 6.0 V for the motor rail)", "VR1", 3, 0.76,
      "STMicroelectronics", "LM317T", "https://www.mouser.com/ProductDetail/STMicroelectronics/LM317T?qs=swDD%2BF%2Bps7c8uLyY%2B3mJJw%3D%3D",
      "https://www.st.com/resource/en/datasheet/lm217.pdf",
      "Replaces the L7806 (obsolete at Mouser). Vout = 1.25 V x (1 + 910/240) = 6.0 V with R11 / R12."),
-    (M, "5 V linear regulator, 1.5 A, TO-220", "VR2", 3, 0.60,
+    (H, "5 V linear regulator, 1.5 A, TO-220", "VR2", 3, 0.60,
      "STMicroelectronics", "L7805CV", "https://www.mouser.com/en/ProductDetail/STMicroelectronics/L7805CV?qs=9NrABl3fj%2FqplZAHiYUxWg%3D%3D",
      "https://www.st.com/resource/en/datasheet/l78.pdf", "Logic rail for the H-bridge VCC and the power LED."),
     (M, "Heat sink, TO-220, channel style, 25.9 C/W", "VR1 (heat sink)", 3, 1.07,
      "Aavid (Boyd)", "577102B00000G", "https://www.mouser.com/ProductDetail/Aavid/577102B00000G?qs=cR7Qvk1oinlekh9MFs6NUA%3D%3D",
-     "https://www.mouser.com/datasheet/2/2/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf", "VR1 dissipates up to about 2.4 W at worst case (see Power Budget)."),
-    (M, "Schottky diode 1 A 40 V, DO-41 (reverse-polarity protection)", "D1", 3, 0.55,
+     "https://www.mouser.com/datasheet/2/2/Aavid_Board_Level_Heatsinks_Cat_1_-3044572.pdf", "VR1 dissipates up to about 1.6 W at worst case (see Power Budget)."),
+    (H, "Schottky diode 1 A 40 V, DO-41 (reverse-polarity protection)", "D1", 3, 0.55,
      "onsemi", "1N5819RLG", "https://www.mouser.com/en/ProductDetail/onsemi/1N5819RLG?qs=y2kkmE52mdN7fhfvNgYV6A%3D%3D",
      "https://www.onsemi.com/pdf/datasheet/1n5817-d.pdf", ""),
-    (M, "DC power jack 2.1 x 5.5 mm, PCB mount", "J1", 3, 0.70,
+    (H, "DC power jack 2.1 x 5.5 mm, PCB mount", "J1", 3, 0.70,
      "Same Sky (CUI)", "PJ-102A", "https://www.mouser.com/en/ProductDetail/Same-Sky/PJ-102A?qs=WyjlAZoYn50UKjtnxOz%2Bqg%3D%3D",
      "https://www.mouser.com/datasheet/3/6118/1/pj_102a.pdf", "Mates with the 9 V adapter plug."),
     (M, "Fuse clip for 5 mm (5 x 20 mm) fuse, PCB mount", "F1 (holder)", 4, 0.33,
      "Keystone Electronics", "3517", "https://www.mouser.com/en/ProductDetail/Keystone-Electronics/3517?qs=qOqV1E1P08RwsK9hgzJijw%3D%3D",
      "https://www.mouser.com/datasheet/3/201/1/3517.PDF", "Two clips per fuse."),
-    (M, "Ceramic capacitor 0.33 uF 50 V X7R, radial, 5 mm lead spacing", "C1, C3", 6, 1.02,
+    (H, "Ceramic capacitor 0.33 uF 50 V X7R, radial, 5 mm lead spacing", "C1, C3", 6, 1.02,
      "Vishay BC Components", "K334K20X7RF5TH5", "https://www.mouser.com/ProductDetail/Vishay-BC-Components/K334K20X7RF5TH5?qs=lQAVKuKFhkL6tfc7l6Mmyw%3D%3D",
      "https://www.vishay.com/doc?45171", "Regulator input capacitors."),
-    (M, "Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing", "C2, C4, C5, C6, C8", 12, 0.118,
+    (H, "Ceramic capacitor 0.1 uF 50 V X7R, radial, 5 mm lead spacing", "C2, C4, C5, C6, C8", 12, 0.118,
      "Vishay BC Components", "K104K15X7RF5WH5", "https://www.mouser.com/en/ProductDetail/Vishay-BC-Components/K104K15X7RF5WH5?qs=8fb2TFeI5qGYDjl7%2BWZxcg%3D%3D",
      "https://www.vishay.com/doc?45171", "Regulator outputs, H-bridge bypass, SPEED_SET RC filter."),
-    (M, "Aluminum electrolytic 47 uF 16 V, radial 5 x 11 mm", "C7", 3, 0.38,
+    (H, "Aluminum electrolytic 47 uF 16 V, radial 5 x 11 mm", "C7", 3, 0.38,
      "Panasonic", "EEU-FC1C470H", "https://www.mouser.com/ProductDetail/Panasonic/EEU-FC1C470H?qs=/C1U95aQ15vhemYBctOGEw%3D%3D",
      "https://industrial.panasonic.com/cdbs/www-data/pdf/RDF0000/ABA0000C1209.pdf", "Bulk bypass on the 6 V motor rail. 2 mm lead pitch."),
-    (M, "Terminal block, 2 position, 5.0 mm pitch", "J2", 2, 0.53,
+    (H, "Terminal block, 2 position, 5.0 mm pitch", "J2", 2, 0.53,
      "Phoenix Contact", "1935161", "https://www.mouser.com/ProductDetail/Phoenix-Contact/1935161?qs=W3wJikR1%252BS6eKzfFl8Rbew%3D%3D",
      "https://www.mouser.com/datasheet/3/507/9/phoenix_contact_1935161_en.pdf", "Motor + / - wires (no ground)."),
-    (M, "Shrouded box header 2 x 4, 2.54 mm, through hole", "J3", 2, 2.88,
-     "Samtec", "TST-104-01-G-D", "https://www.mouser.com/ProductDetail/Samtec/TST-104-01-G-D?qs=rU5fayqh%2BE32/80vAsdSrw%3D%3D",
-     "https://suddendocs.samtec.com/prints/tst-1xx-xx-x-x-xx-xx-mkt.pdf", "Team 8-pin ribbon connector (pin 8 = GND)."),
-    (M, "IDC ribbon cable assembly, 2 x 4, 2.54 mm, 9 in", "Team cable", 1, 6.46,
-     "Samtec", "IDSD-04-D-09.00", "https://www.mouser.com/en/ProductDetail/Samtec/IDSD-04-D-09.00?qs=0lQeLiL1qybglLttr7ZyDQ%3D%3D",
-     "../Appendix/Datasheets/idsd.pdf", "Cable to the Gripper board. Confirm with the team who orders the shared cables."),
+    (L, "Male pin header 2 x 4, 2.54 mm, unshrouded, through hole", "J3", 2, None,
+     "Generic", "2 x 4 pin header", "", "", "Team link connector (pin 8 = GND). Two 1 x 4 pieces of breakaway header also fit the footprint."),
+    (L, "Female-to-female jumper wire, 2.54 mm Dupont, 20 cm", "Team link", 8, None,
+     "Generic", "F-F jumper wire", "", "", "One wire per signal to the Gripper board. Mark pin 1 and use a fixed colour for GND."),
     (M, "Tactile switch 6 x 6 mm, through hole", "SW1", 3, 0.35,
      "Omron", "B3F-1000", "https://www.mouser.com/ProductDetail/Omron-Electronics/B3F-1000?qs=lK7M36XCk6JQHckSc1xIsg%3D%3D",
      "https://www.mouser.com/datasheet/3/39/1/en_b3f.pdf", "Debug button (RE1)."),
     (M, "Test point, miniature PC loop", "TP1, TP2", 4, 0.26,
      "Keystone Electronics", "5001", "https://www.mouser.com/en/ProductDetail/Keystone-Electronics/5001?qs=q0tsjPZWdm%2FW0vdr%2FwowKg%3D%3D",
      "https://www.mouser.com/datasheet/3/201/1/5000_5004.PDF", "+6 V and +5 V probe points."),
-    (M, "AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet", "External (J1)", 1, 13.70,
+    (H, "AC/DC wall adapter 9 V 2.55 A, 2.1 x 5.5 mm plug, C14 inlet", "External (J1)", 1, 13.70,
      "MEAN WELL", "GST25A09-P1J", "https://www.mouser.com/en/ProductDetail/MEAN-WELL/GST25A09-P1J?qs=drgMNd%252BkGPP0sFLpGSh7oQ%3D%3D",
      "https://www.meanwellusa.com/webapp/product/search.aspx?prod=GST25A", "System power source."),
-    (M, "AC power cord NEMA 5-15P to IEC C13, 6 ft", "External (adapter)", 1, 6.39,
+    (H, "AC power cord NEMA 5-15P to IEC C13, 6 ft", "External (adapter)", 1, 6.39,
      "Same Sky", "AC-C13-R NA", "https://www.mouser.com/en/ProductDetail/Same-Sky/AC-C13-R-NA?qs=%252BXxaIXUDbq2HADzpjg7LkA%3D%3D",
      "../Appendix/Datasheets/ac-c13-r-na.pdf", "The adapter has a C14 inlet and ships without a cord."),
-    (P, "250:1 Micro Metal Gearmotor MP 6 V", "B1 (off-board)", 3, 23.95,
-     "Pololu", "item #2370", "https://www.pololu.com/product/2370",
-     "https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf", "Actuator. Stall current 0.67 A (extrapolated)."),
+    (M, "Micro metal DC gearmotor 6 V, 50 rpm, 298:1", "B1 (off-board)", 3, 7.50,
+     "DFRobot", "FIT0579", "https://www.mouser.com/ProductDetail/426-FIT0579",
+     "https://www.robotshop.com/products/dfrobot-micro-metal-dc-geared-motor-6v-50rpm-250gcm",
+     "Arm joint actuator. Stall 2.2 kg-cm, 430 mA max at 6 V. Replaces Pololu #2370 (budget and efficiency)."),
     (L, "Dual H-bridge motor driver, 12-DIPH-300 with heat-sink fin", "U1", 2, None,
      "onsemi (Fairchild)", "FAN8100N", "", "https://datasheet.sic-components.com/FAN8100N%2CMTC.pdf",
      "Already in hand (need 2: breadboard + PCB). Obsolete, so it is not ordered."),
@@ -123,7 +122,7 @@ def site(url):
 
 
 def build():
-    rows = sorted(ROWS, key=lambda r: [M, P, L].index(r[0]))
+    rows = sorted(ROWS, key=lambda r: [M, H, L].index(r[0]))
     with open(HERE / "bom.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["Vendor", "Part Name/Description", "Qty", "Unit Cost (USD)", "Total Cost (USD)", "Manufacturer",
@@ -132,7 +131,7 @@ def build():
             w.writerow([v, d, q, "" if u is None else f"{u:.2f}", "" if u is None else f"{u * q:.2f}", mf, pn, vl, dl, refs, note])
     out = []
     totals = {}
-    for vendor in (M, P, L):
+    for vendor in (M, H, L):
         part = [r for r in rows if r[0] == vendor]
         out.append(f"### {vendor}\n")
         out.append("| **Part Name/Description** | **Qty** | **Unit Cost** | **Total Cost** | **Manufacturer** | **Manufacturer #** "
@@ -145,18 +144,22 @@ def build():
             out.append(f"| {d} | {q} | {money(u) or '-'} | {money(tot) or '-'} | {mf} | {pn} | "
                        f"{link(site(vl), vl)} | {link('Datasheet', dl)} | {refs} |")
         totals[vendor] = t
-        if vendor != L:
-            out.append(f"\n**{vendor} subtotal: ${t:,.2f}** ({len(part)} line item{"s" if len(part) != 1 else ""})\n")
+        if vendor == M:
+            out.append(f"\n**Mouser order subtotal: ${t:,.2f}** ({len(part)} line items, on the Mouser purchase request)\n")
+        elif vendor == H:
+            out.append(f"\nThese parts are already in hand. They are still used in the design but are not ordered again. "
+                       f"Value at the listed Mouser prices: ${t:,.2f}.\n")
         else:
-            out.append("\nThese parts are already in hand, handed out in class or taken from Peralta 109 stock, so they are not on a purchase request.\n")
-    grand = totals[M] + totals[P]
-    out.append(f"**Total to order: ${grand:,.2f}** (Mouser ${totals[M]:,.2f} + Pololu ${totals[P]:,.2f}, before shipping and tax).\n")
+            out.append("\nThese parts are handed out in class or taken from Peralta 109 stock, so they are not on a purchase request.\n")
+    grand = totals[M]
+    out.append(f"**Total to order: ${grand:,.2f}** (one Mouser purchase request, before shipping and tax). "
+               f"Total value of all purchased parts, including those in hand: ${totals[M] + totals[H]:,.2f}.\n")
     page = (HERE / "BOM.md").read_text(encoding="utf-8")
     a, b = "<!-- BOM:START -->", "<!-- BOM:END -->"
     head, rest = page.split(a, 1)
     _, tail = rest.split(b, 1)
     (HERE / "BOM.md").write_text(f"{head}{a}\n" + "\n".join(out) + f"\n{b}{tail}", encoding="utf-8")
-    print(f"Mouser ${totals[M]:.2f}, Pololu ${totals[P]:.2f}, total ${grand:.2f}")
+    print(f"order ${totals[M]:.2f}, in hand ${totals[H]:.2f}")
 
 
 if __name__ == "__main__":
