@@ -658,6 +658,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#footprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Footprints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       How the Schematic Meets the User Needs and Product Requirements
@@ -828,6 +837,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#footprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Footprints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-the-schematic-meets-the-user-needs-and-product-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       How the Schematic Meets the User Needs and Product Requirements
@@ -897,6 +915,13 @@
 <p>The three digital inputs have 10 kΩ pull-downs, so an unplugged cable reads 0, which means stop. The two outputs have 330 Ω series resistors. SPEED_SET has a 1 kΩ / 0.1 µF RC filter.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_page-0001.png" data-desc-position="bottom"><img alt="Arm Motion Control schematic" src="../Arm_Motion_Control_page-0001.png"></a>
 <strong>Figure 1:</strong> Arm Motion Control schematic (click the image to enlarge).</p>
+<p><strong>Revision 2.4 (2026-11-06), footprints checked for PCB layout:</strong> no circuit changes; the netlist is the same as rev 2.3.</p>
+<ul>
+<li><strong>A1:</strong> new footprint <code>YR_Curiosity_Nano_PIC18F57Q43</code> (2 × 28 pins, 2.54 mm pitch, rows 15.24 mm apart). The symbol pin numbers were changed to the Curiosity Nano's edge-pin numbers (for example RC4 = pin 11, RD0 = pin 20, VTG = pin 51), so the schematic and the board use the same numbers.</li>
+<li><strong>U1:</strong> the FAN8100N footprint was corrected to the 12-DIPH-300 drawing: pins 4–6 sit at 12.70–17.78 mm, and each side has one 5.1 mm heat-sink fin lead (pad 13, GND) centred at 8.89 mm with a slotted hole. U1 is soldered directly, because the fin leads do not fit a DIP socket.</li>
+<li><strong>C1, C3</strong> (0.33 µF, size code 20, 5.0 × 3.2 mm body): <code>C_Disc_D5.1mm_W3.2mm_P5.00mm</code>. <strong>C7</strong> (5 × 11 mm, 2.0 mm lead pitch): <code>CP_Radial_D5.0mm_P2.00mm</code>.</li>
+<li><strong>J2</strong> (Phoenix 1935161, PT 1,5/2-5,0-H): <code>TerminalBlock_Phoenix_PT-1,5-2-5.0-H</code>. <strong>TP1, TP2</strong> (Keystone 5001): <code>TestPoint_Keystone_5000-5004_Miniature</code>.</li>
+</ul>
 <p><strong>Revision 2.3 (2026-11-06):</strong></p>
 <ul>
 <li><strong>Motor:</strong> B1 changed from the Pololu #2370 to the DFRobot FIT0579 (Mouser 426-FIT0579) for budget and efficiency reasons; see <a href="../../02-Component-Selection/Component-Selection/">Component Selection</a>. It has the same 6 V rating and two-wire connection, so the drive circuit is unchanged.</li>
@@ -962,6 +987,117 @@
 </tbody>
 </table>
 <p>The only 5 V and 6 V nets on the board are the FAN8100N supply pins (VCC, PVCC), the motor and the power LED. None of them connects to a PIC pin.</p>
+<h2 id="footprints">Footprints</h2>
+<p>Every part on the board has a through-hole footprint that was checked against its datasheet before PCB layout. B1 (the motor) is off-board and connects through J2.</p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>Part</th>
+<th>Footprint</th>
+<th>Checked against</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>PIC18F57Q43 Curiosity Nano</td>
+<td>YR_Custom:YR_Curiosity_Nano_PIC18F57Q43</td>
+<td>User guide pinout (Fig. 4-1); 2 × 28 at 2.54 mm, rows 15.24 mm apart</td>
+</tr>
+<tr>
+<td>U1</td>
+<td>FAN8100N</td>
+<td>YR_Custom:YR_DIPH-12_W7.62mm_Fin</td>
+<td>12-DIPH-300 package drawing (datasheet p. 12)</td>
+</tr>
+<tr>
+<td>VR1, VR2</td>
+<td>LM317T, L7805CV</td>
+<td>TO-220-3_Vertical</td>
+<td>TO-220 pinout: LM317 1 ADJ / 2 OUT / 3 IN; L7805 1 IN / 2 GND / 3 OUT</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>1N5819</td>
+<td>D_DO-41_SOD81_P10.16mm_Horizontal</td>
+<td>DO-41 axial</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>Keystone 3517 clips</td>
+<td>Fuseholder_Clip-5x20mm_Keystone_3517</td>
+<td>Keystone 3517</td>
+</tr>
+<tr>
+<td>J1</td>
+<td>PJ-102A</td>
+<td>BarrelJack_Horizontal</td>
+<td>PJ-102A layout: pins 1–2 6.0 mm apart, pin 3 4.7 mm to the side, slotted holes</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>Phoenix 1935161</td>
+<td>TerminalBlock_Phoenix_PT-1,5-2-5.0-H</td>
+<td>5 mm pitch, 1.3 mm holes</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>2 × 4 pin header</td>
+<td>PinHeader_2x04_P2.54mm_Vertical</td>
+<td>2.54 mm grid</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>1 × 6 pin header</td>
+<td>PinHeader_1x06_P2.54mm_Vertical</td>
+<td>2.54 mm grid</td>
+</tr>
+<tr>
+<td>C1, C3</td>
+<td>Vishay K334K20 (size 20)</td>
+<td>C_Disc_D5.1mm_W3.2mm_P5.00mm</td>
+<td>5.0 × 3.2 mm body, 5.0 mm leads</td>
+</tr>
+<tr>
+<td>C2, C4–C6, C8</td>
+<td>Vishay K104K15 (size 15)</td>
+<td>C_Disc_D5.0mm_W2.5mm_P5.00mm</td>
+<td>4.0 × 2.6 mm body, 5.0 mm leads</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Panasonic EEU-FC1C470H</td>
+<td>CP_Radial_D5.0mm_P2.00mm</td>
+<td>5 mm diameter, 2.0 mm leads</td>
+</tr>
+<tr>
+<td>R1–R12</td>
+<td>1/4 W axial</td>
+<td>R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</td>
+<td>1/4 W body, 10.16 mm lead bend</td>
+</tr>
+<tr>
+<td>DS1, DS2</td>
+<td>3 mm LEDs</td>
+<td>LED_D3.0mm</td>
+<td>2.54 mm leads; pad 1 = cathode</td>
+</tr>
+<tr>
+<td>SW1</td>
+<td>Omron B3F-1000</td>
+<td>SW_PUSH_6mm</td>
+<td>6.5 × 4.5 mm pin pattern</td>
+</tr>
+<tr>
+<td>TP1, TP2</td>
+<td>Keystone 5001</td>
+<td>TestPoint_Keystone_5000-5004_Miniature</td>
+<td>Keystone 5000–5004</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Layout notes:</strong> the 577102B00000G heat sink on VR1 has no PCB tabs. It is held by the TO-220 mounting screw, so leave about 10 mm of clear space behind VR1's tab. The LM317T tab is at +6 V, so the heat sink must not touch other parts. Keep the motor current path (J1 → F1 → D1 → VR1 → U1 → J2) short and wide, at least 0.6 mm (25 mil) for 0.65 A worst case.</p>
 <h2 id="how-the-schematic-meets-the-user-needs-and-product-requirements">How the Schematic Meets the User Needs and Product Requirements</h2>
 <p>The team grouped its user needs into eleven categories and turned them into product requirements PR-01 to PR-18 (<a href="https://egr304-2026-f-107.github.io/03-User-Needs-and%20Benchmarking/#organized-need-statements">user needs</a>, <a href="https://egr304-2026-f-107.github.io/04-Product-Requirements/">product requirements</a>). The table shows which parts of this schematic serve each need that applies to the Arm Motion Control board, and how.</p>
 <table>
@@ -1013,8 +1149,8 @@
 <tr>
 <td><strong>Calibration, Maintenance &amp; Repair</strong></td>
 <td>PR-05, PR-10</td>
-<td>U1 in a socket; Curiosity Nano on female headers; J2 screw terminal for the motor</td>
-<td>The driver, the MCU board and the motor can each be replaced without desoldering.</td>
+<td>Curiosity Nano on two 1 × 28 female headers; J2 screw terminal for the motor; through-hole U1</td>
+<td>The MCU board and the motor can each be replaced without desoldering. U1 is soldered directly, because its heat-sink fin leads do not fit a DIP socket, but as a through-hole part it can still be desoldered and replaced with ordinary tools.</td>
 </tr>
 <tr>
 <td><strong>Assembly, Wiring &amp; Components</strong></td>
