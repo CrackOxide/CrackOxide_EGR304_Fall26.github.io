@@ -72,7 +72,7 @@ The same criteria were used for every part:
     | Pros | Cons |
     | ---- | ---- |
     | Through-hole DIP with a heat-sink fin: fits the breadboard and the PCB directly, no breakout module needed. | Obsolete, so it cannot be reordered; the two parts in hand cover the breadboard and the PCB. |
-    | 1.5 A peak output per channel, more than twice the 0.67 A motor stall current. | No current-sense output for the firmware. |
+    | 1.5 A peak output per channel, more than three times the 0.43 A stall current of the FIT0579 motor (and twice the 0.67 A of the original Pololu motor). | No current-sense output for the firmware. |
     | Two logic inputs per channel (forward / reverse), driven directly by the two PWM1 outputs (RC4, RC5). | Bipolar output stage drops about 0.15 V at 0.2 A and up to 0.55 V at 0.4 A, so the motor sees slightly less than 6 V. |
     | Built-in thermal shutdown with hysteresis and built-in clamp ("spark killing") diodes, so no external flyback diodes. | Supply limit is 9 V (10.5 V absolute), so it suits only low-voltage motors. |
     | Separate logic (VCC) and power (PVCC) supplies: 5 V logic, 6 V motor rail. | |
@@ -125,9 +125,32 @@ The same criteria were used for every part:
     | Light with a 1:48 gearbox and 200 mm leads ending in 0.1" connectors. | Rated 3 V to 6 V, needs a separate lower-voltage rail. |
     | Low current (1.5 A stall at 6 V). | No encoder included; only a basic specification sheet, no full datasheet. |
 
-**Choice:** Option 2, Pololu 250:1 Micro Metal Gearmotor MP 6V.
+4. DFRobot FIT0579 Micro Metal DC Geared Motor, 6 V, 50 rpm (298:1)
 
-**Rationale:** Its 0.67 A stall current is within the FAN8100N (1.5 A) and the LM317T 6 V regulator (1.5 A) with margin, so the whole motor path stays inside its ratings (PR-14, see the [Power Budget](../05-Power-Budget/Power-Budget.md)). Option 1 needs 5 A at stall, which would need a much larger driver and supply. Its 1.6 kg·cm stall torque is about twice that of the TT motor, which gives margin while the arm load is still being defined, and its metal gears and small size keep the arm light and stable (PR-04, PR-13). At $23.95 it is far cheaper than Option 1 (PR-17). The extended back shaft leaves room to add an encoder later (PR-11).
+    <img width="260" height="260" alt="DFRobot FIT0579 micro metal DC geared motor" src="../FIT0579_gearmotor.jpg" />
+
+    * $7.50/each (Mouser 426-FIT0579)
+    * [link to product](https://www.mouser.com/ProductDetail/426-FIT0579)
+
+    | Pros                                      | Cons                                                             |
+    | ----------------------------------------- | ---------------------------------------------------------------- |
+    | $7.50, under a third of the Pololu price, and sold by Mouser, an approved class vendor | No encoder included |
+    | 2.2 kg·cm stall torque, more than the Pololu motor's 1.6 kg·cm, from a 298:1 metal gearbox | Slower: 50 rpm no-load at 6 V |
+    | Low current: 24 mA no-load, 61 mA at the 250 g·cm rated load, 430 mA maximum at stall | Only a short specification table, no full datasheet with curves |
+    | Same micro metal gearmotor size and 6 V rating, so it fits the existing 6 V rail and FAN8100N drive with no circuit change | Stalling for long periods can still damage the gearbox |
+
+**Original choice (first submission and Rev C 2.2):** Option 2, Pololu 250:1 Micro Metal Gearmotor MP 6V.
+
+**Final choice:** Option 4, DFRobot FIT0579, ordered from Mouser (3 pieces, $22.50).
+
+**Rationale (budget and efficiency):** After the parts review with the professor, the motor was changed for two reasons.
+
+* **Budget (PR-17):** Pololu is not a valid ordering site for this class, so the Pololu motor could not be bought. The FIT0579 is on Mouser for $7.50, which keeps the motor under the $10 unit-price target. Three motors cost $22.50 instead of $71.85, and the whole order can go on the single Mouser purchase request.
+* **Efficiency (PR-13, PR-14):** At its rated load the FIT0579 draws only 61 mA from the 6 V rail (about 0.37 W), and its worst-case stall current is 430 mA, lower than the Pololu motor's 0.67 A. Less current means less heat in the LM317T regulator and the FAN8100N, and more margin on the 1.5 A ratings of both parts. Its higher gear ratio also gives more torque per amp (2.2 kg·cm at stall), which suits a slow arm joint.
+
+The motor is the same size class and the same 6 V rating as the Pololu part, so the schematic, the FAN8100N drive circuit and the PWM firmware stay the same. The [Power Budget](../05-Power-Budget/Power-Budget.md) was calculated with the Pololu motor's 0.67 A stall current; the FIT0579's 430 mA is lower, so every rail keeps at least the margin shown there. Option 1 is still ruled out by its 5 A stall current, and the TT motor (Option 3) by its 0.8 kg·cm stall torque.
+
+Motor specifications are from the Mouser product page and the DFRobot specification table: [Mouser 426-FIT0579](https://www.mouser.com/ProductDetail/426-FIT0579), [RobotShop specification listing](https://www.robotshop.com/products/dfrobot-micro-metal-dc-geared-motor-6v-50rpm-250gcm).
 
 ## Position Sensor
 
