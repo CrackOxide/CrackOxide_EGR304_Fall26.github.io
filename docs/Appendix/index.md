@@ -29,4 +29,4 @@ Local copies of the datasheets for every part on the [Bill of Materials](../03-B
 | Test point | Keystone 5001 | TP1, TP2 | [5000 – 5004](Datasheets/5000_5004.pdf) |
 | Terminal block 2-position | Phoenix Contact 1935161 | J2 | [1935161](Datasheets/phoenix_contact_1935161_en.pdf) |
 
-Generic stock parts (DIP socket, 1 × 40 male and female headers, the 2 × 4 pin header J3 and the female-to-female jumper wires) have no part-specific datasheet.
+Generic stock parts (1 × 40 male and female headers, the M3 heat-sink screw, the 2 × 4 pin header J3 and the female-to-female jumper wires) have no part-specific datasheet.

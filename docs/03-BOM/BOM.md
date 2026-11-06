@@ -66,7 +66,7 @@ These parts are already in hand. They are still used in the design but are not o
 | Resistor 910 Ohm 1/4 W 1 %, axial | 3 | - | - | Stackpole | RNF14FTD910R | [Mouser](https://www.mouser.com/c/?q=RNF14FTD910R) | [Datasheet](https://www.ibselectronics.biz/datasheet/Misc/RNF14FTD20K0.pdf) | R12 |
 | LED 3 mm green, diffused | 3 | - | - | Kingbright | WP710A10SGD | [Mouser](https://www.mouser.com/ProductDetail/Kingbright/WP710A10SGD?qs=jBF9H7RTBaS5vBvRdVQZww%3D%3D) | [Datasheet](https://www.mouser.fi/datasheet/3/308/1/WP710A10SGD.pdf) | DS1 |
 | LED 3 mm yellow, diffused | 3 | - | - | Kingbright | WP710A10YD | [Digi-Key](https://www.digikey.com/en/products/detail/kingbright/WP710A10YD/2769824) | [Datasheet](../Appendix/Datasheets/WP710A10YD.pdf) | DS2 |
-| DIP IC socket, 14 pin, 0.3 in | 2 | - | - | Generic | DIP-14 socket | - | - | U1 (socket) |
+| M3 x 8 mm screw, nut and washer (TO-220 to heat sink) | 2 | - | - | Generic | M3 screw set | - | - | VR1 (heat sink mounting) |
 | Male breakaway header 1 x 40, 2.54 mm | 1 | - | - | Pololu | item #965 | [Pololu](https://www.pololu.com/product/965) | [Datasheet](https://www.pololu.com/product/965) | J4 + breadboard pins |
 | Female header 1 x 40, 2.54 mm | 2 | - | - | Generic | 1 x 40 female header | - | - | A1 (socket) |
 
