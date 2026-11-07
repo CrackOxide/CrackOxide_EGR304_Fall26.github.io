@@ -4,12 +4,11 @@ title: PCB Design
 
 ## Overview
 
-This page shows the printed circuit board for the **Arm Motion Control** subsystem. The board is laid out in KiCad from the rev 2.5 [schematic](../04-Schematic/schematic.md). It is a two-layer through-hole board, made on the Peralta Labs LPKF ProtoMat S63 mill.
+This page shows the printed circuit board for the **Arm Motion Control** subsystem. The board is laid out in KiCad [schematic](../04-Schematic/schematic.md). It is a two-layer through hole board.
 
 * **Size:** 100 mm × 92 mm, inside the 100 mm × 100 mm limit.
 * **Layers:** top and bottom copper only. There is no solder mask or silkscreen on the milled board.
 * **Copper:** 0.5 oz/ft². Both layers have a ground (GND) pour.
-* **Initials:** "YR" in large bold text on the top copper. The copper layers are also labelled "TOP TEAM107" and "BOTTOM TEAM107".
 
 ## PCB Layout
 
@@ -21,7 +20,7 @@ This page shows the printed circuit board for the **Arm Motion Control** subsyst
 
 ## Layout
 
-* **Microcontroller:** the PIC18F57Q43 Curiosity Nano (A1) sits in the left-centre of the board on two 1 × 28 female headers. Its USB connector faces the bottom edge. Only traces run under the Nano; no components or vias are placed there.
+* **Microcontroller:** the PIC18F57Q43 Curiosity Nano sits in the left-centre of the board on two 1 × 28 female headers. Its USB connector faces the bottom edge. Only traces run under the Nano; no components or vias are placed there.
 * **Power input:** this is the top-right corner. The 9 V jack J1 feeds fuse F1, then diode D1, then the regulators VR1 (LM317T, +6 V) and VR2 (L7805, +5 V).
     * Each regulator's input and output capacitors (C1–C4) sit next to its pins.
     * VR1's heat sink stands at the right edge. The top copper under it is removed, because the LM317T tab and the heat sink are at +6 V and the board has no solder mask.
