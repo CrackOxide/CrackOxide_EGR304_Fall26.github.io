@@ -955,12 +955,11 @@
   <h1>PCB Design</h1>
 
 <h2 id="overview">Overview</h2>
-<p>This page shows the printed circuit board for the <strong>Arm Motion Control</strong> subsystem. The board is laid out in KiCad from the rev 2.5 <a href="../../04-Schematic/schematic/">schematic</a>. It is a two-layer through-hole board, made on the Peralta Labs LPKF ProtoMat S63 mill.</p>
+<p>This page shows the printed circuit board for the <strong>Arm Motion Control</strong> subsystem. The board is laid out in KiCad <a href="../../04-Schematic/schematic/">schematic</a>. It is a two-layer through hole board.</p>
 <ul>
 <li><strong>Size:</strong> 100 mm × 92 mm, inside the 100 mm × 100 mm limit.</li>
 <li><strong>Layers:</strong> top and bottom copper only. There is no solder mask or silkscreen on the milled board.</li>
 <li><strong>Copper:</strong> 0.5 oz/ft². Both layers have a ground (GND) pour.</li>
-<li><strong>Initials:</strong> "YR" in large bold text on the top copper. The copper layers are also labelled "TOP TEAM107" and "BOTTOM TEAM107".</li>
 </ul>
 <h2 id="pcb-layout">PCB Layout</h2>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../Arm_Motion_Control_PCB_Top.png" data-desc-position="bottom"><img alt="Arm Motion Control PCB, top copper" src="../Arm_Motion_Control_PCB_Top.png"></a>
@@ -969,7 +968,7 @@
 <strong>Figure 2:</strong> Bottom copper layer, mirrored as seen from the bottom of the board (click to enlarge).</p>
 <h2 id="layout">Layout</h2>
 <ul>
-<li><strong>Microcontroller:</strong> the PIC18F57Q43 Curiosity Nano (A1) sits in the left-centre of the board on two 1 × 28 female headers. Its USB connector faces the bottom edge. Only traces run under the Nano; no components or vias are placed there.</li>
+<li><strong>Microcontroller:</strong> the PIC18F57Q43 Curiosity Nano sits in the left-centre of the board on two 1 × 28 female headers. Its USB connector faces the bottom edge. Only traces run under the Nano; no components or vias are placed there.</li>
 <li><strong>Power input:</strong> this is the top-right corner. The 9 V jack J1 feeds fuse F1, then diode D1, then the regulators VR1 (LM317T, +6 V) and VR2 (L7805, +5 V).<ul>
 <li>Each regulator's input and output capacitors (C1–C4) sit next to its pins.</li>
 <li>VR1's heat sink stands at the right edge. The top copper under it is removed, because the LM317T tab and the heat sink are at +6 V and the board has no solder mask.</li>
