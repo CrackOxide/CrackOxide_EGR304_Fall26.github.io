@@ -46,4 +46,5 @@ The Arm Motion Control board turns commands from the team into arm movement:
 | [04 Schematic](04-Schematic/schematic.md) | The KiCad schematic (image, PDF and project zip) and how it meets the user needs |
 | [05 Power Budget](05-Power-Budget/Power-Budget.md) | Worst-case current on every rail and source, and what it means for the design |
 | [06 PCB Design](06-PCB-Design/PCB-Design.md) | The two-layer PCB layout (top and bottom), the KiCad project and the Gerber files |
+| [07 Microcontroller Code](07-Microcontroller-Code/Microcontroller-Code.md) | The MPLAB X firmware used to verify the board: test mode, team state machine and project zip |
 | [Appendix](Appendix/index.md) | Datasheets for every part on the BOM |
